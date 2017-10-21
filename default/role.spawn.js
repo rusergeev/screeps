@@ -9,7 +9,7 @@ var roleSpawn = {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         var source0 = _.filter(Game.creeps, (creep) => creep.memory.source == 0);
         var source1 = _.filter(Game.creeps, (creep) => creep.memory.source == 1);
-        var resource =  (source0 <= source1) ? 0 : 1;
+        var resource =  (source0.length <= source1.length) ? 0 : 1;
 
         if (spawn.spawnCreep(abilities, "dry-run", {dryRun: true}) == OK )
         {
