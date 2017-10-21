@@ -1,4 +1,5 @@
 var creepRoles = require('creep.roles');
+var roleSpawn = require('role.spawn');
 
 module.exports.loop = function () {
 
@@ -9,16 +10,15 @@ module.exports.loop = function () {
         }
     }
 
-    var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-    if(harvesters.length < 12 && Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], "dry-run", {dryRun: true}) == OK) {
-        var newName = 'Harvester' + Game.time;
-        console.log('Spawning new harvester: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName,
-            {memory: {role: 'harvester'}});
-    }
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
         creepRoles.run(creep);
     }
+
+    for(var name in Game.spawns) {
+        var spawn = Game.spawns[name];
+        roleSpawn.run(spawn);
+    }
+
 };
