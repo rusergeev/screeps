@@ -6,7 +6,7 @@ var roleHarvester = {
 
         if(creep.memory.harvesting && creep.carry.energy == 0) {
             creep.memory.upgrading = false;
-            creep.say('ð harvest');
+            creep.say('Ã°ÂÂÂ harvest');
         }
 
 	    if(creep.carry.energy < creep.carryCapacity) {
