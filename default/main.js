@@ -1,5 +1,6 @@
 var creepRoles = require('creep.roles');
 var roleSpawn = require('role.spawn');
+require('prototype.tower');
 
 module.exports.loop = function () {
 
@@ -9,7 +10,6 @@ module.exports.loop = function () {
             console.log('Clearing non-existing creep memory:', name);
         }
     }
-
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
@@ -21,4 +21,8 @@ module.exports.loop = function () {
         roleSpawn.run(spawn);
     }
 
+    var towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
+    for (let tower of towers) {
+        tower.defend();
+    }
 };
