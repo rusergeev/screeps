@@ -5,14 +5,18 @@ var roleSpawn = {
     run: function(spawn) {
         var abilities = [WORK,CARRY,MOVE, MOVE];
         var super_abilities = [WORK, WORK, WORK, CARRY, CARRY,CARRY, MOVE, MOVE];
+        var hyper_abilities = [WORK, WORK, WORK, WORK, CARRY, CARRY,CARRY, CARRY, MOVE, MOVE, MOVE];
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
-        if (spawn.room.energyCapacityAvailable > 500){
+        let energy = spawn.room.energyCapacityAvailable;
+        if (energy >= 500){
             abilities = super_abilities;
         }
-
+        if (energy >= 800){
+            abilities = hyper_abilities;
+        }
 
         let containers = spawn.room.find(FIND_STRUCTURES, { filter: s => s.structureType == STRUCTURE_CONTAINER });
         var miners_container_ids = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner').map(c => c.memory.container);
@@ -33,7 +37,7 @@ var roleSpawn = {
 
         if (spawn.spawnCreep(abilities, "dry-run", {dryRun: true}) == OK )
         {
-            if(harvesters.length + upgraders.length < 10)
+            if(harvesters.length + upgraders.length < 8)
             {
                 if(harvesters.length <= upgraders.length) {
                     var newName = 'Harvester' + Game.time;
@@ -44,7 +48,7 @@ var roleSpawn = {
                     console.log('Spawning new upgrader: ' + newName);
                     spawn.spawnCreep(abilities, newName, {memory: {role: 'upgrader'}});
                 }
-            } else if (builders.length < 10){
+            } else if (builders.length < 8){
                 var newName = 'Builder' + Game.time;
                 console.log('Spawning new builder: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'builder'}});
