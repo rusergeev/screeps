@@ -11,8 +11,7 @@ var roleHarvester = {
 
 	    if(creep.carry.energy < creep.carryCapacity) {
             let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                filter: s => (  s.structureType == STRUCTURE_CONTAINER ||
-                                s.structureType == STRUCTURE_STORAGE) &&
+                filter: s => (  s.structureType == STRUCTURE_CONTAINER ) &&
                                 s.store[RESOURCE_ENERGY] > 0
             });
             if (container != undefined) {
@@ -29,9 +28,11 @@ var roleHarvester = {
         else {
             var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION ||
-                                structure.structureType == STRUCTURE_SPAWN ||
-                                structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
+                        return (
+                            structure.structureType == STRUCTURE_EXTENSION ||
+                            structure.structureType == STRUCTURE_SPAWN ||
+                            structure.structureType == STRUCTURE_TOWER ||
+                            structure.structureType == STRUCTURE_STORAGE) && structure.energy < structure.energyCapacity;
                     }
             });
             if(target != undefined) {
