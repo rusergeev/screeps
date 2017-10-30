@@ -3,19 +3,21 @@ var roleBuilder = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
-	    if(creep.memory.building && creep.carry.energy == 0) {
-            creep.memory.building = false;
+        if(creep.memory.healing && creep.carry.energy == 0) {
+            creep.memory.healing = false;
             creep.say('Harvest');
-	    }
-	    if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
-	        creep.memory.building = true;
-	        creep.say('Build');
-	    }
+        }
+        if(!creep.memory.healing && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.healing = true;
+            creep.say('Heal');
+        }
 
-	    if(creep.memory.building) {
-	        var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+        if(creep.memory.healing) {
+            var target = creep.pos.findClosestByPath(FIND_CREEPS, {
+                filter: (s) => s.hits < s.hitsMax/2 //&& s.structureType != STRUCTURE_WALL
+            });
             if(target != undefined) {
-                if(creep.build(target) == ERR_NOT_IN_RANGE) {
+                if(creep.heal(target) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }else {
@@ -31,9 +33,9 @@ var roleBuilder = {
                 }else if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
-			}
-	    }
-	    else {
+            }
+        }
+        else {
             let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: s => (  s.structureType == STRUCTURE_CONTAINER ||
                     s.structureType == STRUCTURE_STORAGE) &&
@@ -49,8 +51,8 @@ var roleBuilder = {
                     creep.moveTo(source);
                 }
             }
-	    }
-	}
+        }
+    }
 };
 
 module.exports = roleBuilder;
