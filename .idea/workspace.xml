@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e235074b-4c70-4395-8a86-be685e966af0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/default/role.medic.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/train-source/role.medic.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/default/action.recharge.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/train-source/action.harvest.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/train-source/action.move.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/train-source/action.recharge.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.sync" afterPath="$PROJECT_DIR$/.sync" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default/creep.roles.js" afterPath="$PROJECT_DIR$/default/creep.roles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default/role.builder.js" afterPath="$PROJECT_DIR$/default/role.builder.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default/role.harvester.js" afterPath="$PROJECT_DIR$/default/role.harvester.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default/role.spawn.js" afterPath="$PROJECT_DIR$/default/role.spawn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default/role.upgrader.js" afterPath="$PROJECT_DIR$/default/role.upgrader.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train-source/creep.roles.js" afterPath="$PROJECT_DIR$/train-source/creep.roles.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train-source/role.harvester.js" afterPath="$PROJECT_DIR$/train-source/role.harvester.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train-source/role.spawn.js" afterPath="$PROJECT_DIR$/train-source/role.spawn.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train-source/role.upgrader.js" afterPath="$PROJECT_DIR$/train-source/role.upgrader.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,21 +27,11 @@
       <file leaf-file-name="role.harvester.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/default/role.harvester.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="41" column="16" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
+            <state relative-caret-position="394">
+              <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
               <folding>
-                <marker date="1509384745777" expanded="true" signature="1594:1697" ph="{...}" />
+                <marker date="1509386544672" expanded="true" signature="1594:1697" ph="{...}" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="action.recharge.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/train-source/action.recharge.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -58,7 +52,7 @@
             <state relative-caret-position="420">
               <caret line="28" column="7" lean-forward="false" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
               <folding>
-                <marker date="1509178209638" expanded="true" signature="2139:2146" ph="{...}" />
+                <marker date="1509386180374" expanded="true" signature="2139:2146" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -67,8 +61,8 @@
       <file leaf-file-name="role.medic.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.medic.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="24" column="56" lean-forward="false" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
+            <state relative-caret-position="249">
+              <caret line="40" column="49" lean-forward="false" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -77,8 +71,8 @@
       <file leaf-file-name="role.spawn.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.spawn.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="45" column="26" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="88" />
+            <state relative-caret-position="90">
+              <caret line="6" column="62" lean-forward="false" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -99,16 +93,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
               <caret line="21" column="39" lean-forward="false" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="prototype.tower.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/default/prototype.tower.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -143,6 +127,7 @@
       <find>moveTo</find>
       <find>building</find>
       <find>upgrading</find>
+      <find>STORAGE</find>
     </findStrings>
     <replaceStrings>
       <replace>healing</replace>
@@ -194,9 +179,10 @@
         <option value="$PROJECT_DIR$/default/creep.roles.js" />
         <option value="$PROJECT_DIR$/default/role.builder.js" />
         <option value="$PROJECT_DIR$/default/role.medic.js" />
-        <option value="$PROJECT_DIR$/default/role.spawn.js" />
         <option value="$PROJECT_DIR$/default/role.upgrader.js" />
         <option value="$PROJECT_DIR$/default/role.harvester.js" />
+        <option value="$PROJECT_DIR$/default/role.spawn.js" />
+        <option value="$PROJECT_DIR$/energy/company.energy.js" />
       </list>
     </option>
   </component>
@@ -388,16 +374,15 @@
       <updated>1508576237418</updated>
       <workItem from="1508576239407" duration="44093000" />
       <workItem from="1508768487627" duration="853000" />
-      <workItem from="1508784855919" duration="7334000" />
+      <workItem from="1508784855919" duration="9297000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52280000" />
+    <option name="totallyTimeSpent" value="54243000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="739" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -411,8 +396,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16720517" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16720517" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -425,7 +411,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -439,14 +424,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/default/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/train-source/role.spawn.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -459,7 +436,7 @@
         <state relative-caret-position="375">
           <caret line="25" column="62" lean-forward="false" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
           <folding>
-            <marker date="1509178209638" expanded="true" signature="2139:2146" ph="{...}" />
+            <marker date="1509386180374" expanded="true" signature="2139:2146" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -566,6 +543,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -601,6 +579,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="2" />
+          <folding>
+            <marker date="1508587620569" expanded="true" signature="19:884" ph="{...}" />
+            <marker date="1508587620569" expanded="true" signature="26:54" ph="/**...*/" />
+            <marker date="1508587620569" expanded="true" signature="80:882" ph="{...}" />
+            <marker date="1508587620569" expanded="true" signature="145:234" ph="{...}" />
+            <marker date="1508587620569" expanded="true" signature="313:394" ph="{...}" />
+            <marker date="1508587620569" expanded="true" signature="428:634" ph="{...}" />
+            <marker date="1508587620569" expanded="true" signature="513:624" ph="{...}" />
+            <marker date="1508587620569" expanded="true" signature="648:879" ph="{...}" />
+            <marker date="1508587620569" expanded="true" signature="769:869" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -622,6 +611,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -629,13 +619,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/default/action.recharge.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -735,18 +719,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train-source/action.recharge.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/default/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.builder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="7" lean-forward="false" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
+          <folding>
+            <marker date="1509386180374" expanded="true" signature="2139:2146" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.upgrader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="23" column="114" lean-forward="false" selection-start-line="23" selection-start-column="114" selection-end-line="23" selection-end-column="114" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train-source/action.recharge.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -759,46 +761,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.builder.js">
+    <entry file="file://$PROJECT_DIR$/energy/company.energy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="7" lean-forward="false" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
-          <folding>
-            <marker date="1509178209638" expanded="true" signature="2139:2146" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.medic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="24" column="56" lean-forward="false" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
+        <state relative-caret-position="15">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/default/role.spawn.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="45" column="26" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="88" />
+        <state relative-caret-position="90">
+          <caret line="6" column="62" lean-forward="false" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.upgrader.js">
+    <entry file="file://$PROJECT_DIR$/default/action.recharge.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="23" column="114" lean-forward="false" selection-start-line="23" selection-start-column="114" selection-end-line="23" selection-end-column="114" />
+        <state relative-caret-position="165">
+          <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.medic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="40" column="49" lean-forward="false" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/default/role.harvester.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="41" column="16" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
+        <state relative-caret-position="394">
+          <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
           <folding>
-            <marker date="1509384745777" expanded="true" signature="1594:1697" ph="{...}" />
+            <marker date="1509386544672" expanded="true" signature="1594:1697" ph="{...}" />
           </folding>
         </state>
       </provider>

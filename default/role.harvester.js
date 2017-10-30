@@ -39,6 +39,7 @@ var roleHarvester = {
                     }
             });
             if (target == undefined) {
+                creep.say('Storage!');
                 target = creep.room.storage;
             }
             if(target != undefined) {
