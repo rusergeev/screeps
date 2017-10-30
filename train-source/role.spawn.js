@@ -22,7 +22,7 @@ var roleSpawn = {
         let containers = spawn.room.find(FIND_STRUCTURES, { filter: s => s.structureType == STRUCTURE_CONTAINER });
         var miners_container_ids = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner').map(c => c.memory.container);
         if (containers.length != miners_container_ids.length){
-            var miner_abilities = [WORK, WORK, WORK, WORK, MOVE];
+            var miner_abilities = [WORK, WORK, WORK, WORK, WORK, MOVE];
             if(spawn.spawnCreep(miner_abilities, "dry-run", {dryRun: true}) == OK){
                 for (var i in containers) {
                     var container = containers[i];

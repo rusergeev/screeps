@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e235074b-4c70-4395-8a86-be685e966af0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/train-source/role.medic.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/default/action.recharge.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/train-source/action.harvest.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/train-source/action.move.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/train-source/action.recharge.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.sync" afterPath="$PROJECT_DIR$/.sync" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default/role.harvester.js" afterPath="$PROJECT_DIR$/default/role.harvester.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train-source/creep.roles.js" afterPath="$PROJECT_DIR$/train-source/creep.roles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train-source/role.harvester.js" afterPath="$PROJECT_DIR$/train-source/role.harvester.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default/role.spawn.js" afterPath="$PROJECT_DIR$/default/role.spawn.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train-source/role.spawn.js" afterPath="$PROJECT_DIR$/train-source/role.spawn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train-source/role.upgrader.js" afterPath="$PROJECT_DIR$/train-source/role.upgrader.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,14 +16,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="role.harvester.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="role.harvester.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.harvester.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
+            <state relative-caret-position="615">
               <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
               <folding>
-                <marker date="1509386544672" expanded="true" signature="1594:1697" ph="{...}" />
+                <marker date="1509393666099" expanded="true" signature="1594:1697" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="role.spawn.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/train-source/role.spawn.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="24" column="65" lean-forward="false" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -52,7 +54,7 @@
             <state relative-caret-position="420">
               <caret line="28" column="7" lean-forward="false" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
               <folding>
-                <marker date="1509386180374" expanded="true" signature="2139:2146" ph="{...}" />
+                <marker date="1509393666099" expanded="true" signature="2139:2146" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -126,8 +128,8 @@
       <find>console</find>
       <find>moveTo</find>
       <find>building</find>
-      <find>upgrading</find>
       <find>STORAGE</find>
+      <find>upgrading</find>
     </findStrings>
     <replaceStrings>
       <replace>healing</replace>
@@ -174,15 +176,15 @@
         <option value="$PROJECT_DIR$/default/role.tower.js" />
         <option value="$PROJECT_DIR$/default/prototype.tower.js" />
         <option value="$PROJECT_DIR$/default/main.js" />
-        <option value="$PROJECT_DIR$/train-source/role.spawn.js" />
         <option value="$PROJECT_DIR$/train-source/role.builder.js" />
         <option value="$PROJECT_DIR$/default/creep.roles.js" />
         <option value="$PROJECT_DIR$/default/role.builder.js" />
         <option value="$PROJECT_DIR$/default/role.medic.js" />
         <option value="$PROJECT_DIR$/default/role.upgrader.js" />
-        <option value="$PROJECT_DIR$/default/role.harvester.js" />
         <option value="$PROJECT_DIR$/default/role.spawn.js" />
         <option value="$PROJECT_DIR$/energy/company.energy.js" />
+        <option value="$PROJECT_DIR$/default/role.harvester.js" />
+        <option value="$PROJECT_DIR$/train-source/role.spawn.js" />
       </list>
     </option>
   </component>
@@ -374,12 +376,12 @@
       <updated>1508576237418</updated>
       <workItem from="1508576239407" duration="44093000" />
       <workItem from="1508768487627" duration="853000" />
-      <workItem from="1508784855919" duration="9297000" />
+      <workItem from="1508784855919" duration="9993000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54243000" />
+    <option name="totallyTimeSpent" value="54939000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="739" extended-state="0" />
@@ -436,7 +438,7 @@
         <state relative-caret-position="375">
           <caret line="25" column="62" lean-forward="false" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
           <folding>
-            <marker date="1509386180374" expanded="true" signature="2139:2146" ph="{...}" />
+            <marker date="1509393666099" expanded="true" signature="2139:2146" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -688,13 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train-source/role.spawn.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="63" lean-forward="false" selection-start-line="24" selection-start-column="63" selection-end-line="24" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/train-source/role.builder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="739">
@@ -732,7 +727,7 @@
         <state relative-caret-position="420">
           <caret line="28" column="7" lean-forward="false" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
           <folding>
-            <marker date="1509386180374" expanded="true" signature="2139:2146" ph="{...}" />
+            <marker date="1509393666099" expanded="true" signature="2139:2146" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -795,11 +790,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/default/role.harvester.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
+        <state relative-caret-position="615">
           <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
           <folding>
-            <marker date="1509386544672" expanded="true" signature="1594:1697" ph="{...}" />
+            <marker date="1509393666099" expanded="true" signature="1594:1697" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train-source/role.spawn.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="24" column="65" lean-forward="false" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
+          <folding />
         </state>
       </provider>
     </entry>
