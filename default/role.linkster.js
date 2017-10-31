@@ -1,6 +1,9 @@
-module.exports = {
-    /** @param {Creep} spawn **/
-    run: function (creep) {
+
+var roleLinkster = {
+
+    /** @param {Creep} creep **/
+    run: function(creep) {
+
         let container = Game.getObjectById(creep.memory.container);
         if (creep.pos.isEqualTo(container.pos)) {
             let source = creep.pos.findInRange(FIND_SOURCES, 1);
@@ -13,5 +16,7 @@ module.exports = {
         else {
             creep.moveTo(container);
         }
-    }
+	}
 };
+
+module.exports = roleLinkster;

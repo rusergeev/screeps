@@ -3,20 +3,33 @@ var roleSpawn = {
 
     /** @param {StructureSpawn} spawn **/
     run: function(spawn) {
-        var abilities = [WORK,CARRY,MOVE, MOVE];
-        var super_abilities = [WORK, WORK, WORK, CARRY, CARRY,CARRY, MOVE, MOVE];
-        var hyper_abilities = [WORK, WORK, WORK, WORK, CARRY, CARRY,CARRY, CARRY, MOVE, MOVE, MOVE];
+        var abilities = [WORK, CARRY, MOVE, MOVE];
+        var harvester_abilities = abilities;
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
-        var medics = _.filter(Game.creeps, (creep) => creep.memory.role == 'medic');
 
         let energy = spawn.room.energyCapacityAvailable;
-        if (energy >= 500){
-            abilities = super_abilities;
+        if (energy >= 550){
+            abilities = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
         if (energy >= 800){
-            abilities = hyper_abilities;
+            abilities = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+            harvester_abilities = [ CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+                                    MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+        }
+        if (energy >= 1050){
+            abilities = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+            harvester_abilities = [ CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+                                    MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+        }
+        if (energy >= 1800){
+            abilities = [WORK, WORK, WORK, WORK, WORK, WORK, WORK,
+                         CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+                         MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+                         MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+            harvester_abilities = [ CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+                                    MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
 
         let containers = spawn.room.find(FIND_STRUCTURES, { filter: s => s.structureType == STRUCTURE_CONTAINER });
@@ -34,9 +47,7 @@ var roleSpawn = {
                     }
                 }
             }
-        }
-
-        if (spawn.spawnCreep(abilities, "dry-run", {dryRun: true}) == OK )
+        }else if (spawn.spawnCreep(abilities, "dry-run", {dryRun: true}) == OK )
         {
             if(harvesters.length + upgraders.length < 4)
             {
@@ -49,7 +60,7 @@ var roleSpawn = {
                     console.log('Spawning new upgrader: ' + newName);
                     spawn.spawnCreep(abilities, newName, {memory: {role: 'upgrader'}});
                 }
-            } else if (builders.length < 8){
+            } else if (builders.length < 4){
                 var newName = 'Builder' + Game.time;
                 console.log('Spawning new builder: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'builder'}});

@@ -1,5 +1,6 @@
 var creepRoles = require('creep.roles');
 var roleSpawn = require('role.spawn');
+var roleLink = require('role.link');
 require('prototype.tower');
 
 module.exports.loop = function () {
@@ -25,4 +26,5 @@ module.exports.loop = function () {
     for (let tower of towers) {
         tower.defend();
     }
+    roleLink.run(Game.getObjectById('59f503aeee5ab06bb461b884'));
 };
