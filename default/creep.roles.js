@@ -3,6 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleMiner = require('role.miner');
 var roleMedic = require('role.medic');
+var roleLinkster = require('role.linkster');
 
 module.exports = {
     run: function(creep) {
@@ -21,6 +22,9 @@ module.exports = {
         }
         if (creep.memory.role == 'medic') {
             roleMedic.run(creep);
+        }
+        if (creep.memory.role == 'linkster'){
+            roleLinkster.run(creep);
         }
     }
 }

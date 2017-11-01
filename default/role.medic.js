@@ -37,9 +37,10 @@ var roleBuilder = {
         }
         else {
             let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                filter: s => (  s.structureType == STRUCTURE_CONTAINER ||
-                    s.structureType == STRUCTURE_STORAGE) &&
-                    s.store[RESOURCE_ENERGY] > 0
+                filter: s => ((  s.structureType == STRUCTURE_CONTAINER ||
+                                s.structureType == STRUCTURE_STORAGE ) &&
+                                s.store[RESOURCE_ENERGY] > creep.carryCapacity - creep.carry.energy)||
+                    s.structureType == STRUCTURE_LINK && s.energy > creep.carryCapacity - creep.carry.energy
             });
             if (container != undefined) {
                 if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
