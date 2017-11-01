@@ -9,7 +9,7 @@ var roleSpawn = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
-        let energy = spawn.room.energyCapacityAvailable;
+        let energy = spawn.room.energyAvailable;
         if (energy >= 550){
             abilities = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
