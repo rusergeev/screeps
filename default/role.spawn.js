@@ -58,7 +58,7 @@ var roleSpawn = {
                     }
                 }
             } else if (spawn.spawnCreep(abilities, "dry-run", {dryRun: true}) == OK) {
-                if (harvesters.length + upgraders.length < 6) {
+                if (harvesters.length + upgraders.length < 4) {
                     if (harvesters.length <= upgraders.length) {
                         var newName = 'Harvester' + Game.time;
                         console.log('Spawning new harvester: ' + newName);
@@ -68,7 +68,7 @@ var roleSpawn = {
                         console.log('Spawning new upgrader: ' + newName);
                         spawn.spawnCreep(abilities, newName, {memory: {role: 'upgrader'}});
                     }
-                } else if (builders.length < 8) {
+                } else if (builders.length < 2) {
                     var newName = 'Builder' + Game.time;
                     console.log('Spawning new builder: ' + newName);
                     spawn.spawnCreep(abilities, newName, {memory: {role: 'builder'}});

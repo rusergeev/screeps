@@ -15,7 +15,7 @@ var roleHarvester = {
         if(creep.memory.harvesting) {
             let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: s => (  s.structureType == STRUCTURE_CONTAINER ) &&
-                    s.store[RESOURCE_ENERGY] > creep.carryCapacity - creep.carry.energy
+                    s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy)/2
             });
             if (container != undefined) {
                 if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
