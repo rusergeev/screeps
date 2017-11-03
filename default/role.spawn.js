@@ -58,7 +58,7 @@ var roleSpawn = {
                     }
                 }
             } else if (spawn.spawnCreep(abilities, "dry-run", {dryRun: true}) == OK) {
-                if (harvesters.length + upgraders.length < 4) {
+                if (harvesters.length + upgraders.length < 3) {
                     if (harvesters.length <= upgraders.length) {
                         var newName = 'Harvester' + Game.time;
                         console.log('Spawning new harvester: ' + newName);
