@@ -1,5 +1,4 @@
-
-let roleSpawn = {
+module.exports = {
 
     /** @param {StructureSpawn} spawn **/
     run: function(spawn) {
@@ -97,4 +96,3 @@ let roleSpawn = {
     }
 };
 
-module.exports = roleSpawn;
