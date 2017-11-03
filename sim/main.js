@@ -29,9 +29,19 @@ module.exports.loop = function () {
             roleSpawn.run(spawn);
         }
 
-        var towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
+        let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
         for (let tower of towers) {
             tower.defend();
+        }
+
+        let links = spawn.room.find(FIND_STRUCTURES, {
+            filter: s => s.structureType == STRUCTURE_LINK &&
+                s.pos.findInRange(FIND_STRUCTURES, 2, {
+                    filter: ss => ss.structureType == STRUCTURE_CONTAINER ||
+                        ss.structureType == STRUCTURE_STORAGE   }).length != 0});
+
+        for( var name in links) {
+            roleLink.run(links[name]);
         }
 
     } catch (e) {

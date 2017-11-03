@@ -1,8 +1,12 @@
 var roleBuilder = {
     /** @param {StructureLink} link **/
     run: function(link) {
-        if(link.energy > 0){
-            link.transferEnergy(Game.getObjectById('59f529e10dd3866d733f9c4c'))
+        let links = link.room.find(FIND_STRUCTURES, {filter: s => s.id != link.id });
+        for( var name in links){
+            if(link.energy > 0){
+                let other = links[name];
+                link.transferEnergy(other);
+            }
         }
     }
 };

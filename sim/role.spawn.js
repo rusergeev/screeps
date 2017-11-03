@@ -33,10 +33,10 @@ let roleSpawn = {
         }
 
         let links = spawn.room.find(FIND_STRUCTURES, {
-            filter:
-                    s => s.structureType == STRUCTURE_LINK &&
-                    s.pos.findInRange(FIND_STRUCTURES, 2, { filter: ss => ss.structureType == STRUCTURE_LINK})
-        });
+            filter: s => s.structureType == STRUCTURE_LINK &&
+                    s.pos.findInRange(FIND_STRUCTURES, 2, {
+                        filter: ss => ss.structureType == STRUCTURE_CONTAINER ||
+                                      ss.structureType == STRUCTURE_STORAGE   }).length != 0});
         let linkster_link_ids = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkster').map(c => c.memory.link);
         if(links.length != linkster_link_ids.length) {
             var linkster_abilities = [CARRY, MOVE, CARRY, MOVE, TOUGH, TOUGH, TOUGH, TOUGH];

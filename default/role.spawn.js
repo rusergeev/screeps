@@ -1,14 +1,13 @@
 
-var roleSpawn = {
+let roleSpawn = {
 
     /** @param {StructureSpawn} spawn **/
     run: function(spawn) {
-        var abilities = [WORK, CARRY, MOVE, MOVE];
-        var harvester_abilities = abilities;
-        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
-        var linkster = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkster');
+        let abilities = [WORK, CARRY, MOVE, MOVE];
+        let harvester_abilities = abilities;
+        let harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+        let upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+        let builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         
         let energy = spawn.room.energyAvailable;
         if (energy >= 550){
@@ -32,50 +31,69 @@ var roleSpawn = {
             harvester_abilities = [ CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
                                     MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
-        if (linkster.length < 1){
-            var newName = 'Linkster' + Game.time;
-            console.log('Linkster new harvester: ' + newName);
-            spawn.spawnCreep([CARRY,MOVE,CARRY,MOVE,CARRY,MOVE], newName, {memory: {role: 'linkster'}});
-        }else {
-            let containers = spawn.room.find(FIND_STRUCTURES, {filter: s => s.structureType == STRUCTURE_CONTAINER});
-            var miners_container_ids = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner').map(c => c.memory.container);
-            if (containers.length != miners_container_ids.length) {
-                var miner_abilities = [WORK, WORK, WORK, WORK, WORK, MOVE];
-                if (spawn.spawnCreep(miner_abilities, "dry-run", {dryRun: true}) == OK) {
-                    for (var i in containers) {
-                        var container = containers[i];
-                        if (miners_container_ids.indexOf(container.id) == -1) {
-                            var source = container.pos.findInRange(FIND_SOURCES, 1);
-                            var newName = 'Miner' + Game.time;
-                            console.log('Spawning new miner: ' + newName);
-                            spawn.spawnCreep(miner_abilities, newName, {
-                                memory: {
-                                    role: 'miner',
-                                    container: container.id
-                                }
-                            });
-                        }
+
+        let links = spawn.room.find(FIND_STRUCTURES, {
+            filter: s => s.structureType == STRUCTURE_LINK &&
+                    s.pos.findInRange(FIND_STRUCTURES, 2, {
+                        filter: ss => ss.structureType == STRUCTURE_CONTAINER ||
+                                      ss.structureType == STRUCTURE_STORAGE   }).length != 0});
+        let linkster_link_ids = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkster').map(c => c.memory.link);
+        if(links.length != linkster_link_ids.length) {
+            var linkster_abilities = [CARRY, MOVE, CARRY, MOVE, TOUGH, TOUGH, TOUGH, TOUGH];
+            if (spawn.spawnCreep(linkster_abilities, "dry-run", {dryRun: true}) == OK) {
+                for (var i in links) {
+                    var link = links[i];
+                    if (linkster_link_ids.indexOf(link.id) == -1) {
+                        var newName = 'Linkster' + Game.time;
+                        console.log('Spawning new linkster: ' + newName);
+                        spawn.spawnCreep(linkster_abilities, newName, {
+                            memory: {
+                                role: 'linkster',
+                                link: link.id
+                            }
+                        });
                     }
-                }
-            } else if (spawn.spawnCreep(abilities, "dry-run", {dryRun: true}) == OK) {
-                if (harvesters.length + upgraders.length < 3) {
-                    if (harvesters.length <= upgraders.length) {
-                        var newName = 'Harvester' + Game.time;
-                        console.log('Spawning new harvester: ' + newName);
-                        spawn.spawnCreep(harvester_abilities, newName, {memory: {role: 'harvester'}});
-                    } else {
-                        var newName = 'Upgrader' + Game.time;
-                        console.log('Spawning new upgrader: ' + newName);
-                        spawn.spawnCreep(abilities, newName, {memory: {role: 'upgrader'}});
-                    }
-                } else if (builders.length < 2) {
-                    var newName = 'Builder' + Game.time;
-                    console.log('Spawning new builder: ' + newName);
-                    spawn.spawnCreep(abilities, newName, {memory: {role: 'builder'}});
                 }
             }
-
         }
+
+        let containers = spawn.room.find(FIND_STRUCTURES, {filter: s => s.structureType == STRUCTURE_CONTAINER});
+        var miners_container_ids = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner').map(c => c.memory.container);
+        if (containers.length > miners_container_ids.length) {
+            var miner_abilities = [WORK, WORK, WORK, WORK, WORK, MOVE,TOUGH,TOUGH,TOUGH,TOUGH];
+            if (spawn.spawnCreep(miner_abilities, "dry-run", {dryRun: true}) == OK) {
+                for (var i in containers) {
+                    var container = containers[i];
+                    if (miners_container_ids.indexOf(container.id) == -1) {
+                        var newName = 'Miner' + Game.time;
+                        console.log('Spawning new miner: ' + newName);
+                        spawn.spawnCreep(miner_abilities, newName, {
+                            memory: {
+                                role: 'miner',
+                                container: container.id
+                            }
+                        });
+                    }
+                }
+            }
+        } else if (spawn.spawnCreep(abilities, "dry-run", {dryRun: true}) == OK) {
+            if (harvesters.length + upgraders.length < 4) {
+                if (harvesters.length <= upgraders.length) {
+                    let newName = 'Harvester' + Game.time;
+                    console.log('Spawning new harvester: ' + newName);
+                    spawn.spawnCreep(harvester_abilities, newName, {memory: {role: 'harvester'}});
+                } else {
+                    let newName = 'Upgrader' + Game.time;
+                    console.log('Spawning new upgrader: ' + newName);
+                    spawn.spawnCreep(abilities, newName, {memory: {role: 'upgrader'}});
+                }
+            } else if (builders.length < 1) {
+                let newName = 'Builder' + Game.time;
+                console.log('Spawning new builder: ' + newName);
+                spawn.spawnCreep(abilities, newName, {memory: {role: 'builder'}});
+            }
+        }
+
     }
 };
 

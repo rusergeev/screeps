@@ -14,7 +14,8 @@ var roleHarvester = {
         }
         if(creep.memory.harvesting) {
             let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                filter: s => (  s.structureType == STRUCTURE_CONTAINER ) &&
+                filter: s => (  s.structureType == STRUCTURE_CONTAINER ||
+                    s.structureType == STRUCTURE_STORAGE   ) &&
                     s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy)/2
             });
             if (container != undefined) {
@@ -30,11 +31,11 @@ var roleHarvester = {
         }
         else {
             var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return structure.structureType == STRUCTURE_LINK &&
-                           structure.energy < structure.energyCapacity;
-                }
-            });
+                    filter: s => s.structureType == STRUCTURE_LINK &&
+                        s.pos.findInRange(FIND_STRUCTURES, 2, {
+                            filter: ss => ss.structureType == STRUCTURE_CONTAINER ||
+                                ss.structureType == STRUCTURE_STORAGE   }).length != 0});
+
             if (target == undefined) {
                 target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: (structure) => {
