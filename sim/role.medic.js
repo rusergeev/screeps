@@ -1,4 +1,4 @@
-var roleBuilder = {
+module.exports = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
@@ -13,7 +13,7 @@ var roleBuilder = {
         }
 
         if(creep.memory.healing) {
-            var target = creep.pos.findClosestByPath(FIND_CREEPS, {
+            let target = creep.pos.findClosestByPath(FIND_CREEPS, {
                 filter: (s) => s.hits < s.hitsMax/2 //&& s.structureType != STRUCTURE_WALL
             });
             if(target != undefined) {
@@ -21,7 +21,7 @@ var roleBuilder = {
                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }else {
-                var structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                let structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: (s) => s.hits < s.hitsMax/2 && s.structureType != STRUCTURE_WALL
                 });
                 if (structure != undefined) {
@@ -55,5 +55,3 @@ var roleBuilder = {
         }
     }
 };
-
-module.exports = roleBuilder;
