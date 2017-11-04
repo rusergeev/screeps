@@ -4,7 +4,8 @@ let roles = {
     builder: require('role.builder'),
     miner: require('role.miner'),
     medic: require('role.medic'),
-    linkster: require('role.linkster')
+    linkster: require('role.linkster'),
+    claimer: require('role.claimer')
 };
 
 module.exports = {
