@@ -1,5 +1,5 @@
 module.exports = {
-    /** @param {Creep} spawn **/
+    /** @param {Creep} creep **/
     run: function (creep) {
         let container = Game.getObjectById(creep.memory.container);
         if (creep.pos.isEqualTo(container.pos)) {
