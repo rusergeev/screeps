@@ -90,7 +90,7 @@ module.exports = {
                 let newName = 'Builder' + Game.time;
                 console.log('Spawning new builder: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'builder'}});
-            }else if (_.filter(Game.creeps, (creep) => creep.memory.role === 'helper_upgrader' && creep.room === spawn.room).length < 1) {
+            }else if (false && _.filter(Game.creeps, (creep) => creep.memory.role === 'helper_upgrader' && creep.room === spawn.room).length < 1) {
                 let newName = 'UHelper' + Game.time;
                 console.log('Spawning new helper_upgrader: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'helper_upgrader'}});

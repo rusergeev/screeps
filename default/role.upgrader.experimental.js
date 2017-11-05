@@ -25,7 +25,7 @@ module.exports =  {
             }
         }
         else {
-            const route = Game.map.findRoute(creep.room, 'W53N44');
+            const route = Game.map.findRoute(creep.room, 'W53N45');
             if(route.length > 0) {
                 creep.say('Now heading to room '+route[0].room);
                 const exit = creep.pos.findClosestByRange(route[0].exit);
@@ -42,7 +42,7 @@ module.exports =  {
                         creep.moveTo(container);
                     }
                 } else {
-                    var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
+                    let source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
                     if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                         creep.moveTo(source);
                     }
