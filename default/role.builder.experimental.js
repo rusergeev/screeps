@@ -20,7 +20,7 @@ module.exports = {
                 creep.moveTo(exit);
             }else {
                     let target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
-                    if (target !== undefined) {
+                    if (target) {
                         if (creep.build(target) === ERR_NOT_IN_RANGE) {
                             creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                         }
@@ -31,13 +31,13 @@ module.exports = {
             }
 	    }
 	    else {
-            const route = Game.map.findRoute(creep.room, 'W53N44');
+            const route = Game.map.findRoute(creep.room, 'W53N46');
             if(route.length > 0) {
                 creep.say('Now heading to room '+route[0].room);
                 const exit = creep.pos.findClosestByRange(route[0].exit);
                 creep.moveTo(exit);
             }else {
-                const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+                let target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
                 if (target) {
                     if (creep.pickup(target) === ERR_NOT_IN_RANGE) {
                         creep.moveTo(target);
@@ -49,7 +49,7 @@ module.exports = {
                             s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 2) ||
                             s.structureType === STRUCTURE_LINK && s.energy > (creep.carryCapacity - creep.carry.energy) / 2
                     });
-                    if (container !== undefined) {
+                    if (container) {
                         if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                             creep.moveTo(container);
                         }

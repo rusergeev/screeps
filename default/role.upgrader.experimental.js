@@ -37,7 +37,7 @@ module.exports =  {
                         s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 2) ||
                         s.structureType === STRUCTURE_LINK && s.energy > (creep.carryCapacity - creep.carry.energy) / 2
                 });
-                if (container !== undefined) {
+                if (container) {
                     if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                         creep.moveTo(container);
                     }

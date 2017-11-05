@@ -7,7 +7,7 @@ module.exports = {
             creep.memory.healing = false;
             creep.say('Harvest');
         }
-        if(!creep.memory.healing && creep.carry.energy == creep.carryCapacity) {
+        if(!creep.memory.healing && creep.carry.energy === creep.carryCapacity) {
             creep.memory.healing = true;
             creep.say('Heal');
         }
@@ -16,39 +16,39 @@ module.exports = {
             let target = creep.pos.findClosestByPath(FIND_CREEPS, {
                 filter: (s) => s.hits < s.hitsMax/2 //&& s.structureType != STRUCTURE_WALL
             });
-            if(target != undefined) {
-                if(creep.heal(target) == ERR_NOT_IN_RANGE) {
+            if(target) {
+                if(creep.heal(target) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }else {
                 let structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                    filter: (s) => s.hits < s.hitsMax/2 && s.structureType != STRUCTURE_WALL
+                    filter: (s) => s.hits < s.hitsMax/2 && s.structureType !== STRUCTURE_WALL
                 });
-                if (structure != undefined) {
+                if (structure) {
                     // try to repair it, if it is out of range
-                    if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
+                    if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
                         // move towards it
                         creep.moveTo(structure);
                     }
-                }else if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+                }else if(creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
         }
         else {
             let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                filter: s => ((  s.structureType == STRUCTURE_CONTAINER ||
-                                s.structureType == STRUCTURE_STORAGE ) &&
+                filter: s => ((  s.structureType === STRUCTURE_CONTAINER ||
+                                s.structureType === STRUCTURE_STORAGE ) &&
                                 s.store[RESOURCE_ENERGY] > creep.carryCapacity - creep.carry.energy)||
-                    s.structureType == STRUCTURE_LINK && s.energy > creep.carryCapacity - creep.carry.energy
+                    s.structureType === STRUCTURE_LINK && s.energy > creep.carryCapacity - creep.carry.energy
             });
-            if (container != undefined) {
-                if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            if (container) {
+                if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(container);
                 }
             }else {
                 var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
-                if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(source);
                 }
             }
