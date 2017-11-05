@@ -56,6 +56,28 @@ module.exports = {
             }
         }
 
+        let x_room = Game.rooms['W53N46'];
+        let x_containers = x_room.find(FIND_STRUCTURES, {filter: s => s.structureType === STRUCTURE_CONTAINER});
+        let x_miners_container_ids = _.filter(Game.creeps, (creep) => creep.memory.role === 'miner' && creep.room === x_room).map(c => c.memory.container);
+        if (x_containers.length > x_miners_container_ids.length) {
+            let miner_abilities = [WORK, WORK, WORK, WORK, WORK, MOVE,TOUGH,TOUGH,TOUGH,TOUGH];
+            if (spawn.spawnCreep(miner_abilities, "dry-run", {dryRun: true}) === OK) {
+                for (var i in x_containers) {
+                    let container = x_containers[i];
+                    if (x_miners_container_ids.indexOf(container.id) === -1) {
+                        let newName = 'Miner' + Game.time;
+                        console.log('Spawning new miner: ' + newName);
+                        spawn.spawnCreep(miner_abilities, newName, {
+                            memory: {
+                                role: 'miner',
+                                container: container.id
+                            }
+                        });
+                    }
+                }
+            }
+        }
+
         let containers = spawn.room.find(FIND_STRUCTURES, {filter: s => s.structureType === STRUCTURE_CONTAINER});
         let miners_container_ids = _.filter(Game.creeps, (creep) => creep.memory.role === 'miner' && creep.room === spawn.room).map(c => c.memory.container);
         if (containers.length > miners_container_ids.length) {
@@ -90,16 +112,19 @@ module.exports = {
                 let newName = 'Builder' + Game.time;
                 console.log('Spawning new builder: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'builder'}});
-            }else if ( _.filter(Game.creeps, (creep) => creep.memory.role === 'helper_upgrader').length < 10) {
+            } else if ( _.filter(Game.creeps, (creep) => creep.memory.role === 'helper_upgrader').length < 5) {
                 let newName = 'UHelper' + Game.time;
                 console.log('Spawning new helper_upgrader: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'helper_upgrader'}});
-            }else if ( _.filter(Game.creeps, (creep) => creep.memory.role === 'helper_builder' ).length < 10) {
+            } else if ( _.filter(Game.creeps, (creep) => creep.memory.role === 'helper_builder' ).length < 0) {
                 let newName = 'BHelper' + Game.time;
                 console.log('Spawning new helper_builder: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'helper_builder'}});
+            } else if ( _.filter(Game.creeps, (creep) => creep.memory.role === 'helper_harvester' ).length < 5) {
+                let newName = 'HHelper' + Game.time;
+                console.log('Spawning new helper_harvester: ' + newName);
+                spawn.spawnCreep(abilities, newName, {memory: {role: 'helper_harvester'}});
             }
         }
     }
 };
-
