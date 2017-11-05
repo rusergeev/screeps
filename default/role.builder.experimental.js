@@ -31,7 +31,7 @@ module.exports = {
             }
 	    }
 	    else {
-            const route = Game.map.findRoute(creep.room, 'W53N45');
+            const route = Game.map.findRoute(creep.room, 'W53N44');
             if(route.length > 0) {
                 creep.say('Now heading to room '+route[0].room);
                 const exit = creep.pos.findClosestByRange(route[0].exit);

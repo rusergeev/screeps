@@ -90,11 +90,11 @@ module.exports = {
                 let newName = 'Builder' + Game.time;
                 console.log('Spawning new builder: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'builder'}});
-            }else if (false && _.filter(Game.creeps, (creep) => creep.memory.role === 'helper_upgrader' && creep.room === spawn.room).length < 1) {
+            }else if (false && _.filter(Game.creeps, (creep) => creep.memory.role === 'helper_upgrader').length < 10) {
                 let newName = 'UHelper' + Game.time;
                 console.log('Spawning new helper_upgrader: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'helper_upgrader'}});
-            }else if (false && _.filter(Game.creeps, (creep) => creep.memory.role === 'helper_builder' && creep.room === spawn.room).length < 1) {
+            }else if (false && _.filter(Game.creeps, (creep) => creep.memory.role === 'helper_builder' ).length < 10) {
                 let newName = 'BHelper' + Game.time;
                 console.log('Spawning new helper_builder: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'helper_builder'}});
