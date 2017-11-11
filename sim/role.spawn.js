@@ -18,7 +18,8 @@ module.exports = {
                 const abilities = [WORK, MOVE];
                 if (workers.length < 1 && spawn.spawnCreep(abilities, 'noname', {dryRun: true}) === OK) {
                     let newName = 'Miner' + Game.time;
-                    let status = spawn.spawnCreep(abilities, newName, {memory: {role: 'miner', assignment: source.id, assignme: true}}) === OK
+                    let status = spawn.spawnCreep(abilities, newName,
+                        {memory: {role: 'miner', assignment: source.id, range: 1, action: 'move'}}) === OK
                         ? 'OK' :'failed';
                     console.log(spawn.name+ ': spawning ' + newName + ' - ' + status);
                 }

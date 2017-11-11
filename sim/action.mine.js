@@ -3,7 +3,6 @@
 module.exports = {
     /** @param {Creep} creep **/
     run: function (creep) {
-        creep.harvest(creep.assignment)
-
+        creep.harvest(creep.assignment);
     }
 };

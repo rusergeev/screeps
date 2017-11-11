@@ -19,10 +19,10 @@ Creep.prototype.moveToX = function (x) {
 };
 
 Object.defineProperty(Creep.prototype, 'role', {
-    get: function() {
+    get: function () {
         return this.memory.role;
     },
-    set: function(v) {
+    set: function (v) {
         this.memory.role = v;
     },
     enumerable: false,
@@ -41,6 +41,33 @@ Object.defineProperty(Creep.prototype, 'assignment', {
         if (!this._assignment) {
             delete this._assignment;
         }
+    },
+    enumerable: false,
+    configurable: true
+});
+
+Object.defineProperty(Creep.prototype, 'action', {
+    get: function () {
+        return this.memory.action;
+    },
+    set: function (v) {
+        this.memory.action = v;
+    },
+    enumerable: false,
+    configurable: true
+});
+
+Object.defineProperty(Creep.prototype, 'has_path', {
+    get: function () {
+        return (this.memory._move) && (this.memory._move.path);
+    },
+    enumerable: false,
+    configurable: true
+});
+
+Object.defineProperty(Creep.prototype, 'range', {
+    get: function () {
+        return this.memory.range;
     },
     enumerable: false,
     configurable: true

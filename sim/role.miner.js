@@ -1,11 +1,19 @@
 'use strict';
 
+let actions = {
+    move : require('action.move'),
+    mine : require('action.mine')
+};
+
 module.exports = {
     /** @param {Creep} creep **/
     run: function (creep) {
-        let source = creep.assignment;
-        if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-            creep.moveToX(source);
+        let action = actions[creep.action];
+        if (action) {
+            action.run(creep);
+        } else {
+            creep.action = 'mine';
+            console.log(creep+ ' action could not be handeled :' + creep.action);
         }
     }
 };
