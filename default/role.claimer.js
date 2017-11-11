@@ -9,7 +9,7 @@ module.exports = {
             creep.moveTo(exit);
         }else{
             //creep.move(TOP);
-            //creep.memory.role = 'builder';
+            creep.memory.role = 'harvester';
             //let structure = Game.getObjectById('59fe2284b2c99b661227be6c');
             //creep.moveTo(structure);
             //if (creep.build(structure) === ERR_NOT_IN_RANGE) {

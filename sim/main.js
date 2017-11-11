@@ -20,22 +20,24 @@ module.exports.loop = function () {
         for (let name in Game.spawns) {
             var spawn = Game.spawns[name];
             roleSpawn.run(spawn);
+
+            let links = spawn.room.find(FIND_STRUCTURES, {
+                filter: s => s.structureType === STRUCTURE_LINK &&
+                    s.pos.findInRange(FIND_STRUCTURES, 2, {
+                        filter: ss => ss.structureType === STRUCTURE_CONTAINER ||
+                            ss.structureType === STRUCTURE_STORAGE   }).length !== 0});
+
+            for( let name in links) {
+                roleLink.run(links[name]);
+            }
         }
 
-        let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
+        let towers = _.filter(Game.structures, s => s.structureType === STRUCTURE_TOWER);
         for (let tower of towers) {
             tower.defend();
         }
 
-        let links = spawn.room.find(FIND_STRUCTURES, {
-            filter: s => s.structureType == STRUCTURE_LINK &&
-                s.pos.findInRange(FIND_STRUCTURES, 2, {
-                    filter: ss => ss.structureType == STRUCTURE_CONTAINER ||
-                        ss.structureType == STRUCTURE_STORAGE   }).length != 0});
 
-        for( let name in links) {
-            roleLink.run(links[name]);
-        }
 
     } catch (e) {
         console.log('Brain Exeception', e);

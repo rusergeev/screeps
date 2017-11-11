@@ -1,5 +1,4 @@
 module.exports = {
-
     /** @param {Creep} creep **/
     run: function(creep) {
 
@@ -12,13 +11,12 @@ module.exports = {
             creep.say('Full');
         }
 	    if(creep.memory.harvesting) {
-            target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
-            if(target) {
-                if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
-                }
+            const route = Game.map.findRoute(creep.room, 'W53N46');
+            if(route.length > 0) {
+                creep.say('To '+route[0].room);
+                const exit = creep.pos.findClosestByRange(route[0].exit);
+                creep.moveTo(exit);
             } else {
-
                 let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: s => (  s.structureType === STRUCTURE_CONTAINER ) &&
                         s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 2
@@ -42,32 +40,21 @@ module.exports = {
             }
         }
         else {
-            var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType === STRUCTURE_EXTENSION ||
-                                structure.structureType === STRUCTURE_SPAWN ||
-                                structure.structureType === STRUCTURE_TOWER) &&
-                                structure.energy < structure.energyCapacity;
-                    }
-            });
-            if (!target) {
+            const route = Game.map.findRoute(creep.room, 'W53N44');
+            if(route.length > 0) {
+                creep.say('To '+route[0].room);
+                const exit = creep.pos.findClosestByRange(route[0].exit);
+                creep.moveTo(exit);
+            } else {
                 creep.say('Storage!');
-                target = creep.room.storage;
-            }
-            if(target) {
-                if(creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
-                }
-            }
-            else{
-                target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
-                if(target) {
-                    if(creep.build(target) === ERR_NOT_IN_RANGE) {
+                var target = creep.room.storage;
+                if (target) {
+                    if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }
             }
-
         }
+
 	}
 };

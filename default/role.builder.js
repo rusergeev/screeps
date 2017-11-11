@@ -7,14 +7,15 @@ module.exports = {
             creep.memory.building = false;
             creep.say('Harvest');
 	    }
-	    if(!creep.memory.building && creep.carry.energy === creep.carryCapacity) {
+	    if(!creep.memory.building && _.sum(creep.carry) === creep.carryCapacity) {
 	        creep.memory.building = true;
 	        creep.say('Build');
 	    }
 
 	    if(creep.memory.building) {
             var structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                filter: (s) => s.hits < s.hitsMax/2 && s.structureType !== STRUCTURE_WALL
+                filter: (s) => s.hits < s.hitsMax/2 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART ||
+                    s.structureType === STRUCTURE_RAMPART && s.hits < 1000
             });
             if (structure) {
                 // try to repair it, if it is out of range
