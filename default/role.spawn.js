@@ -80,7 +80,7 @@ module.exports = {
                 let newName = 'Harvester' + Game.time;
                 console.log('Spawning new harvester: ' + newName);
                 spawn.spawnCreep(harvester_abilities, newName, {memory: {role: 'harvester'}});
-            } else if (upgraders.length < 2 ){
+            } else if (upgraders.length < 3 ){
                 let newName = 'Upgrader' + Game.time;
                 console.log('Spawning new upgrader: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'upgrader'}});

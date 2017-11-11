@@ -7,7 +7,7 @@ module.exports = {
             creep.memory.harvesting = true;
             creep.say('Harvest');
         }
-        if(creep.memory.harvesting && creep.carry.energy === creep.carryCapacity) {
+        if(creep.memory.harvesting && _.sum(creep.carry) === creep.carryCapacity) {
             creep.memory.harvesting = false;
             creep.say('Full');
         }

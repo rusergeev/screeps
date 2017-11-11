@@ -7,7 +7,7 @@ module.exports =  {
             creep.memory.upgrading = false;
             creep.say('Harvest');
 	    }
-	    if(!creep.memory.upgrading && creep.carry.energy === creep.carryCapacity) {
+	    if(!creep.memory.upgrading && _.sum(creep.carry) === creep.carryCapacity) {
 	        creep.memory.upgrading = true;
 	        creep.say('Upgrade');
 	    }
