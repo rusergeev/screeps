@@ -15,9 +15,9 @@ module.exports.loop = function () {
 
         for (let name in Memory.creeps) {
             if (!Game.creeps[name]) {
-                let assignment = Memory.creeps[name].assignment;
+                let assignment = Game.getObjectById(Memory.creeps[name].assignment);
                 if (assignment) {
-
+                    assignment.workers.find();
                 }
                 delete Memory.creeps[name];
                 console.log('Clearing non-existing creep memory:', name);
