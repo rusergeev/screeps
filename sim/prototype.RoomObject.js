@@ -44,15 +44,16 @@ Object.defineProperty(Source.prototype, 'workers', {
 
 /** @param {Creep} creep **/
 RoomObject.prototype.assign = function (creep) {
-    this.memory.workers.push(creep.id);
+    creep.memory.id = creep.id;
+    this.memory.workers.push(creep.memory.id);
     delete this._workers;
 };
 
-/** @param {Creep} creep **/
-RoomObject.prototype.release = function (creep) {
-    let index = this.memory.workers.find(creep.id);
+/** @param {Int} creep_id **/
+RoomObject.prototype.release = function (creep_id) {
+    let index = this.memory.workers.indexOf(creep_id);
     if (index > -1) {
-        this.memory.workers;
+        this.memory.workers.splice(index, 1);
         delete this._workers;
     } else {
         console.error(this.id + ': could not release creep ' + creep);

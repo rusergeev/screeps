@@ -10,7 +10,6 @@ module.exports = {
         let workers = source.workers;
         for(let name in workers) {
             let worker = workers[name];
-            console.log('source' + source + ' worker :' + name + ' - ' + worker + ' - ' + worker.role);
             roles[worker.role].run(worker);
         }
     }

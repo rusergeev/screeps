@@ -8,8 +8,7 @@ module.exports = {
         let spawning = spawn.spawning;
         if (spawning){
             let creep = Game.creeps[spawning.name];
-            if (creep.memory.assignme) {
-                delete creep.memory.assignme;
+            if (!creep.memory.id) {
                 creep.assignment.assign(creep);
             }
         } else {
