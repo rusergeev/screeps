@@ -3,7 +3,10 @@
 require('prototype.Room');
 require('prototype.Creep');
 require('prototype.RoomObject');
-require('prototype.Source');
+
+let creepRoles = require('creep.roles');
+let roleSpawn = require('role.spawn');
+let roleLink = require('role.link');
 let roleRoom = require('role.room');
 require('prototype.StructureTower');
 
@@ -23,9 +26,16 @@ module.exports.loop = function () {
             }
         }
         let rooms = Game.rooms;
+
         for (let name in rooms){
             let room = rooms[name];
             roleRoom.run(room);
+        }
+
+        let spawns = Game.spawns;
+        for(let name in spawns){
+            let spawn = spawns[name];
+            roleSpawn.run(spawn);
         }
     } catch (e) {
         console.log('Brain Exeception', e);

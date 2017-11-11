@@ -28,16 +28,6 @@ Object.defineProperty(Source.prototype, 'workers', {
         }
         return this._workers;
     },
-    set: function(v){
-        console.log('set'+v);
-        this.memory.workers = v;
-        this._workers = this.memory.workers;
-    },
-    push: function(v){
-        console.log('push'+v);
-        this.memory.workers.push(v);
-        this._workers = this.memory.workers.map(id => Game.getObjectById(id));
-    },
     enumerable: false,
     configurable: true
 });
