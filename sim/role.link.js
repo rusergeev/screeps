@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     /** @param {StructureLink} link **/
     run: function(link) {

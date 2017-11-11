@@ -1,3 +1,5 @@
+'use strict';
+
 let roles = {
     harvester: require('role.harvester'),
     upgrader: require('role.upgrader'),
@@ -5,11 +7,7 @@ let roles = {
     miner: require('role.miner'),
     medic: require('role.medic'),
     linkster: require('role.linkster'),
-    claimer: require('role.claimer'),
-    helper_upgrader: require('role.upgrader.experimental'),
-    helper_builder: require('role.builder.experimental'),
-    helper_harvester: require('role.harvester.experimental')
-
+    claimer: require('role.claimer')
 };
 
 module.exports = {

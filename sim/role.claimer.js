@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     /** @param {Creep} creep **/
     run: function(creep) {
@@ -6,14 +8,14 @@ module.exports = {
         if(route.length > 0) {
             console.log('Now heading to room '+route[0].room);
             const exit = creep.pos.findClosestByRange(route[0].exit);
-            creep.moveTo(exit);
+            creep.moveToX(exit);
         }else{
             //creep.move(TOP);
             //creep.memory.role = 'builder';
             //let structure = Game.getObjectById('59fe2284b2c99b661227be6c');
-            //creep.moveTo(structure);
+            //creep.moveToX(structure);
             //if (creep.build(structure) === ERR_NOT_IN_RANGE) {
-            //   creep.moveTo(structure);
+            //   creep.moveToX(structure);
             //}
         }
     }

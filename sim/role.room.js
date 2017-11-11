@@ -1,13 +1,18 @@
-require('Room.prototype');
+'use strict';
 
 let roles = {
-    control: require('role.tech.control'),
+    source: require('role.source'),
+    controller: require('role.controller')
 };
 
 module.exports = {
     /** @param {RoomObject} room **/
     run: function(room) {
-        console.log('room ', room);
-        roles['control'].run(room.controller);
+        roles['controller'].run(room.controller);
+        let sources = room.sources;
+        for(let name in sources){
+            let source = sources[name];
+            roles['source'].run(source);
+        }
     }
 };

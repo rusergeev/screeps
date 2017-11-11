@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 
     /** @param {Creep} creep **/
@@ -25,12 +27,12 @@ module.exports = {
             }
             if (container) {
                 if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(container);
+                    creep.moveToX(container);
                 }
             }else {
                 var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
                 if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(source);
+                    creep.moveToX(source);
                 }
             }
         }
@@ -49,13 +51,13 @@ module.exports = {
             }
             if(target) {
                 if(creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveToX(target);
                 }
             }else{
                 var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
                 if(target) {
                     if(creep.build(target) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                        creep.moveToX(target, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }
             }

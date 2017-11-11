@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports =  {
 
     /** @param {Creep} creep **/
@@ -14,7 +16,7 @@ module.exports =  {
 
 	    if(creep.memory.upgrading) {
             if(creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                creep.moveToX(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
             }
         }
         else {
@@ -26,12 +28,12 @@ module.exports =  {
             });
             if (container) {
                 if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(container);
+                    creep.moveToX(container);
                 }
             } else {
                 var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
                 if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(source);
+                    creep.moveToX(source);
                 }
             }
         }
