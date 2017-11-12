@@ -6,13 +6,15 @@ require('prototype.Creep');
 require('prototype.RoomObject');
 require('prototype.Source');
 
-let roleSpawn = require('role.spawn');
-let roleLink = require('role.link');
-let roleRoom = require('role.room');
-require('prototype.StructureTower');
+let roles = {
+    spawn: require('role.spawn'),
+    room: require('role.room'),
+    creep: require('role.creep')
+};
 
 module.exports.loop = function () {
     try {
+
         for (let name in Memory.creeps) {
             if (!Game.creeps[name]) {
                 console.log('Deleting: '+ name);
@@ -26,18 +28,25 @@ module.exports.loop = function () {
                 console.log('Clearing non-existing creep memory:', name);
             }
         }
-        let rooms = Game.rooms;
 
+        let rooms = Game.rooms;
         for (let name in rooms){
             let room = rooms[name];
-            roleRoom.run(room);
+            roles['room'].run(room);
         }
 
         let spawns = Game.spawns;
         for(let name in spawns){
             let spawn = spawns[name];
-            roleSpawn.run(spawn);
+            roles['spawn'].run(spawn);
         }
+
+        let creeps = Game.creeps;
+        for (let name in creeps) {
+            let creep = creeps[name];
+            roles['creep'].run(creep);
+        }
+
     } catch (e) {
         console.log('Brain Exeception', e);
     }

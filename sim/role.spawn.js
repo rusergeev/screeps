@@ -1,9 +1,5 @@
 'use strict';
 
-let roles = {
-
-};
-
 module.exports = {
 
     /** @param {StructureSpawn} spawn **/
@@ -16,7 +12,6 @@ module.exports = {
                 creep.assignment.assign(creep);
             }
         } else {
-
             for (let name in sources) {
                 let source = sources[name];
                 let workers = source.workers;
