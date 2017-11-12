@@ -80,11 +80,11 @@ module.exports = {
                 let newName = 'Harvester' + Game.time;
                 console.log('Spawning new harvester: ' + newName);
                 spawn.spawnCreep(harvester_abilities, newName, {memory: {role: 'harvester'}});
-            } else if (upgraders.length < 3 ){
+            } else if (upgraders.length < 2 ){
                 let newName = 'Upgrader' + Game.time;
                 console.log('Spawning new upgrader: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'upgrader'}});
-            } else if (builders.length < 1 && spawn.room.find(FIND_CONSTRUCTION_SITES).length > 0) {
+            } else if (builders.length < 3 && spawn.room.find(FIND_CONSTRUCTION_SITES).length > 0) {
                 let newName = 'Builder' + Game.time;
                 console.log('Spawning new builder: ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: 'builder'}});
