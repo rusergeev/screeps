@@ -18,9 +18,9 @@ Object.defineProperty(RoomObject.prototype, 'memory', {
 });
 
 Object.defineProperty(RoomObject.prototype, 'workers', {
-    get: function() {
+    get: function () {
         if (!this._workers) {
-            if (!this.memory.workers){
+            if (!this.memory.workers) {
                 this.memory.workers = [];
                 console.log(this.name + ' init workers with empty []');
             }

@@ -6,7 +6,7 @@ let roles = {
 
 module.exports = {
     /** @param {StructureController} controller **/
-    run: function(controller) {
+    run: function (controller) {
 
     }
 };

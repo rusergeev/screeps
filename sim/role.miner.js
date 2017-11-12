@@ -12,8 +12,7 @@ module.exports = {
         if (action) {
             action.run(creep);
         } else {
-            creep.action = 'mine';
-            console.log(creep+ ' action could not be handeled :' + creep.action);
+            console.log(creep + ' action could not be handeled :' + creep.action);
         }
     }
 };

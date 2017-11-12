@@ -10,7 +10,7 @@ let roles = {
 };
 
 module.exports = {
-    run: function(creep) {
+    run: function (creep) {
         roles[creep.memory.role].run(creep);
     }
 };

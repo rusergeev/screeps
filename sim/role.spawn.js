@@ -3,10 +3,10 @@
 module.exports = {
 
     /** @param {StructureSpawn} spawn **/
-    run: function(spawn) {
+    run: function (spawn) {
         let sources = spawn.room.sources;
         let spawning = spawn.spawning;
-        if (spawning){
+        if (spawning) {
             let creep = Game.creeps[spawning.name];
             if (!creep.memory.id) {
                 creep.assignment.assign(creep);
@@ -18,10 +18,16 @@ module.exports = {
                 const abilities = [WORK, MOVE];
                 if (workers.length < 1 && spawn.spawnCreep(abilities, 'noname', {dryRun: true}) === OK) {
                     let newName = 'Miner' + Game.time;
-                    let status = spawn.spawnCreep(abilities, newName,
-                        {memory: {role: 'miner', assignment: source.id, range: 1, action: 'move'}}) === OK
-                        ? 'OK' :'failed';
-                    console.log(spawn.name+ ': spawning ' + newName + ' - ' + status);
+                    let status = spawn.spawnCreep(abilities, newName, {
+                        memory: {
+                            role: 'miner',
+                            assignment: source.id,
+                            target: source.container.id,
+                            range: 0,
+                            action: 'mine'
+                        }
+                    }) === OK ? 'OK' : 'failed';
+                    console.log(spawn.name + ': spawning ' + newName + ' - ' + status);
                 }
             }
         }

@@ -73,12 +73,31 @@ Object.defineProperty(Creep.prototype, 'range', {
     configurable: true
 });
 
-Creep.prototype.switch_to_moving = function (x) {
+Creep.prototype.moving = function (x) {
     this.memory.then = this.action;
     this.action = 'move';
+    this.say('Moving');
 };
 
 Creep.prototype.arrived = function (x) {
     this.action = this.memory.then;
-    delete this.then;
+    delete this.memory.then;
+    this.say('Arrived');
 };
+
+Object.defineProperty(Creep.prototype, 'target', {
+    get: function() {
+        if (!this._target) {
+            this._target = Game.getObjectById(this.memory.target);
+        }
+        return this._target;
+    },
+    set: function(v) {
+        this.memory.target = v.id;
+        if (!this._target) {
+            delete this._target;
+        }
+    },
+    enumerable: false,
+    configurable: true
+});

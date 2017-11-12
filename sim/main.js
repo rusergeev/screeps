@@ -1,5 +1,6 @@
 'use strict';
 
+require('prototype.RoomPosition');
 require('prototype.Room');
 require('prototype.Creep');
 require('prototype.RoomObject');
