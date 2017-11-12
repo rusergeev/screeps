@@ -17,7 +17,7 @@ Object.defineProperty(RoomObject.prototype, 'memory', {
     enumerable: false,
 });
 
-Object.defineProperty(Source.prototype, 'workers', {
+Object.defineProperty(RoomObject.prototype, 'workers', {
     get: function() {
         if (!this._workers) {
             if (!this.memory.workers){
