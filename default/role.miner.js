@@ -6,7 +6,7 @@ module.exports = {
             let target = source.pos.findInRange(FIND_STRUCTURES, 2, {
                 filter: ss => ss.structureType === STRUCTURE_CONTAINER ||
                     ss.structureType === STRUCTURE_STORAGE   })[0]|| source;
-            creep.moveTo(target);
+            creep.moveTo(target, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
         }
     }
 };

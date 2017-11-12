@@ -6,7 +6,7 @@ module.exports = {
         if(route.length > 0) {
             console.log('Now heading to room '+route[0].room);
             const exit = creep.pos.findClosestByRange(route[0].exit);
-            creep.moveTo(exit);
+            creep.moveTo(exit, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
         }else{
             //creep.move(TOP);
             creep.memory.role = 'harvester';

@@ -21,16 +21,16 @@ module.exports = {
                 // try to repair it, if it is out of range
                 if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
                     // move towards it
-                    creep.moveTo(structure);
+                    creep.moveTo(structure, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                 }
             } else {
                 var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
                 if(target) {
                     if(creep.build(target) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                        creep.moveTo(target, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }else if(creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveTo(creep.room.controller, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                 }
 			}
 	    }
@@ -38,7 +38,7 @@ module.exports = {
             const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
             if(target) {
                 if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
+                    creep.moveTo(target, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }else {
                 let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
@@ -49,12 +49,12 @@ module.exports = {
                 });
                 if (container) {
                     if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(container);
+                        creep.moveTo(container, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 } else {
                     var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
                     if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(source);
+                        creep.moveTo(source, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }
             }
