@@ -72,3 +72,13 @@ Object.defineProperty(Creep.prototype, 'range', {
     enumerable: false,
     configurable: true
 });
+
+Creep.prototype.switch_to_moving = function (x) {
+    this.memory.then = this.action;
+    this.action = 'move';
+};
+
+Creep.prototype.arrived = function (x) {
+    this.action = this.memory.then;
+    delete this.then;
+};
