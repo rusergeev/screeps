@@ -6,7 +6,6 @@ require('prototype.Creep');
 require('prototype.RoomObject');
 require('prototype.Source');
 
-let creepRoles = require('creep.roles');
 let roleSpawn = require('role.spawn');
 let roleLink = require('role.link');
 let roleRoom = require('role.room');

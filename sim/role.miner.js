@@ -8,11 +8,6 @@ let actions = {
 module.exports = {
     /** @param {Creep} creep **/
     run: function (creep) {
-        let action = actions[creep.action];
-        if (action) {
-            action.run(creep);
-        } else {
-            console.log(creep + ' action could not be handeled :' + creep.action);
-        }
+        while(!actions[creep.action].run(creep));
     }
 };

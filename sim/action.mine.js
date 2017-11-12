@@ -3,8 +3,10 @@
 module.exports = {
     /** @param {Creep} creep **/
     run: function (creep) {
-        if (creep.harvest(creep.assignment) === ERR_NOT_IN_RANGE) {
+        let mining =  creep.harvest(creep.assignment) !== ERR_NOT_IN_RANGE;
+        if(!mining){
             creep.moving();
         }
+        return mining;
     }
 };
