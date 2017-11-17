@@ -13,9 +13,9 @@ module.exports = {
 	    }
 
 	    if(creep.memory.building) {
-            var structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+            var structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (s) => s.hits < s.hitsMax/2 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART ||
-                    s.structureType === STRUCTURE_RAMPART && s.hits < 1000
+                    s.structureType === STRUCTURE_RAMPART && s.hits < 10000
             });
             if (structure) {
                 // try to repair it, if it is out of range
@@ -24,7 +24,7 @@ module.exports = {
                     creep.moveTo(structure, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                 }
             } else {
-                var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+                var target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
                 if(target) {
                     if(creep.build(target) === ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
@@ -41,10 +41,10 @@ module.exports = {
                     creep.moveTo(target, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }else {
-                let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: s => ( (  s.structureType === STRUCTURE_CONTAINER ||
                         s.structureType === STRUCTURE_STORAGE) &&
-                        s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy)/2)||
+                        s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy)/4)||
                         s.structureType === STRUCTURE_LINK && s.energy > (creep.carryCapacity - creep.carry.energy)/2
                 });
                 if (container) {
@@ -52,7 +52,7 @@ module.exports = {
                         creep.moveTo(container, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 } else {
-                    var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
+                    var source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
                     if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                         creep.moveTo(source, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                     }

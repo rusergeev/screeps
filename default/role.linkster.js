@@ -12,7 +12,7 @@ module.exports =  {
             creep.say('Full');
         }
         if(creep.memory.harvesting) {
-            let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+            let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: s => (  s.structureType === STRUCTURE_CONTAINER ||
                     s.structureType === STRUCTURE_STORAGE   ) &&
                     s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy)/2
@@ -22,7 +22,7 @@ module.exports =  {
                     creep.moveTo(container, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }else {
-                let source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
+                let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
                 if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(source, {noPathFinding: creep.has_path, reusePath: 50, visualizePathStyle: {stroke: '#ffffff'}});
                 }

@@ -3,7 +3,7 @@ let roles = {
     upgrader: require('role.upgrader'),
     builder: require('role.builder'),
     miner: require('role.miner'),
-    medic: require('role.medic'),
+    transport: require('role.transport'),
     linkster: require('role.linkster'),
     claimer: require('role.claimer'),
     helper_upgrader: require('role.upgrader.experimental'),

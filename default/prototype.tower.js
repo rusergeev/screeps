@@ -4,7 +4,7 @@ StructureTower.prototype.defend =
         if (target) {
             this.attack(target);
         }else {
-            let structure = this.pos.findClosestByPath(FIND_STRUCTURES, {
+            let structure = this.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (s) => s.hits < s.hitsMax / 1.5 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART ||
                     s.structureType === STRUCTURE_RAMPART && s.hits < 1000
             });
