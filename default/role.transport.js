@@ -9,11 +9,10 @@ module.exports = {
                 creep.say('Arrived!');
                 creep.memory.moving = false;
             }else {
-                let result = creep.moveTo(target, {
-                    noPathFinding: true,
-                    reusePath: 50,
-                    visualizePathStyle: {stroke: '#ffffff'}
-                });
+                if(!creep.memory.path) {
+                    creep.memory.path = creep.pos.findPathTo(target);
+                }
+                creep.moveByPath(creep.memory.path,{stroke: '#ffffff'});
                 return;
             }
         }
@@ -32,7 +31,8 @@ module.exports = {
                         creep.memory.moving = true;
                         creep.memory.move_range = 1;
                         creep.memory.move_target = resource.id;
-                        creep.moveTo(resource, {visualizePathStyle: {stroke: '#ffffff'}});
+                        creep.memory.path = creep.pos.findPathTo(resource,{ignoreCreeps:true});
+                        creep.moveByPath(creep.memory.path);
                         break;
                     case ERR_FULL:
                         creep.memory.harvesting = false;
@@ -54,7 +54,8 @@ module.exports = {
                                 creep.memory.moving = true;
                                 creep.memory.move_range = 1;
                                 creep.memory.move_target = container.id;
-                                creep.moveTo(container, {visualizePathStyle: {stroke: '#ffffff'}});
+                                creep.memory.path = creep.pos.findPathTo(container,{ignoreCreeps:true});
+                                creep.moveByPath(creep.memory.path);
                                 break;
                             case ERR_FULL:
                                 creep.memory.harvesting = false;
@@ -82,7 +83,8 @@ module.exports = {
                             creep.memory.moving = true;
                             creep.memory.move_range = 1;
                             creep.memory.move_target = target.id;
-                            creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                            creep.memory.path = creep.pos.findPathTo(target,{ignoreCreeps:true});
+                            creep.moveByPath(creep.memory.path);
                             break;
                         case ERR_NOT_ENOUGH_RESOURCES:
                             creep.memory.harvesting = true;

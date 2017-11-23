@@ -46,6 +46,6 @@ RoomObject.prototype.release = function (creep_id) {
         this.memory.workers.splice(index, 1);
         delete this._workers;
     } else {
-        console.error(this.id + ': could not release creep ' + creep);
+        console.log(this.id + ': could not release creep ' + creep_id);
     }
 };

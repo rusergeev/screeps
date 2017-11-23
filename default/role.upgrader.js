@@ -14,7 +14,8 @@ module.exports = {
                     reusePath: 50,
                     visualizePathStyle: {stroke: '#ffffff'}
                 });
-                return;
+                if(result !== ERR_NOT_FOUND)
+                {return;}
             }
         }
 
@@ -71,7 +72,7 @@ module.exports = {
                 case ERR_NOT_IN_RANGE:
                     creep.say('Moving');
                     creep.memory.moving = true;
-                    creep.memory.move_range = 2;
+                    creep.memory.move_range = 3;
                     creep.memory.move_target = creep.room.controller.id;
                     creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
                     break;

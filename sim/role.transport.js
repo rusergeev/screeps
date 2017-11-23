@@ -2,7 +2,9 @@
 
 let actions = {
     move : require('action.move'),
-    mine : require('action.mine')
+    pickup : require('action.pickup'),
+    deliver : require('action.deliver'),
+    withdraw : require('action.withdraw')
 };
 
 module.exports = {

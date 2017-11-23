@@ -6,6 +6,8 @@ let roles = {
     transport: require('role.transport'),
     linkster: require('role.linkster'),
     claimer: require('role.claimer'),
+    medic: require('role.medic'),
+    destroyer: require('role.destroyer'),
     helper_upgrader: require('role.upgrader.experimental'),
     helper_builder: require('role.builder.experimental'),
     helper_harvester: require('role.harvester.experimental')

@@ -4,7 +4,9 @@ let roleLink = require('role.link');
 require('prototype.tower');
 
 module.exports.loop = function () {
+    return;
     try {
+
         for (let name in Memory.creeps) {
             if (!Game.creeps[name]) {
                 delete Memory.creeps[name];
@@ -37,8 +39,23 @@ module.exports.loop = function () {
             tower.defend();
         }
 
+        /*
+        const amountToSell = 100, maxTransferEnergyCost = 500;
+        const orders = Game.market.getAllOrders({type: ORDER_BUY, resourceType: RESOURCE_UTRIUM});
 
+        for(let i=0; i<orders.length; i++) {
+            console.log('found an order to sell: '+ orders[i].roomName+' - '+ orders[i]);
+            const transferEnergyCost = Game.market.calcTransactionCost(
+                amountToSell, 'W53N44', orders[i].roomName);
 
+            if(transferEnergyCost < maxTransferEnergyCost) {
+                console.log('sold');
+                console.log(Game.market.deal(orders[i].id, amountToSell, "W53N44"));
+
+                break;
+            }
+        }
+        */
     } catch (e) {
         console.log('Brain Exeception', e);
     }

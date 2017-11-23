@@ -11,7 +11,7 @@ module.exports = {
             creep.say('Full');
         }
 	    if(creep.memory.harvesting) {
-            let storage = Game.getObjectById(creep.memory.target || '59edd32f75ec8b050d6a20bc');
+            let storage = Game.getObjectById(creep.memory.storage);
             if (storage) {
                 if (creep.withdraw(storage, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(storage);
@@ -19,7 +19,7 @@ module.exports = {
             }
         }
         else {
-            var target = Game.getObjectById(creep.memory.storage || '5a0492b7e4d99c4dfa41ee49');
+            var target = Game.getObjectById(creep.memory.target);
             if (target) {
                 if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
