@@ -10,8 +10,11 @@ let roles = {
 };
 
 module.exports = {
-    /** @param {RoomObject} room **/
+    /** @param {Room} room **/
     run: function (room) {
-        console.log('room');
+        //console.log(JSON.stringify(room));
+
+        console.log(JSON.stringify(room.survivalInfo));
+        //console.log(room.energyAvailable);
     }
 };

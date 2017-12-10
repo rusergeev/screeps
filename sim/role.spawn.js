@@ -6,7 +6,15 @@ module.exports = {
 
     /** @param {StructureSpawn} spawn **/
     run: function (spawn) {
-
+        if (spawn.spawning) return;
+        let order = spawn.orders.pop();
+        if (order) {
+            let newName = order.role + Game.time;
+            let status = spawn.spawnCreep(order.abilities, newName, {memory: order.memory});
+            if (status !== OK) {
+                spawn.orders.push(order);
+            }
+        }
     },
     unrun: function (spawn) {
         let sources = spawn.room.sources;

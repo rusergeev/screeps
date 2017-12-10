@@ -9,6 +9,17 @@ Object.defineProperty(StructureSpawn.prototype, 'targets', {
             return a.pos.dispa - b;
         });
     },
-    enumerable: false,
+    enumerable: true,
+    configurable: true
+});
+
+Object.defineProperty(StructureSpawn.prototype, 'orders', {
+    get: function () {
+        if (!this._orders) {
+            this._orders = this.room.sources;
+        }
+        return this._orders;
+    },
+    enumerable: true,
     configurable: true
 });
