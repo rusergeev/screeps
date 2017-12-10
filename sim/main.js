@@ -4,7 +4,9 @@ let roles = {
     spawn: {role: require('role.spawn'), memory: Memory.spawns, objects: Game.spawns},
     room: {role: require('role.room'), memory: Memory.rooms, objects: Game.rooms},
     creep: {role: require('role.creep'), memory: Memory.creeps, objects: Game.creeps},
-    constructionSites: {role: require('role.construction.sites'), memory: Memory.constructionSites, objects: Game.constructionSites}
+    constructionSite: {role: require('role.construction.site'), memory: Memory.constructionSites, objects: Game.constructionSites},
+    flag: {role: require('role.flag'), memory: Memory.flags, objects: Game.flags},
+
 };
 
 module.exports.loop = function () {
