@@ -1,9 +1,14 @@
 'use strict';
 
+require('prototype.StructureSpawn');
+
 module.exports = {
 
     /** @param {StructureSpawn} spawn **/
     run: function (spawn) {
+
+    },
+    unrun: function (spawn) {
         let sources = spawn.room.sources;
         let spawning = spawn.spawning;
         if (spawning) {
@@ -14,11 +19,11 @@ module.exports = {
         } else {
             for (let name in sources) {
                 let source = sources[name];
-                let workers = source.workers;
-                const miner_abilities = [WORK, MOVE];
+                let miner_abilities = [MOVE, WORK];
                 let miners_number = source.workers.filter(worker => worker.role === 'miner').length;
                 if ( miners_number === 0 && spawn.spawnCreep(miner_abilities, 'noname', {dryRun: true}) === OK) {
                     let newName = 'Miner' + Game.time;
+
                     let status = spawn.spawnCreep(miner_abilities, newName, {
                         memory: {
                             role: 'miner',

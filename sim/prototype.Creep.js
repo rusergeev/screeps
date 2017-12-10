@@ -101,3 +101,10 @@ Object.defineProperty(Creep.prototype, 'target', {
     enumerable: false,
     configurable: true
 });
+
+Creep.prototype.travelTo = function (pos, opts) {
+    if (typeof opts.ignoreCreeps === 'undefined') {
+        opts.ignoreCreeps = true
+    }
+    return this.moveTo(pos, opts)
+}

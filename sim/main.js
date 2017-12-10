@@ -1,57 +1,35 @@
 'use strict';
 
-require('prototype.RoomPosition');
-require('prototype.Room');
-require('prototype.Creep');
-require('prototype.RoomObject');
-require('prototype.Source');
+//require('prototype.RoomPosition');
+//require('prototype.Room');
+//require('prototype.Creep');
+//require('prototype.RoomObject');
+//require('prototype.Source');
 
 let roles = {
-    spawn: require('role.spawn'),
-    room: require('role.room'),
-    creep: require('role.creep')
+    spawn: {role: require('role.spawn'), memory: Memory.spawns, objects: Game.spawns},
+    room: {role: require('role.room'), memory: Memory.rooms, objects: Game.rooms},
+    creep: {role: require('role.creep'), memory: Memory.creeps, objects: Game.creeps},
 };
 
 module.exports.loop = function () {
-    if (false){
-    try {
-
-        for (let name in Memory.creeps) {
-            if (!Game.creeps[name]) {
-                console.log('Deleting: '+ name);
-                if (Memory.creeps[name].assignment) {
-                    let assignment = Game.getObjectById(Memory.creeps[name].assignment);
-                    console.log('Assignment: ' + assignment);
-                    if (assignment) {
-                        console.log('Releaseing: ' + name);
-                        assignment.release(Memory.creeps[name].id);
-                    }
+    for (let role_name in roles) {
+        try {
+            let role = roles[role_name];
+            let memory = role['memory'];
+            let objects = role['objects'];
+            for (let name in memory) {
+                if (!objects[name]) {
+                    console.log('Deleting: ' + name);
+                    delete memory[name];
+                    console.log('Clearing non-existing '+ role_name + ' memory:', name);
                 }
-                delete Memory.creeps[name];
-                console.log('Clearing non-existing creep memory:', name);
             }
+            for (let name in objects) {
+                role['role'].run(objects[name]);
+            }
+        } catch (e) {
+            console.log(role_name + ' exception', e);
         }
-
-        let rooms = Game.rooms;
-        for (let name in rooms){
-            let room = rooms[name];
-            roles['room'].run(room);
-        }
-
-        let spawns = Game.spawns;
-        for(let name in spawns){
-            let spawn = spawns[name];
-            roles['spawn'].run(spawn);
-        }
-
-        let creeps = Game.creeps;
-        for (let name in creeps) {
-            let creep = creeps[name];
-            roles['creep'].run(creep);
-        }
-
-    } catch (e) {
-        console.log('Brain Exeception', e);
-    }
     }
 };
