@@ -1,5 +1,6 @@
 'use strict';
 
+require('prototype.Source')
 
 let roles = {
 
