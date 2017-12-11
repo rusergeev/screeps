@@ -1,20 +1,21 @@
 'use strict';
 
-//require('prototype.RoomPosition');
 require('prototype.Room');
-//require('prototype.RoomObject');
-//require('prototype.Source');
+
 
 let roles = {
-
+    controller: require('role.controller'),
+    source:  require('role.source')
 };
 
 module.exports = {
     /** @param {Room} room **/
     run: function (room) {
-        //console.log(JSON.stringify(room));
-
-        console.log(JSON.stringify(room.survivalInfo));
-        //console.log(room.energyAvailable);
+        if (room.controller){
+            roles.controller.run(room.controller);
+        }
+        for (let name in room.sources){
+            roles.source.run(room.sources[name]);
+        }
     }
 };
