@@ -9,6 +9,10 @@ let roles = {
 
 };
 
+if (!Memory.spawns_queue) {
+    Memory.spawns_queue = {};
+}
+
 module.exports.loop = function () {
     for (let role_name in roles) {
         try {
@@ -19,7 +23,7 @@ module.exports.loop = function () {
                 if (!objects[name]) {
                     console.log('Deleting: ' + name);
                     delete memory[name];
-                    console.log('Clearing non-existing '+ role_name + ' memory:', name);
+                    console.log('Clearing non-existing ' + role_name + ' memory:', name);
                 }
             }
             for (let name in objects) {

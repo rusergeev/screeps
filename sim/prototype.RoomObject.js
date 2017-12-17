@@ -1,6 +1,6 @@
 'use strict';
 
-Object.defineProperty(RoomObject.prototype, 'memory', {
+    Object.defineProperty(RoomObject.prototype, 'memory', {
     get: function () {
         if (!Memory.objects) {
             Memory.objects = {};
@@ -16,36 +16,3 @@ Object.defineProperty(RoomObject.prototype, 'memory', {
     configurable: true,
     enumerable: false,
 });
-
-Object.defineProperty(RoomObject.prototype, 'workers', {
-    get: function () {
-        if (!this._workers) {
-            if (!this.memory.workers) {
-                this.memory.workers = [];
-                console.log(this.name + ' init workers with empty []');
-            }
-            this._workers = this.memory.workers.map(id => Game.getObjectById(id));
-        }
-        return this._workers;
-    },
-    enumerable: false,
-    configurable: true
-});
-
-/** @param {Creep} creep **/
-RoomObject.prototype.assign = function (creep) {
-    creep.memory.id = creep.id;
-    this.memory.workers.push(creep.memory.id);
-    delete this._workers;
-};
-
-/** @param {Int} creep_id **/
-RoomObject.prototype.release = function (creep_id) {
-    let index = this.memory.workers.indexOf(creep_id);
-    if (index > -1) {
-        this.memory.workers.splice(index, 1);
-        delete this._workers;
-    } else {
-        console.log(this.id + ': could not release creep ' + creep_id);
-    }
-};

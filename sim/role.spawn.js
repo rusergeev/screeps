@@ -1,18 +1,24 @@
 'use strict';
 
 require('prototype.StructureSpawn');
+require('prototype.Source');
 
 module.exports = {
 
     /** @param {StructureSpawn} spawn **/
     run: function (spawn) {
         if (spawn.spawning) return;
-        let order = spawn.orders.pop();
-        if (order) {
-            let newName = order.role + Game.time;
-            let status = spawn.spawnCreep(order.abilities, newName, {memory: order.memory});
-            if (status !== OK) {
-                spawn.orders.push(order);
+        for (let source_id in Memory.spawns_queue) {
+            let order = Memory.spawns_queue[source_id];
+            if (order) {
+                let newName = order.memory.role + Game.time;
+                console.log(spawn.name + ': spawning ' + newName);
+                if (spawn.spawnCreep([MOVE, WORK], newName, {memory: order.memory}) === OK) {
+                    order.demand--;
+                }
+                if (order.demand) {
+                    delete Memory.spawns_queue[source_id];
+                }
             }
         }
     },

@@ -1,19 +1,27 @@
 'use strict';
 
-Object.defineProperty(Source.prototype, 'container', {
+require('prototype.RoomPosition');
+
+Object.defineProperty(Source.prototype, 'ports', {
     get: function () {
-        if (!this._container) {
-            if (!this.memory.container) {
-                this._container =
-                    this.pos.findInRange(FIND_STRUCTURES, 1, {filter: s => (s.structureType === STRUCTURE_CONTAINER )})[0] ||
-                    this.pos.findInRange(FIND_CONSTRUCTION_SITES, 1, {filter: s => (s.structureType === STRUCTURE_CONTAINER )})[0];
-                this.memory.container = this._container.id;
-                console.log(this.memory.container);
-            } else {
-                this._container = Game.getObjectById(this.memory.container);
+        if (!this._ports) {
+            if (!this.memory.ports) {
+                this.memory.ports = this.pos.free_adj_pos_count()
             }
+            this._ports = this.memory.ports
         }
-        return this._container;
+        return this._ports;
+    },
+    enumerable: false,
+    configurable: true
+});
+
+Object.defineProperty(Source.prototype, 'demand', {
+    get: function () {
+        if(!Memory.spawns_queue[source.id])
+            return ports;
+        else
+            return 0;
     },
     enumerable: false,
     configurable: true
