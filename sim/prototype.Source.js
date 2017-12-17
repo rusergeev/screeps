@@ -16,13 +16,8 @@ Object.defineProperty(Source.prototype, 'ports', {
     configurable: true
 });
 
-Object.defineProperty(Source.prototype, 'demand', {
-    get: function () {
-        if(!Memory.spawns_queue[source.id])
-            return ports;
-        else
-            return 0;
-    },
-    enumerable: false,
-    configurable: true
-});
+Source.prototype.energy_around = function () {
+
+    let x = this.room.lookForAtArea(LOOK_ENERGY,this.pos.x-1, this.pos.y-1, this.pos.x+1, this.pos.y+1, true).map(item => item.energy.energy);
+    return  _.sum(x);
+};
