@@ -22,7 +22,7 @@ Creep.prototype.moveToX = function (pos) {
     let pos_json = JSON.stringify(pos);
     if(!this.memory.path || pos_json !== this.memory.path_destination) {
         this.say('pathing 🐽');
-        this.memory.path = this.pos.findPathTo(pos);
+        this.memory.path = this.pos.findPathTo(pos, {ignoreCreeps: true});
         this.memory.path_destination = pos_json;
     }
 
