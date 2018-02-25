@@ -1,0 +1,3 @@
+[submodule "screeps-movement"]
+	path = screeps-movement
+	url = https://github.com/trebbettes-screeps/screeps-movement.git

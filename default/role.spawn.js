@@ -29,8 +29,17 @@ module.exports = {
             }
             let constructionSites = spawn.room.find(FIND_CONSTRUCTION_SITES).length;
             let builders = _.filter(Game.creeps, creep => creep.memory.role === 'builder').length;
-            if (constructionSites && builders < 1) {
+            if (constructionSites > builders && builders < 2) {
                 let role = 'builder';
+                let newName = role + Game.time + spawn.name;
+                let abilities = [MOVE, CARRY, WORK];
+                console.log(spawn + ': spawning ' + newName);
+                spawn.spawnCreep(abilities, newName, {memory: {role: role}});
+                return true;
+            }
+            let upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader').length;
+            if ( upgraders < 1) {
+                let role = 'upgrader';
                 let newName = role + Game.time + spawn.name;
                 let abilities = [MOVE, CARRY, WORK];
                 console.log(spawn + ': spawning ' + newName);

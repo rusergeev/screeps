@@ -19,6 +19,9 @@ Object.defineProperty(Creep.prototype, 'isEmpty', {
 });
 
 Creep.prototype.moveToX = function (pos) {
+    if (this.spawning || this.fatigue) {
+        return OK;
+    }
     let pos_json = JSON.stringify(pos);
     if(!this.memory.path || pos_json !== this.memory.path_destination) {
         this.say('pathing 🐽');
@@ -29,6 +32,7 @@ Creep.prototype.moveToX = function (pos) {
     let result = this.moveByPath(this.memory.path);
     switch (result) {
         case OK:
+
         case ERR_TIRED:
             break;
         case ERR_NOT_FOUND:
