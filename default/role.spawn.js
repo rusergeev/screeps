@@ -14,14 +14,14 @@ module.exports = {
                 let transport = _.filter(Game.creeps, creep => creep.memory.role === 'transport' && creep.memory.source === source ).length;
                 if (miner === 0) {
                     let role = 'miner';
-                    let newName = role + Game.time + spawn.name;
+                    let newName = role + Game.time;
                     console.log(spawn + ': spawning ' + newName);
                     let abilities = [MOVE, WORK, WORK];
                     spawn.spawnCreep(abilities, newName, {memory: {role: role, source: source}});
                 } else if ( transport === 0) {
                     let role = 'transport';
                     let target = spawn.id;
-                    let newName = role + Game.time + spawn.name;
+                    let newName = role + Game.time;
                     let abilities = [MOVE, CARRY, CARRY];
                     console.log(spawn + ': spawning ' + newName);
                     spawn.spawnCreep(abilities, newName, {memory: {role: role, source: source, target: target}});
@@ -31,7 +31,7 @@ module.exports = {
             let builders = _.filter(Game.creeps, creep => creep.memory.role === 'builder').length;
             if (constructionSites > builders && builders < 2) {
                 let role = 'builder';
-                let newName = role + Game.time + spawn.name;
+                let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
                 console.log(spawn + ': spawning ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});
@@ -40,7 +40,7 @@ module.exports = {
             let upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader').length;
             if ( upgraders < 1) {
                 let role = 'upgrader';
-                let newName = role + Game.time + spawn.name;
+                let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
                 console.log(spawn + ': spawning ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});

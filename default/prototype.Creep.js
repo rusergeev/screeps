@@ -141,9 +141,9 @@ Creep.prototype.deliver = function () {
     switch (result) {
         case OK: break;
         case ERR_NOT_IN_RANGE:
-            let port = Game.getObjectById(this.memory.target).port;
-            this.memory.destination = port;
-            this.moveToX(port);
+
+            this.memory.destination = target.pos;
+            this.moveToX(target);
             break;
         case ERR_FULL:
             this.drop(RESOURCE_ENERGY);
