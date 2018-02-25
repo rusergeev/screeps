@@ -2,7 +2,8 @@
 
 let roles = {
     miner : require('role.miner'),
-    transport: require('role.transport')
+    transport: require('role.transport'),
+    builder: require('role.builder')
 };
 
 module.exports = {
