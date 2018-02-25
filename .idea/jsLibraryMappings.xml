@@ -2,5 +2,7 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="PROJECT" libraries="{ScreepsAutocomplete}" />
+    <includedPredefinedLibrary name="Nashorn" />
+    <includedPredefinedLibrary name="WebGL" />
   </component>
 </project>

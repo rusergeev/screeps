@@ -13,7 +13,7 @@ module.exports = {
             if (order) {
                 let newName = order.memory.role + Game.time;
                 console.log(spawn.name + ': spawning ' + newName);
-                if (spawn.spawnCreep([MOVE, WORK], newName, {memory: order.memory}) === OK) {
+                if (spawn.spawnCreep([MOVE, WORK], newName, {memory: Object.assign({}, order.memory)}) === OK) {
                     order.demand--;
                 }
                 if (order.demand) {

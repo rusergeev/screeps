@@ -12,6 +12,9 @@ let roles = {
 if (!Memory.spawns_queue) {
     Memory.spawns_queue = {};
 }
+if (!Memory.stats){
+    Memory.stats ={};
+}
 
 module.exports.loop = function () {
     for (let role_name in roles) {
@@ -33,4 +36,7 @@ module.exports.loop = function () {
             console.log(role_name + ' exception', e);
         }
     }
+    Memory.stats['cpu.getUsed'] = Game.cpu.getUsed;
+    Memory.stats['cpu.limit'] = Game.cpu.limit;
+    Memory.stats['cpu.bucket'] = Game.cpu.bucket;
 };

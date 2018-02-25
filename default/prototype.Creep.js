@@ -1,103 +1,152 @@
 'use strict';
 
+require('prototype.Source');
+
 Object.defineProperty(Creep.prototype, 'isFull', {
     get: function() {
-        if (!this._isFull) {
-            this._isFull = _.sum(this.carry) === this.carryCapacity;
-        }
-        return this._isFull;
+        return _.sum(this.carry) === this.carryCapacity;
     },
     enumerable: false,
     configurable: true
 });
 
-Creep.prototype.moveToX = function (x) {
-    this.room.memory.step = this.room.memory.step || {};
-    this.room.memory.step[this.pos] = this.room.memory.step[this.pos] || {pos: this.pos, count: 0};
-    this.room.memory.step[this.pos].count++;
-    return this.moveTo(x);
-};
-
-Object.defineProperty(Creep.prototype, 'role', {
-    get: function () {
-        return this.memory.role;
-    },
-    set: function (v) {
-        this.memory.role = v;
-    },
-    enumerable: false,
-    configurable: true
-});
-
-Object.defineProperty(Creep.prototype, 'assignment', {
+Object.defineProperty(Creep.prototype, 'isEmpty', {
     get: function() {
-        if (!this._assignment) {
-            this._assignment = Game.getObjectById(this.memory.assignment);
-        }
-        return this._assignment;
-    },
-    set: function(v) {
-        this.memory.assignment = v.id;
-        if (!this._assignment) {
-            delete this._assignment;
-        }
+        return _.sum(this.carry) === 0;
     },
     enumerable: false,
     configurable: true
 });
 
-Object.defineProperty(Creep.prototype, 'action', {
-    get: function () {
-        return this.memory.action;
-    },
-    set: function (v) {
-        this.memory.action = v;
-    },
-    enumerable: false,
-    configurable: true
-});
+Creep.prototype.moveToX = function (pos) {
+    let pos_json = JSON.stringify(pos);
+    if(!this.memory.path || pos_json !== this.memory.path_destination) {
+        this.say('pathing 🐽');
+        this.memory.path = this.pos.findPathTo(pos, {ignoreCreeps: true});
+        this.memory.path_destination = pos_json;
+    }
 
-Object.defineProperty(Creep.prototype, 'has_path', {
-    get: function () {
-        return (this.memory._move) && (this.memory._move.path);
-    },
-    enumerable: false,
-    configurable: true
-});
-
-Object.defineProperty(Creep.prototype, 'range', {
-    get: function () {
-        return this.memory.range;
-    },
-    enumerable: false,
-    configurable: true
-});
-
-Creep.prototype.moving = function (x) {
-    this.memory.then = this.action;
-    this.action = 'move';
-    this.say('Moving');
+    let result = this.moveByPath(this.memory.path);
+    switch (result) {
+        case OK:
+        case ERR_TIRED:
+            break;
+        case ERR_NOT_FOUND:
+            delete this.memory.path;
+            this.moveToX(pos);
+            break;
+        default:
+            console.log(this + ' cant move to' + pos + ' : ' + result);
+            break;
+    }
+    return result;
 };
 
-Creep.prototype.arrived = function (x) {
-    this.action = this.memory.then;
-    delete this.memory.then;
-    this.say('Arrived');
+Creep.prototype.pickupX = function (energy) {
+
+    if (this.memory.destination) {
+        let destination  = new RoomPosition(this.memory.destination.x, this.memory.destination.y, this.memory.destination.roomName);
+        if (this.pos.isNearTo(destination)) {
+            delete this.memory.destination;
+        } else {
+            return this.moveToX(destination);
+        }
+    }
+
+    let result = this.pickup(energy);
+    switch (result) {
+        case OK:
+            break;
+        case ERR_NOT_IN_RANGE:
+            let port = Game.getObjectById(this.memory.source).port;
+            this.memory.destination = port;
+            this.moveToX(port);
+            break;
+        case ERR_FULL:
+            this.memory.loading = false;
+            this.say('full: WTF?');
+            break;
+        default:
+            console.log(this + ' cant pickup ' + energy + ' : ' + result);
+            break;
+    }
+    return result;
 };
 
-Object.defineProperty(Creep.prototype, 'target', {
-    get: function() {
-        if (!this._target) {
-            this._target = Game.getObjectById(this.memory.target);
+Creep.prototype.withdrawX = function (from) {
+
+    if (this.memory.destination) {
+        let destination  = new RoomPosition(this.memory.destination.x, this.memory.destination.y, this.memory.destination.roomName);
+        if (this.pos.isNearTo(destination)) {
+            delete this.memory.destination;
+        } else {
+            return this.moveToX(destination);
         }
-        return this._target;
-    },
-    set: function(v) {
-        this.memory.target = v.id;
-        if (!this._target) {
-            delete this._target;
+    }
+
+    let result = this.withdraw(from, RESOURCE_ENERGY);
+    switch (result) {
+        case OK:
+            break;
+        case ERR_NOT_IN_RANGE:
+            let port = Game.getObjectById(this.memory.source).port;
+            this.memory.destination = port;
+            this.moveToX(port);
+            break;
+        case ERR_FULL:
+            this.memory.loading = false;
+            this.say('full: WTF?');
+            break;
+        default:
+            console.log(this + ' cant pickup ' + from + ' : ' + result);
+            break;
+    }
+    return result;
+};
+
+Creep.prototype.load = function () {
+    let source = Game.getObjectById(this.memory.source);
+    let port = source.port;
+    let energy = source.room.lookForAt(LOOK_ENERGY, port)[0];
+
+    if (energy) {
+        this.pickupX(energy);
+    } else {
+        let container = _.filter(
+            source.room.lookForAt(LOOK_STRUCTURES, port),
+            s => s.structureType === STRUCTURE_CONTAINER)[0];
+        if (container) {
+            this.withdrawX(container);
         }
-    },
-    enumerable: false,
-    configurable: true
-});
+    }
+};
+
+Creep.prototype.deliver = function () {
+
+    if (this.memory.destination) {
+        let destination  = new RoomPosition(this.memory.destination.x, this.memory.destination.y, this.memory.destination.roomName);
+        if (this.pos.isNearTo(destination)) {
+            delete this.memory.destination;
+        } else {
+            return this.moveToX(destination);
+        }
+    }
+
+    let target = Game.getObjectById(this.memory.target);
+    let result = this.transfer(target, RESOURCE_ENERGY);
+    switch (result) {
+        case OK: break;
+        case ERR_NOT_IN_RANGE:
+            let port = Game.getObjectById(this.memory.target).port;
+            this.memory.destination = port;
+            this.moveToX(port);
+            break;
+        case ERR_FULL:
+            this.drop(RESOURCE_ENERGY);
+            break;
+        default:
+            console.log(this + ' cant transfer to ' + target + ' : ' + result);
+            break;
+    }
+    return result;
+};

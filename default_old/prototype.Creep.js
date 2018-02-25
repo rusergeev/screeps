@@ -11,6 +11,13 @@ Object.defineProperty(Creep.prototype, 'isFull', {
     configurable: true
 });
 
+Creep.prototype.moveToX = function (x) {
+    this.room.memory.step = this.room.memory.step || {};
+    this.room.memory.step[this.pos] = this.room.memory.step[this.pos] || {pos: this.pos, count: 0};
+    this.room.memory.step[this.pos].count++;
+    return this.moveTo(x);
+};
+
 Object.defineProperty(Creep.prototype, 'role', {
     get: function () {
         return this.memory.role;
@@ -94,10 +101,3 @@ Object.defineProperty(Creep.prototype, 'target', {
     enumerable: false,
     configurable: true
 });
-
-Creep.prototype.travelTo = function (pos, opts) {
-    if (typeof opts.ignoreCreeps === 'undefined') {
-        opts.ignoreCreeps = true
-    }
-    return this.moveTo(pos, opts)
-}

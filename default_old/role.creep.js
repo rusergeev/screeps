@@ -10,7 +10,6 @@ let roles = {
 module.exports = {
     run: function(creep) {
         if (roles[creep.role]) {
-            console.log(creep.role);
             roles[creep.role].run(creep);
         } else {
             console.log(creep + ': cannot handle role '+ creep.role);
