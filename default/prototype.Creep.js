@@ -30,11 +30,24 @@ Creep.prototype.moveToRange = function (destination, range) {
 
     let pos = destination.pos === undefined ? destination : destination.pos;
     let pos_json = JSON.stringify(pos);
-    if(!this.memory.path || pos_json !== this.memory.path_destination || range !== this.memory.path_range ) {
+    if (!this.memory.path || pos_json !== this.memory.path_destination || range !== this.memory.path_range) {
         this.say('pathing 🐽');
-        this.memory.path = this.pos.findPathTo(pos, { range: range });
+        this.memory.path = this.pos.findPathTo(pos, {
+            range: range,
+            ignoreCreeps: true,
+            costCallback:
+                function (roomName, costMatrix) {
+                    Game.rooms[roomName].find(FIND_CREEPS, {filter: c => !c.isMoving}).forEach(function (c) {
+                        costMatrix.set(c.pos.x, c.pos.y, 0xff);
+                    });
+                }
+        });
         this.memory.path_destination = pos_json;
         this.memory.path_range = range;
+        new RoomVisual(this.room.name).poly(this.memory.path, {
+            stroke: '#fff', strokeWidth: .15,
+            opacity: .2, lineStyle: 'dashed'
+        });
     }
 
     return this.rollToRange();
