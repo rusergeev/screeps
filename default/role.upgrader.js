@@ -17,6 +17,15 @@ module.exports = {
         }
 
         if (creep.memory.loading) {
+            const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+            if(target) {
+                if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
+                    creep.moveToRange(target, 1);
+                    return;
+                }
+            }
+
+
             let container =
                 creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: s => (  (s.structureType === STRUCTURE_CONTAINER ||
@@ -31,7 +40,7 @@ module.exports = {
                 switch (result) {
                     case ERR_NOT_IN_RANGE:
                         creep.say('Moving');
-                        creep.moveToX(container);
+                        creep.moveToRange(container, 1);
                         break;
                     case ERR_FULL:
                         creep.memory.harvesting = false;
@@ -45,7 +54,7 @@ module.exports = {
                 switch (result) {
                     case ERR_NOT_IN_RANGE:
                         creep.say('Moving');
-                        creep.moveToX(source);
+                        creep.moveToRange(source, 1);
                         break;
                     case ERR_FULL:
                         creep.memory.harvesting = false;
@@ -61,7 +70,7 @@ module.exports = {
             switch (result) {
                 case ERR_NOT_IN_RANGE:
                     creep.say('Moving');
-                    creep.moveToX(creep.room.controller);
+                    creep.moveToRange(creep.room.controller, 3);
                     break;
                 case ERR_NOT_ENOUGH_RESOURCES:
                     creep.memory.loading = true;

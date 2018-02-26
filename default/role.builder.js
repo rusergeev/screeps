@@ -16,7 +16,7 @@ module.exports = {
             let target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
             if(target) {
                 if(creep.build(target) === ERR_NOT_IN_RANGE) {
-                    creep.moveToX(target);
+                    creep.moveToRange(target, 2);
                 }
             }else {
                 let structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -27,11 +27,11 @@ module.exports = {
                     // try to repair it, if it is out of range
                     if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
                         // move towards it
-                        creep.moveToX(structure);
+                        creep.moveToRange(structure, 2);
                     }
                 } else {
                     if (creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-                        creep.moveToX(creep.room.controller);
+                        creep.moveToRange(creep.room.controller, 3);
                     }
                 }
 
@@ -42,7 +42,7 @@ module.exports = {
             const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
             if(target) {
                 if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
-                    creep.moveToX(target);
+                    creep.moveToRange(target,1);
                 }
             }else {
                 let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -53,12 +53,12 @@ module.exports = {
                 });
                 if (container) {
                     if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                        creep.moveToX(container);
+                        creep.moveToRange(container, 1);
                     }
                 } else {
                     let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
                     if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                        creep.moveToX(source);
+                        creep.moveToRange(source, 1);
                     }
                 }
             }

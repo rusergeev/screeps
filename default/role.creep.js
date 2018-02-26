@@ -9,6 +9,9 @@ let roles = {
 
 module.exports = {
     run: function(creep) {
+        if(creep.isMoving && creep.rollToRange() === OK) {
+            return;
+        }
         if (roles[creep.memory.role]) {
             roles[creep.memory.role].run(creep);
         } else {
