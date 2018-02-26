@@ -68,6 +68,7 @@ Creep.prototype.rollToRange = function () {
         delete this.memory.path_destination;
         delete this.memory.path_range;
         delete this.memory.path_prev_pos;
+        return ERR_NO_PATH;
     } else {
         this.memory.path_prev_pos = this.pos;
     }
