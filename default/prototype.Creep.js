@@ -32,7 +32,7 @@ Creep.prototype.moveToRange = function (destination, range) {
     let pos_json = JSON.stringify(pos);
     if(!this.memory.path || pos_json !== this.memory.path_destination || range !== this.memory.path_range ) {
         this.say('pathing 🐽');
-        this.memory.path = this.pos.findPathTo(pos);
+        this.memory.path = this.pos.findPathTo(pos, { range: range });
         this.memory.path_destination = pos_json;
         this.memory.path_range = range;
     }
