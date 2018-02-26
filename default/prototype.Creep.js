@@ -59,6 +59,19 @@ Creep.prototype.rollToRange = function () {
         return OK;
     }
 
+    let prev_pos = this.memory.path_prev_pos;
+
+    if (prev_pos !== undefined && this.pos.isEqualTo(new RoomPosition(prev_pos.x, prev_pos.y, prev_pos.roomName))) {
+        console.log(this, ": stuck!");
+        this.say("stuck 😡");
+        delete this.memory.path;
+        delete this.memory.path_destination;
+        delete this.memory.path_range;
+        delete this.memory.path_prev_pos;
+    } else {
+        this.memory.path_prev_pos = this.pos;
+    }
+
     let destination = JSON.parse(this.memory.path_destination);
     let range = this.memory.path_range;
 
@@ -66,6 +79,7 @@ Creep.prototype.rollToRange = function () {
         delete this.memory.path;
         delete this.memory.path_destination;
         delete this.memory.path_range;
+        delete this.memory.path_prev_pos;
         return ERR_NO_PATH;
     }
 
