@@ -18,6 +18,7 @@ module.exports = {
                     console.log(spawn + ': spawning ' + newName);
                     let abilities = [MOVE, WORK, WORK];
                     spawn.spawnCreep(abilities, newName, {memory: {role: role, source: source}});
+                    return;
                 } else if ( transport === 0) {
                     let role = 'transport';
                     let target = spawn.id;
@@ -25,6 +26,7 @@ module.exports = {
                     let abilities = [MOVE, CARRY, CARRY];
                     console.log(spawn + ': spawning ' + newName);
                     spawn.spawnCreep(abilities, newName, {memory: {role: role, source: source, target: target}});
+                    return;
                 }
             }
             let constructionSites = spawn.room.find(FIND_CONSTRUCTION_SITES).length;
@@ -35,16 +37,19 @@ module.exports = {
                 let abilities = [MOVE, CARRY, WORK];
                 console.log(spawn + ': spawning ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});
-                return true;
+                return;
             }
             let upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader').length;
-            if ( upgraders < 1) {
+            if ( upgraders < 1 ) {
                 let role = 'upgrader';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
                 console.log(spawn + ': spawning ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});
-                return true;
+                return;
+            }
+            if ( 1 ) {
+
             }
         } catch (e) {
             console.log(spawn + 'spawn exception: ', e);

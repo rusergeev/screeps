@@ -16,7 +16,7 @@ module.exports = {
             let target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
             if(target) {
                 if(creep.build(target) === ERR_NOT_IN_RANGE) {
-                    creep.moveToRange(target, 2);
+                    creep.moveToRange(target, 3);
                 }
             }else {
                 let structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -27,7 +27,7 @@ module.exports = {
                     // try to repair it, if it is out of range
                     if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
                         // move towards it
-                        creep.moveToRange(structure, 2);
+                        creep.moveToRange(structure, 3);
                     }
                 } else {
                     if (creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {

@@ -46,12 +46,15 @@ module.exports = {
                 } else {
                     let container = _.filter(
                         source.room.lookForAt(LOOK_STRUCTURES, port),
-                        s => s.structureType === STRUCTURE_CONTAINER)[0];
+                            s => s.structureType === STRUCTURE_CONTAINER &&
+                                s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 2)[0];
                     if (container) {
                         let result = creep.withdraw(container, RESOURCE_ENERGY);
                         switch (result) {
                             case OK:
                                 break;
+                            case ERR_NOT_ENOUGH_RESOURCES:
+                                creep.say('empty: WTF?');
                             case ERR_NOT_IN_RANGE:
                                 let port = Game.getObjectById(creep.memory.source).port;
                                 creep.memory.destination = port;
@@ -62,7 +65,7 @@ module.exports = {
                                 creep.say('full: WTF?');
                                 break;
                             default:
-                                console.log(creep + ' cant pickup ' + container + ' : ' + result);
+                                console.log(creep + ' cant withdraw ' + container + ' : ' + result);
                                 break;
                         }
                     }
