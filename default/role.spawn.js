@@ -81,16 +81,14 @@ module.exports = {
                 return;
             }
             let upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader').length;
-            if ( upgraders < 11 ) {
+            if ( upgraders < 2 ) {
                 let role = 'upgrader';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
                 let cost = abilities.reduce(function (cost, part) {return cost + BODYPART_COST[part];}, 0);
-                while (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK] <= spawn.room.energyAvailable){
-                    abilities.push(MOVE);
-                    abilities.push(CARRY);
+                while (cost + BODYPART_COST[WORK] <= spawn.room.energyAvailable){
                     abilities.push(WORK);
-                    cost += BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK];
+                    cost += BODYPART_COST[WORK];
                 }
                 console.log(spawn + ': spawning ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});

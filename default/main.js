@@ -6,6 +6,8 @@ let roles = {
     creep:  require('role.creep')
 };
 
+require('prototype.tower');
+
 module.exports.loop = function () {
     try {
 
@@ -28,6 +30,11 @@ module.exports.loop = function () {
 
         for( let name in Game.rooms) {
             roles['room'].run(Game.rooms[name]);
+        }
+
+        let towers = _.filter(Game.structures, s => s.structureType === STRUCTURE_TOWER);
+        for (let tower of towers) {
+            tower.defend();
         }
 
     } catch (e) {
