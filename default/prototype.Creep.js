@@ -39,7 +39,7 @@ Creep.prototype.moveToRange = function (destination, range) {
                 function (roomName, costMatrix) {
                     const room = Game.rooms[roomName];
                     if (room !== undefined){
-                        room.find(FIND_CREEPS, {filter: c => !c.isMoving}).forEach(function (c) {
+                        room.find(FIND_CREEPS, {filter: c => c.my && !c.isMoving}).forEach(function (c) {
                             costMatrix.set(c.pos.x, c.pos.y, 0xff);
                         });
                     }
