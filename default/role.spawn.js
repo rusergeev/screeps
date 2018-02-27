@@ -45,7 +45,10 @@ module.exports = {
                     return;
                 } else if ( transport === 0) {
                     let role = 'transport';
-                    let target = spawn.id;
+                    let target = spawn.pos.findInRange(FIND_STRUCTURES, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER})[0];
+                    if (target === undefined) {
+                        target = spawn;
+                    }
                     let newName = role + Game.time;
                     let abilities = [MOVE, CARRY, CARRY];
                     let cost = abilities.reduce(function (cost, part) {return cost + BODYPART_COST[part];}, 0);
@@ -56,7 +59,7 @@ module.exports = {
                         cost += BODYPART_COST[MOVE]+ 2 * BODYPART_COST[CARRY];
                     }
                     console.log(spawn + ': spawning ' + newName);
-                    spawn.spawnCreep(abilities, newName, {memory: {role: role, source: source, target: target}});
+                    spawn.spawnCreep(abilities, newName, {memory: {role: role, source: source, target: target.id}});
                     return;
                 }
             }
@@ -78,7 +81,7 @@ module.exports = {
                 return;
             }
             let upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader').length;
-            if ( upgraders < 2 ) {
+            if ( upgraders < 11 ) {
                 let role = 'upgrader';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
