@@ -4,7 +4,8 @@ let roles = {
     miner : require('role.miner'),
     transport: require('role.transport'),
     builder: require('role.builder'),
-    upgrader: require('role.upgrader')
+    upgrader: require('role.upgrader'),
+    harvester: require('role.harvester')
 };
 
 module.exports = {

@@ -31,7 +31,7 @@ Creep.prototype.moveToRange = function (destination, range) {
     let pos = destination.pos === undefined ? destination : destination.pos;
     let pos_json = JSON.stringify(pos);
     if (!this.memory.path || pos_json !== this.memory.path_destination || range !== this.memory.path_range) {
-        this.say('pathing 🐽');
+        this.say('pathing ð½');
         this.memory.path = this.pos.findPathTo(pos, {
             range: range,
             ignoreCreeps: true,
@@ -66,7 +66,7 @@ Creep.prototype.rollToRange = function () {
 
     if (prev_pos !== undefined && this.pos.isEqualTo(new RoomPosition(prev_pos.x, prev_pos.y, prev_pos.roomName))) {
         console.log(this, ": stuck!");
-        this.say("stuck 😡");
+        this.say("stuck ð¡");
         delete this.memory.path;
         delete this.memory.path_destination;
         delete this.memory.path_range;

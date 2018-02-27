@@ -7,6 +7,25 @@ module.exports = {
     /** @param {StructureSpawn} spawn **/
     run: function (spawn) {
         try {
+            let harvesters = _.filter(Game.creeps, creep => creep.memory.role === 'harvester').length;
+            if ( harvesters < 2 ) {
+                let role = 'harvester';
+                let newName = role + Game.time;
+                let abilities = [MOVE, CARRY, WORK];
+                let cost = abilities.reduce(function (cost, part) {return cost + BODYPART_COST[part];}, 0);
+                while (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK] <= spawn.room.energyAvailable){
+                    abilities.push(MOVE);
+                    abilities.push(CARRY);
+                    abilities.push(WORK);
+                    cost += BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK];
+                }
+                console.log(spawn + ': spawning ' + newName);
+                spawn.spawnCreep(abilities, newName, {memory: {role: role}});
+                return;
+            }
+            if (spawn.room.energyAvailable !== spawn.room.energyCapacityAvailable) {
+                return;
+            }
             let sources = spawn.room.find(FIND_SOURCES).map(source => source.id);
             for (let i in sources) {
                 let source = sources[i];
@@ -17,6 +36,11 @@ module.exports = {
                     let newName = role + Game.time;
                     console.log(spawn + ': spawning ' + newName);
                     let abilities = [MOVE, WORK, WORK];
+                    let cost = abilities.reduce(function (cost, part) {return cost + BODYPART_COST[part];}, 0);
+                    while (cost + BODYPART_COST[WORK] <= spawn.room.energyAvailable){
+                        abilities.push(WORK);
+                        cost += BODYPART_COST[WORK];
+                    }
                     spawn.spawnCreep(abilities, newName, {memory: {role: role, source: source}});
                     return;
                 } else if ( transport === 0) {
@@ -24,6 +48,13 @@ module.exports = {
                     let target = spawn.id;
                     let newName = role + Game.time;
                     let abilities = [MOVE, CARRY, CARRY];
+                    let cost = abilities.reduce(function (cost, part) {return cost + BODYPART_COST[part];}, 0);
+                    while (cost + BODYPART_COST[MOVE]+ 2 * BODYPART_COST[CARRY] <= spawn.room.energyAvailable){
+                        abilities.push(MOVE);
+                        abilities.push(CARRY);
+                        abilities.push(CARRY);
+                        cost += BODYPART_COST[MOVE]+ 2 * BODYPART_COST[CARRY];
+                    }
                     console.log(spawn + ': spawning ' + newName);
                     spawn.spawnCreep(abilities, newName, {memory: {role: role, source: source, target: target}});
                     return;
@@ -35,22 +66,34 @@ module.exports = {
                 let role = 'builder';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
+                let cost = abilities.reduce(function (cost, part) {return cost + BODYPART_COST[part];}, 0);
+                while (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK] <= spawn.room.energyAvailable){
+                    abilities.push(MOVE);
+                    abilities.push(CARRY);
+                    abilities.push(WORK);
+                    cost += BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK];
+                }
                 console.log(spawn + ': spawning ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});
                 return;
             }
             let upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader').length;
-            if ( upgraders < 1 ) {
+            if ( upgraders < 2 ) {
                 let role = 'upgrader';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
+                let cost = abilities.reduce(function (cost, part) {return cost + BODYPART_COST[part];}, 0);
+                while (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK] <= spawn.room.energyAvailable){
+                    abilities.push(MOVE);
+                    abilities.push(CARRY);
+                    abilities.push(WORK);
+                    cost += BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK];
+                }
                 console.log(spawn + ': spawning ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});
                 return;
             }
-            if ( 1 ) {
 
-            }
         } catch (e) {
             console.log(spawn + 'spawn exception: ', e);
         }
