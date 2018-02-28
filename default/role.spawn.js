@@ -65,7 +65,11 @@ module.exports = {
             }
             let constructionSites = spawn.room.find(FIND_CONSTRUCTION_SITES).length;
             let builders = _.filter(Game.creeps, creep => creep.memory.role === 'builder').length;
-            if (constructionSites > builders && builders < 2) {
+            let structures = spawn.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (s) => s.hits < s.hitsMax / 2 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART ||
+                    (s.structureType === STRUCTURE_WALL || s.structureType === STRUCTURE_RAMPART)&& s.hits < 5000
+            }).length;
+            if ((structures > builders || constructionSites > builders) && builders < 2) {
                 let role = 'builder';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
@@ -80,8 +84,9 @@ module.exports = {
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});
                 return;
             }
+            let up_containers = spawn.room.controller.pos.findInRange(FIND_STRUCTURES, 3, {filter: s => s.structureType === STRUCTURE_CONTAINER});
             let upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader').length;
-            if ( upgraders < 2 ) {
+            if ( upgraders < 1) {
                 let role = 'upgrader';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];

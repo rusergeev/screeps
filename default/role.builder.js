@@ -13,7 +13,9 @@ module.exports = {
         }
 
         if(creep.memory.building) {
-            let target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+            let target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, {filter: c=>c.structureType === STRUCTURE_EXTENSION})
+                || creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, {filter: c=>c.structureType === STRUCTURE_CONTAINER})
+                || creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
             if(target) {
                 if(creep.build(target) === ERR_NOT_IN_RANGE) {
                     creep.moveToRange(target, 3);
@@ -39,29 +41,24 @@ module.exports = {
 
         }
         else {
-            const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
-            if(target) {
-                if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
-                    creep.moveToRange(target,1);
+
+            let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: s => ((s.structureType === STRUCTURE_CONTAINER ||
+                    s.structureType === STRUCTURE_STORAGE) &&
+                    s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 4) ||
+                    s.structureType === STRUCTURE_LINK && s.energy > (creep.carryCapacity - creep.carry.energy) / 2
+            });
+            if (container) {
+                if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                    creep.moveToRange(container, 1);
                 }
-            }else {
-                let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: s => ( (  s.structureType === STRUCTURE_CONTAINER ||
-                        s.structureType === STRUCTURE_STORAGE) &&
-                        s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy)/4)||
-                        s.structureType === STRUCTURE_LINK && s.energy > (creep.carryCapacity - creep.carry.energy)/2
-                });
-                if (container) {
-                    if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                        creep.moveToRange(container, 1);
-                    }
-                } else {
-                    let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
-                    if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                        creep.moveToRange(source, 1);
-                    }
+            } else {
+                let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
+                if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
+                    creep.moveToRange(source, 1);
                 }
             }
+
         }
     }
 };
