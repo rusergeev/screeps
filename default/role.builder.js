@@ -52,6 +52,13 @@ module.exports = {
                 if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     creep.moveToRange(container, 1);
                 }
+                return;
+            }
+            const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+            if(target) {
+                if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
+                    creep.moveToRange(target,1);
+                }
             } else {
                 let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
                 if (creep.harvest(source) === ERR_NOT_IN_RANGE) {

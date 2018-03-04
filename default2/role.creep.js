@@ -3,18 +3,11 @@
 let roles = {
     miner : require('role.miner'),
     transport: require('role.transport'),
-    builder: require('role.builder'),
-    upgrader: require('role.upgrader'),
-    harvester: require('role.harvester'),
-    builder_exp: require('role.builder.experimental'),
-    claimer: require('role.claimer')
+    builder: require('role.builder')
 };
 
 module.exports = {
     run: function(creep) {
-        if(creep.isMoving && creep.rollToRange() === OK) {
-            return;
-        }
         if (roles[creep.memory.role]) {
             roles[creep.memory.role].run(creep);
         } else {

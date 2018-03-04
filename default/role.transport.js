@@ -72,6 +72,15 @@ module.exports = {
                 }
             } else {
                 let target = Game.getObjectById(creep.memory.target);
+                if (!target || _.sum(target.store) === target.storeCapacity) {
+                    target = creep.room.controller.pos.findInRange( FIND_STRUCTURES, 3, { filter:
+                            s => s.structureType === STRUCTURE_CONTAINER
+                                && _.sum(s.store) < s.storeCapacity/2}).sort(
+                                    (a,b) => _.sum(a.store)-_.sum(b.store)-a.storeCapacity+b.storeCapacity)[0];
+                }
+                if (!target) {
+                    target = creep.room.storage;
+                }
                 let result = creep.transfer(target, RESOURCE_ENERGY);
                 switch (result) {
                     case OK:

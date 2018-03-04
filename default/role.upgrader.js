@@ -17,6 +17,7 @@ module.exports = {
         }
 
         if (creep.memory.loading) {
+            /*
             const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
             if(target) {
                 if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
@@ -24,7 +25,7 @@ module.exports = {
                     return;
                 }
             }
-
+            */
 
             let container =
                 creep.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -50,19 +51,29 @@ module.exports = {
 
             } else {
                 let source = Game.getObjectById(creep.memory.source) || creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
-                let result = creep.harvest(source);
-                switch (result) {
-                    case ERR_NOT_IN_RANGE:
-                        creep.say('Moving');
-                        creep.moveToRange(source, 1);
-                        break;
-                    case ERR_FULL:
-                        creep.memory.harvesting = false;
-                        creep.say('Full');
-                        break;
-                    case OK:
-                        creep.memory.source = source.id;
-                        break;
+                if (source) {
+                    let result = creep.harvest(source);
+                    switch (result) {
+                        case ERR_NOT_IN_RANGE:
+                            creep.say('Moving');
+                            creep.moveToRange(source, 1);
+                            break;
+                        case ERR_FULL:
+                            creep.memory.harvesting = false;
+                            creep.say('Full');
+                            break;
+                        case OK:
+                            creep.memory.source = source.id;
+                            break;
+                    }
+                } else {
+                    const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+                    if (target) {
+                        if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
+                            creep.moveToRange(target, 1);
+                            return;
+                        }
+                    }
                 }
             }
         } else {

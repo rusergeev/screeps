@@ -7,7 +7,7 @@ module.exports = {
     /** @param {StructureSpawn} spawn **/
     run: function (spawn) {
         try {
-            let harvesters = _.filter(Game.creeps, creep => creep.memory.role === 'harvester').length;
+            let harvesters = _.filter(Game.creeps, creep => creep.memory.role === 'harvester' && creep.room === spawn.room).length;
             if ( harvesters < 2 ) {
                 let role = 'harvester';
                 let newName = role + Game.time;
@@ -37,7 +37,7 @@ module.exports = {
                     console.log(spawn + ': spawning ' + newName);
                     let abilities = [MOVE, WORK, WORK];
                     let cost = abilities.reduce(function (cost, part) {return cost + BODYPART_COST[part];}, 0);
-                    while (cost + BODYPART_COST[WORK] <= spawn.room.energyAvailable){
+                    while (cost + BODYPART_COST[WORK] <= spawn.room.energyAvailable && cost < BODYPART_COST[MOVE]+ 5*BODYPART_COST[WORK]){
                         abilities.push(WORK);
                         cost += BODYPART_COST[WORK];
                     }
@@ -65,11 +65,11 @@ module.exports = {
             }
             let constructionSites = spawn.room.find(FIND_CONSTRUCTION_SITES).length;
             let builders = _.filter(Game.creeps, creep => creep.memory.role === 'builder').length;
-            let structures = spawn.pos.findClosestByRange(FIND_STRUCTURES, {
+            let structure = spawn.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (s) => s.hits < s.hitsMax / 2 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART ||
                     (s.structureType === STRUCTURE_WALL || s.structureType === STRUCTURE_RAMPART)&& s.hits < 5000
-            }).length;
-            if ((structures > builders || constructionSites > builders) && builders < 2) {
+            });
+            if ((!!structure || constructionSites > builders) && builders < 2) {
                 let role = 'builder';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
@@ -84,8 +84,28 @@ module.exports = {
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});
                 return;
             }
+            if (false) {
+                let builders_exp = _.filter(Game.creeps, creep => creep.memory.role === 'builder_exp').length;
+                if (builders_exp < 2) {
+                    let role = 'builder_exp';
+                    let newName = role + Game.time;
+                    let abilities = [MOVE, CARRY, WORK];
+                    let cost = abilities.reduce(function (cost, part) {
+                        return cost + BODYPART_COST[part];
+                    }, 0);
+                    while (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK] <= spawn.room.energyAvailable) {
+                        abilities.push(MOVE);
+                        abilities.push(CARRY);
+                        abilities.push(WORK);
+                        cost += BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK];
+                    }
+                    console.log(spawn + ': spawning ' + newName);
+                    spawn.spawnCreep(abilities, newName, {memory: {role: role}});
+                    return;
+                }
+            }
             let up_containers = spawn.room.controller.pos.findInRange(FIND_STRUCTURES, 3, {filter: s => s.structureType === STRUCTURE_CONTAINER});
-            let upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader').length;
+            let upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader' && creep.room === spawn.room).length;
             if ( upgraders < 1) {
                 let role = 'upgrader';
                 let newName = role + Game.time;
