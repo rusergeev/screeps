@@ -7,7 +7,10 @@ let roles = {
     upgrader: require('role.upgrader'),
     harvester: require('role.harvester'),
     builder_exp: require('role.builder.experimental'),
-    claimer: require('role.claimer')
+    claimer: require('role.claimer'),
+    destroyer: require('role.destroyer'),
+    medic: require('role.medic'),
+    blocker: require('role.blocker')
 };
 
 module.exports = {

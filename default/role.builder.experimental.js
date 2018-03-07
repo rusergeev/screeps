@@ -19,6 +19,8 @@ module.exports = {
                 const exit = creep.pos.findClosestByRange(route[0].exit);
                 creep.moveToRange(exit,0);
             }else {
+                //creep.memory.role = 'upgrader';
+                //return;
                 let target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
                 if (target) {
                     if (creep.build(target) === ERR_NOT_IN_RANGE) {
@@ -31,6 +33,7 @@ module.exports = {
             }
 	    }
         else {
+
             let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: s => ((s.structureType === STRUCTURE_CONTAINER ||
                     s.structureType === STRUCTURE_STORAGE) &&

@@ -45,7 +45,8 @@ module.exports = {
                     return;
                 } else if ( transport === 0) {
                     let role = 'transport';
-                    let target = spawn.pos.findInRange(FIND_STRUCTURES, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER})[0];
+                    let target = spawn.room.storage
+                        || spawn.pos.findInRange(FIND_STRUCTURES, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER})[0];
                     if (target === undefined) {
                         target = spawn;
                     }
@@ -86,7 +87,7 @@ module.exports = {
             }
             if (false) {
                 let builders_exp = _.filter(Game.creeps, creep => creep.memory.role === 'builder_exp').length;
-                if (builders_exp < 2) {
+                if (builders_exp < 1) {
                     let role = 'builder_exp';
                     let newName = role + Game.time;
                     let abilities = [MOVE, CARRY, WORK];
@@ -104,7 +105,6 @@ module.exports = {
                     return;
                 }
             }
-            let up_containers = spawn.room.controller.pos.findInRange(FIND_STRUCTURES, 3, {filter: s => s.structureType === STRUCTURE_CONTAINER});
             let upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader' && creep.room === spawn.room).length;
             if ( upgraders < 1) {
                 let role = 'upgrader';
@@ -119,7 +119,53 @@ module.exports = {
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});
                 return;
             }
+            if (false && sources.length > 1) {
+                let destroyers = _.filter(Game.creeps, creep => creep.memory.role === 'destroyer' && creep.room === spawn.room).length;
+                if (destroyers < 1) {
+                    let role = 'destroyer';
+                    let newName = role + Game.time;
+                    let abilities = [ATTACK, MOVE];
+                    let cost = abilities.reduce(function (cost, part) {
+                        return cost + BODYPART_COST[part];
+                    }, 0);
+                    while (cost + BODYPART_COST[ATTACK] + BODYPART_COST[MOVE] <= spawn.room.energyAvailable) {
+                        abilities.push(ATTACK);
+                        abilities.push(MOVE);
+                        cost += BODYPART_COST[ATTACK] + BODYPART_COST[MOVE];
+                    }
+                    console.log(spawn + ': spawning ' + newName);
+                    spawn.spawnCreep(abilities, newName, {memory: {role: role}});
+                    return;
+                }
 
+                let medics = _.filter(Game.creeps, creep => creep.memory.role === 'medic' && creep.room === spawn.room).length;
+                if (medics < 0) {
+                    let role = 'medic';
+                    let newName = role + Game.time;
+                    let abilities = [HEAL, MOVE];
+                    let cost = abilities.reduce(function (cost, part) {
+                        return cost + BODYPART_COST[part];
+                    }, 0);
+                    while (cost + BODYPART_COST[HEAL] + BODYPART_COST[MOVE] <= spawn.room.energyAvailable) {
+                        abilities.push(HEAL);
+                        abilities.push(MOVE);
+                        cost += BODYPART_COST[HEAL] + BODYPART_COST[MOVE];
+                    }
+                    console.log(spawn + ': spawning ' + newName);
+                    spawn.spawnCreep(abilities, newName, {memory: {role: role}});
+                    return;
+                }
+            }
+            if (false){
+                let blockers = _.filter(Game.creeps, creep => creep.memory.role === 'blocker' && creep.room === spawn.room).length;
+                let role = 'blocker';
+                let newName = role + Game.time;
+                let abilities = [MOVE];
+                let cost = abilities.reduce(function (cost, part) {return cost + BODYPART_COST[part];}, 0);
+                console.log(spawn + ': spawning ' + newName);
+                spawn.spawnCreep(abilities, newName, {memory: {role: role}});
+                return;
+            }
         } catch (e) {
             console.log(spawn + 'spawn exception: ', e);
         }

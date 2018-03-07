@@ -46,8 +46,7 @@ module.exports = {
                 } else {
                     let container = _.filter(
                         source.room.lookForAt(LOOK_STRUCTURES, port),
-                            s => s.structureType === STRUCTURE_CONTAINER &&
-                                s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 2)[0];
+                            s => s.structureType === STRUCTURE_CONTAINER)[0];
                     if (container) {
                         let result = creep.withdraw(container, RESOURCE_ENERGY);
                         switch (result) {
@@ -55,6 +54,7 @@ module.exports = {
                                 break;
                             case ERR_NOT_ENOUGH_RESOURCES:
                                 creep.say('empty: WTF?');
+                                break;
                             case ERR_NOT_IN_RANGE:
                                 let port = Game.getObjectById(creep.memory.source).port;
                                 creep.memory.destination = port;
@@ -71,15 +71,13 @@ module.exports = {
                     }
                 }
             } else {
-                let target = Game.getObjectById(creep.memory.target);
-                if (!target || _.sum(target.store) === target.storeCapacity) {
-                    target = creep.room.controller.pos.findInRange( FIND_STRUCTURES, 3, { filter:
+                let   target = creep.room.controller.pos.findInRange( FIND_STRUCTURES, 3, { filter:
                             s => s.structureType === STRUCTURE_CONTAINER
                                 && _.sum(s.store) < s.storeCapacity/2}).sort(
                                     (a,b) => _.sum(a.store)-_.sum(b.store)-a.storeCapacity+b.storeCapacity)[0];
-                }
+
                 if (!target) {
-                    target = creep.room.storage;
+                    target = Game.getObjectById(creep.memory.target);
                 }
                 let result = creep.transfer(target, RESOURCE_ENERGY);
                 switch (result) {
