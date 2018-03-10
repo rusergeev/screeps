@@ -27,13 +27,15 @@ module.exports = {
             }
             */
 
-            let container =
-                creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: s => (  (s.structureType === STRUCTURE_CONTAINER ||
-                        s.structureType === STRUCTURE_STORAGE) &&
-                        s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 2) ||
+            let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: s => (  (
+                        s.structureType === STRUCTURE_CONTAINER ||
+                        s.structureType === STRUCTURE_STORAGE ||
                         s.structureType === STRUCTURE_LINK
-                });
+                    ) && s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 2
+                )
+            });
+            console.log(container);
             if (container) {
                 creep.memory.container = container.id;
 

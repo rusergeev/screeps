@@ -2,7 +2,7 @@ module.exports = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
-        const route = Game.map.findRoute(creep.room, 'E38N46');
+        const route = Game.map.findRoute(creep.room, 'E37N47');
         if (route.length > 0) {
             console.log('Now heading to room ' + route[0].room);
             const exit = creep.pos.findClosestByRange(route[0].exit);
@@ -10,8 +10,7 @@ module.exports = {
         } else {
             let target = creep.pos.findClosestByRange(FIND_HOSTILE_SPAWNS);
             if (target) {
-                console.log('block spawn');
-                if (creep.attack(target) === ERR_NOT_IN_RANGE) {
+                if (creep.attack(target) !== OK) {
                     creep.moveToRange(target,1);
                 }
             }

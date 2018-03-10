@@ -13,7 +13,7 @@ module.exports = {
 	    }
 
 	    if(creep.memory.building) {
-            const route = Game.map.findRoute(creep.room, 'E39N46');
+            const route = Game.map.findRoute(creep.room, 'E39N47');
             if(route.length > 0) {
                 creep.say('To '+route[0].room);
                 const exit = creep.pos.findClosestByRange(route[0].exit);
