@@ -3,11 +3,11 @@ module.exports = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
-        if(!creep.memory.harvesting && creep.carry.energy === 0) {
+        if(!creep.memory.harvesting && creep.isEmpty) {
             creep.memory.harvesting = true;
             creep.say('Harvest');
         }
-        if(creep.memory.harvesting && _.sum(creep.carry) === creep.carryCapacity) {
+        if(creep.memory.harvesting && creep.isFull) {
             creep.memory.harvesting = false;
             creep.say('Full');
         }
@@ -68,6 +68,13 @@ module.exports = {
                     if(creep.build(target) === ERR_NOT_IN_RANGE) {
                         creep.moveToRange(target, 1);
                     }
+                }
+            }
+
+            if (!target) {
+                target = Game.getObjectById(creep.memory.spawn);
+                if (target) {
+                    creep.moveToRange(target, 1);
                 }
             }
 

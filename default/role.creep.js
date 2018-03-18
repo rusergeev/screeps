@@ -10,7 +10,9 @@ let roles = {
     claimer: require('role.claimer'),
     destroyer: require('role.destroyer'),
     medic: require('role.medic'),
-    blocker: require('role.blocker')
+    blocker: require('role.blocker'),
+    atob: require('role.atob'),
+    harvester_exp: require('role.builder.experimental')
 };
 
 module.exports = {

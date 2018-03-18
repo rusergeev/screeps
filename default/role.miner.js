@@ -12,6 +12,11 @@ module.exports = {
             switch (result) {
                 case OK:
                     break;
+                case ERR_BUSY:
+                    break;
+                case ERR_NOT_ENOUGH_RESOURCES:
+                    console.log(creep + ' cant harvest: should wait ');
+                    break;
                 case ERR_NOT_IN_RANGE:
                     creep.moveToRange(source.port, 0);
                     break;
