@@ -12,7 +12,15 @@ Object.defineProperty(Creep.prototype, 'isFull', {
 
 Object.defineProperty(Creep.prototype, 'isEmpty', {
     get: function() {
-        return _.sum(this.carry) === 0;
+        return this.carry[RESOURCE_ENERGY] === 0;
+    },
+    enumerable: false,
+    configurable: true
+});
+
+Object.defineProperty(Creep.prototype, 'hasMinerals', {
+    get: function() {
+        return _.sum(this.carry) - this.carry[RESOURCE_ENERGY] > 0;
     },
     enumerable: false,
     configurable: true
@@ -35,6 +43,7 @@ Creep.prototype.moveToRange = function (destination, range) {
         this.memory.path = this.pos.findPathTo(pos, {
             range: range,
             ignoreCreeps: true,
+            ignoreDestructibleStructures: false,
             costCallback:
                 function (roomName, costMatrix) {
                     const room = Game.rooms[roomName];
@@ -58,50 +67,55 @@ Creep.prototype.moveToRange = function (destination, range) {
 
 Creep.prototype.rollToRange = function () {
 
-    if (this.spawning || this.fatigue) {
-        return OK;
-    }
+    try {
+        if (this.spawning || this.fatigue) {
+            return OK;
+        }
 
-    let prev_pos = this.memory.path_prev_pos;
+        let prev_pos = this.memory.path_prev_pos;
 
-    if (prev_pos !== undefined && this.pos.isEqualTo(new RoomPosition(prev_pos.x, prev_pos.y, prev_pos.roomName))) {
-        console.log(this, ": stuck!");
-        this.say("stuck =(¡");
-        delete this.memory.path;
-        delete this.memory.path_destination;
-        delete this.memory.path_range;
-        delete this.memory.path_prev_pos;
-        return ERR_NO_PATH;
-    } else {
-        this.memory.path_prev_pos = this.pos;
-    }
-
-    let destination = JSON.parse(this.memory.path_destination);
-    let range = this.memory.path_range;
-
-    if (this.pos.inRangeTo(destination, range)) {
-        delete this.memory.path;
-        delete this.memory.path_destination;
-        delete this.memory.path_range;
-        delete this.memory.path_prev_pos;
-        return ERR_NO_PATH;
-    }
-
-    let result = this.moveByPath(this.memory.path);
-    switch (result) {
-        case OK:
-            break;
-        case ERR_TIRED:
-            result = OK;
-            break;
-        case ERR_NOT_FOUND:
+        if (prev_pos !== undefined && this.pos.isEqualTo(prev_pos)) {
+            console.log(this, ": stuck!");
+            this.say("stuck =(");
             delete this.memory.path;
-            this.moveToRange(destination, range);
-            this.say('moving to range: WTF?');
-            break;
-        default:
-            console.log(this + ' cant move to' + destination + ' range ' + range + ': ' + result);
-            break;
+            delete this.memory.path_destination;
+            delete this.memory.path_range;
+            delete this.memory.path_prev_pos;
+            return ERR_NO_PATH;
+        } else {
+            this.memory.path_prev_pos = this.pos;
+        }
+
+        let destination = JSON.parse(this.memory.path_destination);
+        let range = this.memory.path_range;
+
+        if (this.pos.inRangeTo(destination, range)) {
+            delete this.memory.path;
+            delete this.memory.path_destination;
+            delete this.memory.path_range;
+            delete this.memory.path_prev_pos;
+            return ERR_NO_PATH;
+        }
+
+        let result = this.moveByPath(this.memory.path);
+        switch (result) {
+            case OK:
+                break;
+            case ERR_TIRED:
+                result = OK;
+                break;
+            case ERR_NOT_FOUND:
+                delete this.memory.path;
+                this.moveToRange(destination, range);
+                this.say('moving to range: WTF?');
+                break;
+            default:
+                console.log(this + ' cant move to' + destination + ' range ' + range + ': ' + result);
+                break;
+        }
+        return result;
+    } catch (e) {
+        console.log('roll exception:', e);
     }
-    return result;
+
 };

@@ -23,7 +23,7 @@ module.exports = {
             }else {
                 let structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (s) => s.hits < s.hitsMax / 2 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART ||
-                        (s.structureType === STRUCTURE_WALL || s.structureType === STRUCTURE_RAMPART)&& s.hits < 5000
+                        (s.structureType === STRUCTURE_WALL || s.structureType === STRUCTURE_RAMPART)&& s.hits < 550000
                 });
                 if (structure) {
                     // try to repair it, if it is out of range

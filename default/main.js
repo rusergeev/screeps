@@ -38,6 +38,6 @@ module.exports.loop = function () {
         }
 
     } catch (e) {
-        console.log('main exception', e);
+        console.log('main exception:', e);
     }
 };

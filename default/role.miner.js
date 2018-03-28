@@ -18,7 +18,10 @@ module.exports = {
                     console.log(creep + ' cant harvest: should wait ');
                     break;
                 case ERR_NOT_IN_RANGE:
-                    creep.moveToRange(source.port, 0);
+                    if (source.port)
+                        creep.moveToRange(source.port, 0);
+                    else
+                        creep.moveToRange(source, 1);
                     break;
                 default:
                     console.log(creep + ' cant harvest ' + source + ' : ' + result);
