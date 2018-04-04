@@ -13,7 +13,7 @@ module.exports = {
 	    }
 
 	    if(creep.memory.building) {
-            const route = Game.map.findRoute(creep.room, 'E35N47');
+            const route = Game.map.findRoute(creep.room, 'E36N49');
             if(route.length > 0) {
                 creep.say('To '+route[0].room);
                 const exit = creep.pos.findClosestByRange(route[0].exit);
@@ -40,6 +40,7 @@ module.exports = {
                     return;
                 }
             }
+            if (0){ }
             let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: s => ((s.structureType === STRUCTURE_CONTAINER ||
                     s.structureType === STRUCTURE_STORAGE) &&
@@ -51,7 +52,7 @@ module.exports = {
                     creep.moveToRange(container, 1);
                 }
             } else {
-                let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
+                let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {filter: s => s.energy > 0});
                 if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                     creep.moveToRange(source, 1);
                 }

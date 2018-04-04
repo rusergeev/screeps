@@ -50,7 +50,7 @@ module.exports = {
                 }
 
             } else {
-                let source = Game.getObjectById(creep.memory.source) || creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
+                let source = Game.getObjectById(creep.memory.source) || creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {filter: s => s.energy > 0});
                 if (source) {
                     let result = creep.harvest(source);
                     switch (result) {

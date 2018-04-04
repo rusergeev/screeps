@@ -115,7 +115,11 @@ Creep.prototype.rollToRange = function () {
         }
         return result;
     } catch (e) {
-        console.log('roll exception:', e);
+        console.log(this + ' - roll exception:', e);
+        delete this.memory.path;
+        delete this.memory.path_destination;
+        delete this.memory.path_range;
+        delete this.memory.path_prev_pos;
     }
 
 };

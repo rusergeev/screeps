@@ -23,7 +23,7 @@ module.exports = {
             }else {
                 let structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (s) => s.hits < s.hitsMax / 2 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART ||
-                        (s.structureType === STRUCTURE_WALL || s.structureType === STRUCTURE_RAMPART)&& s.hits < 550000
+                        (s.structureType === STRUCTURE_WALL || s.structureType === STRUCTURE_RAMPART)&& s.hits < 750000
                 });
                 if (structure) {
                     // try to repair it, if it is out of range
@@ -60,7 +60,7 @@ module.exports = {
                     creep.moveToRange(target,1);
                 }
             } else {
-                let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
+                let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {filter: s => s.energy > 0});
                 if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                     creep.moveToRange(source, 1);
                 }

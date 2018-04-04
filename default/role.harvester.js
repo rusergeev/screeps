@@ -44,7 +44,7 @@ module.exports = {
                     creep.moveToRange(target,1);
                 }
             } else {
-                let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
+                let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {filter: s => s.energy > 0});
                 if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                     creep.moveToRange(source, 1);
                 }

@@ -12,7 +12,7 @@ StructureTower.prototype.defend =
             } else {
                 let structure = this.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (s) => (s.hits < s.hitsMax / 1.5 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART) ||
-                        ((s.structureType === STRUCTURE_RAMPART || s.structureType === STRUCTURE_WALL) && s.hits < 150000)
+                        ((s.structureType === STRUCTURE_RAMPART || s.structureType === STRUCTURE_WALL) && s.hits < 751000)
                 });
                 if (structure) {
                     this.repair(structure);
