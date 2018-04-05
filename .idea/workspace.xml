@@ -5,12 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/.sync" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/prototype.Creep.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/prototype.Creep.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/prototype.tower.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/prototype.tower.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.builder.experimental.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.builder.experimental.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.builder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.claimer.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.claimer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.destroyer.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.destroyer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.harvester.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.harvester.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/default/role.medic.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.medic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/role.spawn.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.spawn.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/role.upgrader.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.upgrader.js" afterDir="false" />
     </list>
@@ -23,20 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="role.spawn.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="role.spawn.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/default/role.spawn.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="112" column="20" selection-start-line="112" selection-start-column="20" selection-end-line="112" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="role.transport.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/default/role.transport.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+            <state relative-caret-position="228">
+              <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -44,8 +30,8 @@
       <file leaf-file-name="role.harvester.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.harvester.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="46" column="106" lean-forward="true" selection-start-line="46" selection-start-column="77" selection-end-line="46" selection-end-column="106" />
+            <state relative-caret-position="690">
+              <caret line="46" column="106" selection-start-line="46" selection-start-column="77" selection-end-line="46" selection-end-column="106" />
             </state>
           </provider>
         </entry>
@@ -53,7 +39,7 @@
       <file leaf-file-name="role.builder.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.builder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
+            <state relative-caret-position="930">
               <caret line="62" column="106" selection-start-line="62" selection-start-column="106" selection-end-line="62" selection-end-column="106" />
             </state>
           </provider>
@@ -62,8 +48,8 @@
       <file leaf-file-name="role.upgrader.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.upgrader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="52" column="149" selection-start-line="52" selection-start-column="149" selection-end-line="52" selection-end-column="149" />
+            <state relative-caret-position="907">
+              <caret line="79" column="57" selection-start-line="79" selection-start-column="57" selection-end-line="79" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -71,16 +57,25 @@
       <file leaf-file-name="role.destroyer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.destroyer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="46" column="60" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="60" />
+            <state relative-caret-position="530">
+              <caret line="46" column="57" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="role.builder.experimental.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="role.medic.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/default/role.medic.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="57" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="role.builder.experimental.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.builder.experimental.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
+            <state relative-caret-position="810">
               <caret line="54" column="106" selection-start-line="54" selection-start-column="106" selection-end-line="54" selection-end-column="106" />
             </state>
           </provider>
@@ -89,8 +84,8 @@
       <file leaf-file-name="prototype.Creep.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/prototype.Creep.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1815">
-              <caret line="121" column="41" selection-start-line="121" selection-start-column="41" selection-end-line="121" selection-end-column="41" />
+            <state relative-caret-position="530">
+              <caret line="110" column="80" selection-start-line="110" selection-start-column="80" selection-end-line="110" selection-end-column="80" />
             </state>
           </provider>
         </entry>
@@ -220,18 +215,18 @@
         <option value="$PROJECT_DIR$/default/prototype.Source.js" />
         <option value="$PROJECT_DIR$/default/main.js" />
         <option value="$PROJECT_DIR$/default/role.blocker.js" />
-        <option value="$PROJECT_DIR$/default/role.medic.js" />
         <option value="$PROJECT_DIR$/default/role.creep.js" />
         <option value="$PROJECT_DIR$/default/role.miner.js" />
         <option value="$PROJECT_DIR$/default/prototype.tower.js" />
-        <option value="$PROJECT_DIR$/default/role.destroyer.js" />
         <option value="$PROJECT_DIR$/default/role.claimer.js" />
-        <option value="$PROJECT_DIR$/default/prototype.Creep.js" />
-        <option value="$PROJECT_DIR$/default/role.spawn.js" />
         <option value="$PROJECT_DIR$/default/role.harvester.js" />
         <option value="$PROJECT_DIR$/default/role.builder.js" />
-        <option value="$PROJECT_DIR$/default/role.upgrader.js" />
         <option value="$PROJECT_DIR$/default/role.builder.experimental.js" />
+        <option value="$PROJECT_DIR$/default/prototype.Creep.js" />
+        <option value="$PROJECT_DIR$/default/role.medic.js" />
+        <option value="$PROJECT_DIR$/default/role.destroyer.js" />
+        <option value="$PROJECT_DIR$/default/role.upgrader.js" />
+        <option value="$PROJECT_DIR$/default/role.spawn.js" />
       </list>
     </option>
   </component>
@@ -248,15 +243,13 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/screeps-quorum/node_modules" />
-  </component>
   <component name="PhpServers">
     <servers />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="339" />
+    <option name="y" value="61" />
     <option name="width" value="1440" />
     <option name="height" value="839" />
   </component>
@@ -266,6 +259,8 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -282,8 +277,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -462,7 +455,11 @@
       <workItem from="1522436387969" duration="499000" />
       <workItem from="1522484301942" duration="3748000" />
       <workItem from="1522779103975" duration="1702000" />
-      <workItem from="1522866082546" duration="1073000" />
+      <workItem from="1522866082546" duration="3269000" />
+      <workItem from="1522915138807" duration="21000" />
+      <workItem from="1522927132577" duration="213000" />
+      <workItem from="1522933871629" duration="379000" />
+      <workItem from="1522949621868" duration="3980000" />
     </task>
     <task id="LOCAL-00001" summary="Fix the bug with enemy creep blocks movement">
       <created>1519757707462</created>
@@ -482,7 +479,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="566974000" />
+    <option name="totallyTimeSpent" value="573763000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="839" extended-state="6" />
@@ -498,12 +495,11 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="3" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.490701" weight="0.20295699" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49713877" side_tool="true" visible="true" weight="0.2311828" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49713877" side_tool="true" visible="true" weight="0.18413979" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18097281" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18955651" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.3293011" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24892704" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -514,6 +510,7 @@
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.3293011" />
       <window_info anchor="bottom" id="TypeScript" order="12" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -525,12 +522,12 @@
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="3" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28040057" />
       <window_info id="Structure" order="1" weight="0.24892704" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.490701" weight="0.20295699" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -541,7 +538,7 @@
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49713877" side_tool="true" visible="true" weight="0.32841823" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.490701" weight="0.20295699" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5028612" side_tool="true" weight="0.32841823" />
       <window_info id="Capture Tool" order="2" />
       <window_info anchor="bottom" id="Message" order="1" />
@@ -743,33 +740,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quorum/programs/creep.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-183" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quorum/programs/city/construct.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-468" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quorum/lib/genome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1333" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quorum/programs/empire/intel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-811" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quorum/programs/empire/expand.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1470">
-          <caret line="98" column="57" selection-start-line="98" selection-start-column="42" selection-end-line="98" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/quorum/programs/creep.js" />
+    <entry file="file://$PROJECT_DIR$/quorum/programs/city/construct.js" />
+    <entry file="file://$PROJECT_DIR$/quorum/lib/genome.js" />
+    <entry file="file://$PROJECT_DIR$/quorum/programs/empire/intel.js" />
+    <entry file="file://$PROJECT_DIR$/quorum/programs/empire/expand.js" />
     <entry file="file://$PROJECT_DIR$/default/prototype.RoomPosition.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
@@ -802,13 +777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="60" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.medic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="60" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
         </state>
       </provider>
     </entry>
@@ -847,13 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.destroyer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" column="60" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/default/role.claimer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -861,45 +822,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/default/prototype.Creep.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1815">
-          <caret line="121" column="41" selection-start-line="121" selection-start-column="41" selection-end-line="121" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.spawn.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="112" column="20" selection-start-line="112" selection-start-column="20" selection-end-line="112" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/default/role.harvester.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="46" column="106" lean-forward="true" selection-start-line="46" selection-start-column="77" selection-end-line="46" selection-end-column="106" />
+        <state relative-caret-position="690">
+          <caret line="46" column="106" selection-start-line="46" selection-start-column="77" selection-end-line="46" selection-end-column="106" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/default/role.builder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
+        <state relative-caret-position="930">
           <caret line="62" column="106" selection-start-line="62" selection-start-column="106" selection-end-line="62" selection-end-column="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.upgrader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="52" column="149" selection-start-line="52" selection-start-column="149" selection-end-line="52" selection-end-column="149" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/default/role.builder.experimental.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="810">
           <caret line="54" column="106" selection-start-line="54" selection-start-column="106" selection-end-line="54" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.destroyer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="46" column="57" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.medic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="57" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/prototype.Creep.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="110" column="80" selection-start-line="110" selection-start-column="80" selection-end-line="110" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.upgrader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="907">
+          <caret line="79" column="57" selection-start-line="79" selection-start-column="57" selection-end-line="79" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.spawn.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
         </state>
       </provider>
     </entry>

@@ -66,7 +66,6 @@ Creep.prototype.moveToRange = function (destination, range) {
 };
 
 Creep.prototype.rollToRange = function () {
-
     try {
         if (this.spawning || this.fatigue) {
             return OK;
@@ -106,16 +105,15 @@ Creep.prototype.rollToRange = function () {
                 break;
             case ERR_NOT_FOUND:
                 delete this.memory.path;
-                this.moveToRange(destination, range);
-                this.say('moving to range: WTF?');
+                this.say('out of range: WTF?');
                 break;
             default:
-                console.log(this + ' cant move to' + destination + ' range ' + range + ': ' + result);
+                console.log(this + ' cant move to' + JSON.stringify(destination) + ' range ' + range + ': ' + result);
                 break;
         }
         return result;
     } catch (e) {
-        console.log(this + ' - roll exception:', e);
+        console.log(this, '- roll exception:', e);
         delete this.memory.path;
         delete this.memory.path_destination;
         delete this.memory.path_range;

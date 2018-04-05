@@ -17,26 +17,34 @@ module.exports = {
         }
 
         if (creep.memory.loading) {
-            /*
-            const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
-            if(target) {
-                if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
-                    creep.moveToRange(target, 1);
-                    return;
+
+            let container;
+            if (creep.memory.container){
+                container = Game.getObjectById(creep.memory.container);
+            } else {
+                if ( creep.room.controller ){
+                    container = creep.room.controller.pos.findInRange(FIND_STRUCTURES, 3, {
+                        filter: s =>
+                            s.structureType === STRUCTURE_CONTAINER ||
+                            s.structureType === STRUCTURE_STORAGE ||
+                            s.structureType === STRUCTURE_TERMINAL
+                        }
+                    )[0];
+                    if (container) {
+                        creep.memory.container = container.id;
+                    }
                 }
+                container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: s => (  (
+                            s.structureType === STRUCTURE_CONTAINER ||
+                            s.structureType === STRUCTURE_STORAGE ||
+                            s.structureType === STRUCTURE_TERMINAL
+                        ) && s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 2
+                    )
+                });
             }
-            */
 
-            let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: s => (  (
-                        s.structureType === STRUCTURE_CONTAINER ||
-                        s.structureType === STRUCTURE_STORAGE
-                    ) && s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 2
-                )
-            });
             if (container) {
-                creep.memory.container = container.id;
-
                 let result = creep.withdraw(container, RESOURCE_ENERGY);
                 switch (result) {
                     case ERR_NOT_IN_RANGE:
@@ -48,9 +56,8 @@ module.exports = {
                         creep.say('Full');
                         break;
                 }
-
             } else {
-                let source = Game.getObjectById(creep.memory.source) || creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {filter: s => s.energy > 0});
+                let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {filter: s => s.energy > 0});
                 if (source) {
                     let result = creep.harvest(source);
                     switch (result) {
@@ -71,7 +78,6 @@ module.exports = {
                     if (target) {
                         if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
                             creep.moveToRange(target, 1);
-                            return;
                         }
                     }
                 }
