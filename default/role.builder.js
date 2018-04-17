@@ -13,17 +13,20 @@ module.exports = {
         }
 
         if(creep.memory.building) {
+            let structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (s) => s.hits < s.hitsMax / 20 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART
+            });
             let target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, {filter: c=>c.structureType === STRUCTURE_EXTENSION})
                 || creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, {filter: c=>c.structureType === STRUCTURE_CONTAINER})
                 || creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
-            if(target) {
+            if(target && !structure) {
                 if(creep.build(target) === ERR_NOT_IN_RANGE) {
                     creep.moveToRange(target, 3);
                 }
             }else {
-                let structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                structure = structure || creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (s) => s.hits < s.hitsMax / 2 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART ||
-                        (s.structureType === STRUCTURE_WALL || s.structureType === STRUCTURE_RAMPART)&& s.hits < 750000
+                        (s.structureType === STRUCTURE_WALL || s.structureType === STRUCTURE_RAMPART)&& s.hits < 1750000
                 });
                 if (structure) {
                     // try to repair it, if it is out of range

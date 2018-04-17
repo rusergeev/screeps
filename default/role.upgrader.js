@@ -23,7 +23,7 @@ module.exports = {
                 container = Game.getObjectById(creep.memory.container);
             } else {
                 if ( creep.room.controller ){
-                    container = creep.room.controller.pos.findInRange(FIND_STRUCTURES, 3, {
+                    container = creep.room.controller.pos.findInRange(FIND_STRUCTURES, 4, {
                         filter: s =>
                             s.structureType === STRUCTURE_CONTAINER ||
                             s.structureType === STRUCTURE_STORAGE ||

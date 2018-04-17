@@ -73,10 +73,20 @@ module.exports = {
                     }
                 }
             } else {
-                let   target = creep.room.controller.pos.findInRange( FIND_STRUCTURES, 3, { filter:
-                            s => s.structureType === STRUCTURE_CONTAINER
+                let   target = creep.room.controller.pos.findInRange( FIND_STRUCTURES, 4, { filter:
+                        s => (s.structureType === STRUCTURE_CONTAINER ||
+                              s.structureType === STRUCTURE_STORAGE)
+                                && _.sum(s.store) < s.storeCapacity/10}).sort(
+                                    (a,b) => _.sum(a.store)-_.sum(b.store)-a.storeCapacity+b.storeCapacity)[0]
+                    || creep.room.storage
+                    || creep.pos.findClosestByRange( FIND_STRUCTURES,
+                        {filter: s => ( s.structureType === STRUCTURE_SPAWN || s.structureType === STRUCTURE_SPAWN || s.structureType === STRUCTURE_TOWER)
+                                && _.sum(s.store)===0 })
+                    || creep.room.controller.pos.findInRange( FIND_STRUCTURES, 4, { filter:
+                            s => (s.structureType === STRUCTURE_CONTAINER ||
+                                s.structureType === STRUCTURE_STORAGE)
                                 && _.sum(s.store) < s.storeCapacity/2}).sort(
-                                    (a,b) => _.sum(a.store)-_.sum(b.store)-a.storeCapacity+b.storeCapacity)[0];
+                        (a,b) => _.sum(a.store)-_.sum(b.store)-a.storeCapacity+b.storeCapacity)[0];
 
                 if (!target) {
                     target = Game.getObjectById(creep.memory.target);

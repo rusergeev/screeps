@@ -27,8 +27,13 @@ module.exports = {
                 creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: s => (s.structureType === STRUCTURE_STORAGE) &&
                         s.store[RESOURCE_ENERGY] > creep.carryCapacity - creep.carry.energy
-                }) ||
-                creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                })
+                || creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: s => (s.structureType === STRUCTURE_CONTAINER) &&
+                        s.store[RESOURCE_ENERGY] > creep.carryCapacity - creep.carry.energy &&
+                        (!s.room.controller || !s.pos.inRangeTo(s.room.controller, 3))
+                })
+                || creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: s => (s.structureType === STRUCTURE_CONTAINER) &&
                         s.store[RESOURCE_ENERGY] > creep.carryCapacity - creep.carry.energy
                 });
@@ -53,24 +58,26 @@ module.exports = {
 
         }
         else {
-            let target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return ((structure.structureType === STRUCTURE_EXTENSION ||
-                                structure.structureType === STRUCTURE_SPAWN) &&
-                                structure.energy < structure.energyCapacity) ||
-                                structure.structureType === STRUCTURE_TOWER &&
-                                structure.energy < structure.energyCapacity/2;
-                    }
-            }) || creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return structure.structureType === STRUCTURE_TOWER &&
-                        structure.energy < structure.energyCapacity;
-                }
-            });
-
-            if(target) {
-                if(creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveToRange(target, 1);
+            let target =  creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: s =>
+                        (s.structureType === STRUCTURE_EXTENSION ||
+                            s.structureType === STRUCTURE_SPAWN )&& s.energy < s.energyCapacity ||
+                        s.structureType === STRUCTURE_TOWER && s.energy < s.energyCapacity/2})
+                || creep.room.controller.pos.findInRange(4, FIND_STRUCTURES, {
+                    filter: s => s.structureType === STRUCTURE_CONTAINER && s.energy < s.energyCapacity})[0]
+                || creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: s => s.structureType === STRUCTURE_TOWER && s.energy < s.energyCapacity});
+            if(target !== null) {
+                let result = creep.transfer(target, RESOURCE_ENERGY);
+                switch(result) {
+                    case OK:
+                        break;
+                    case ERR_NOT_IN_RANGE:
+                        creep.moveToRange(target, 1);
+                        break;
+                    default:
+                        console.log(creep, 'transfer to', target, 'result:', result)
+                        break;
                 }
             }
             else{

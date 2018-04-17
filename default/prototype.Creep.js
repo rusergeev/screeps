@@ -28,7 +28,7 @@ Object.defineProperty(Creep.prototype, 'hasMinerals', {
 
 Object.defineProperty(Creep.prototype, 'isMoving', {
     get: function() {
-        return this.memory.path !== undefined;
+        return this.memory.path !== undefined && !this.memory.stuck;
     },
     enumerable: false,
     configurable: true
@@ -68,6 +68,7 @@ Creep.prototype.moveToRange = function (destination, range) {
 Creep.prototype.rollToRange = function () {
     try {
         if (this.spawning || this.fatigue) {
+            this.memory.stuck = true;
             return OK;
         }
 
@@ -80,6 +81,7 @@ Creep.prototype.rollToRange = function () {
             delete this.memory.path_destination;
             delete this.memory.path_range;
             delete this.memory.path_prev_pos;
+            this.memory.stuck = true;
             return ERR_NO_PATH;
         } else {
             this.memory.path_prev_pos = this.pos;
@@ -99,6 +101,7 @@ Creep.prototype.rollToRange = function () {
         let result = this.moveByPath(this.memory.path);
         switch (result) {
             case OK:
+                this.memory.stuck = false;
                 break;
             case ERR_TIRED:
                 result = OK;
