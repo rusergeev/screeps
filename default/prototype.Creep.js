@@ -74,8 +74,8 @@ Creep.prototype.rollToRange = function () {
 
         let prev_pos = this.memory.path_prev_pos;
 
-        if (prev_pos !== undefined && this.pos.isEqualTo(prev_pos)) {
-            console.log(this, ": stuck!");
+        if (prev_pos !== undefined && JSON.stringify(this.pos) === prev_pos ) {
+            //console.log(this, ": stuck!");
             this.say("stuck =(");
             delete this.memory.path;
             delete this.memory.path_destination;
@@ -84,7 +84,7 @@ Creep.prototype.rollToRange = function () {
             this.memory.stuck = true;
             return ERR_NO_PATH;
         } else {
-            this.memory.path_prev_pos = this.pos;
+            this.memory.path_prev_pos = JSON.stringify(this.pos);
         }
 
         let destination = JSON.parse(this.memory.path_destination);

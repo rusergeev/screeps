@@ -18,7 +18,10 @@ module.exports = {
                     console.log(creep + ' cant harvest: should wait ');
                     break;
                 case ERR_NOT_IN_RANGE:
-                    if (source.port)
+                    let container = source.pos.findInRange(FIND_STRUCTURES, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER })[0];
+                    if (container)
+                        creep.moveToRange(container, 0);
+                    else if (source.port)
                         creep.moveToRange(source.port, 0);
                     else
                         creep.moveToRange(source, 1);

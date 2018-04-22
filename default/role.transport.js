@@ -22,8 +22,7 @@ module.exports = {
 
             if (creep.memory.loading) {
                 let source = Game.getObjectById(creep.memory.source);
-                let port = source.port;
-                let energy = source.room.lookForAt(LOOK_ENERGY, port)[0];
+                let energy = source.pos.findInRange(FIND_DROPPED_ENERGY, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER })[0];
 
                 if (energy) {
                     let result = creep.pickup(energy);
@@ -31,9 +30,7 @@ module.exports = {
                         case OK:
                             break;
                         case ERR_NOT_IN_RANGE:
-                            let port = Game.getObjectById(creep.memory.source).port;
-                            creep.memory.destination = port;
-                            creep.moveToRange(port, 1);
+                            creep.moveToRange(energy, 1);
                             break;
                         case ERR_FULL:
                             creep.memory.loading = false;
@@ -44,9 +41,7 @@ module.exports = {
                             break;
                     }
                 } else {
-                    let container = _.filter(
-                        source.room.lookForAt(LOOK_STRUCTURES, port),
-                            s => s.structureType === STRUCTURE_CONTAINER)[0];
+                    let container = source.pos.findInRange(FIND_STRUCTURES, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER })[0];
                     if (container) {
                         let result = creep.withdraw(container, RESOURCE_ENERGY);
                         switch (result) {
@@ -58,9 +53,7 @@ module.exports = {
                                 creep.say('empty: WTF?');
                                 break;
                             case ERR_NOT_IN_RANGE:
-                                let port = Game.getObjectById(creep.memory.source).port;
-                                creep.memory.destination = port;
-                                creep.moveToRange(port, 1);
+                                creep.moveToRange(container, 1);
                                 break;
                             case ERR_FULL:
                                 creep.memory.loading = false;

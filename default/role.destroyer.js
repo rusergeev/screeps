@@ -4,7 +4,7 @@ module.exports = {
     run: function (creep) {
 
 
-        const route = Game.map.findRoute(creep.room, 'E38N47');
+        const route = Game.map.findRoute(creep.room, 'E36N49');
         if (route.length > 0) {
             const exit = creep.pos.findClosestByRange(route[0].exit);
             creep.moveToRange(exit, 0);
