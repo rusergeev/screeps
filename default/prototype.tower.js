@@ -1,6 +1,8 @@
+const whitelist = require('white.list');
+
 StructureTower.prototype.defend =
     function () {
-        let target = this.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        let target = this.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: c => !whitelist.isFriend(c)});
         if (target) {
             this.attack(target);
         } else {

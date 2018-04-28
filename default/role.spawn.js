@@ -7,7 +7,7 @@ module.exports = {
     /** @param {StructureSpawn} spawn **/
     run: function (spawn) {
         try {
-            if (spawn.spawning !== null) {
+            if (spawn.spawning !== null || !spawn.isActive()) {
                 return;
             }
             let sources = spawn.room.find(FIND_SOURCES).map(source => source.id);

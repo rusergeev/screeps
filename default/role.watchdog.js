@@ -1,3 +1,5 @@
+const whitelist = require('white.list');
+
 module.exports = {
 
     /** @param {Creep} creep **/
@@ -8,7 +10,7 @@ module.exports = {
             creep.heal(patient);
         }
 
-        let target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        let target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: c => !whitelist.isFriend(c)});
         if (target) {
             console.log(creep, 'destroy creep at', creep.room.name);
             if (creep.attack(target) === ERR_NOT_IN_RANGE) {

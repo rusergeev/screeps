@@ -26,7 +26,8 @@ module.exports = {
                         creep.moveToRange(target, 3);
                     }
                 }else {
-                    structure = structure || creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: s => s.hits < s.hitsMax / 2 });
+                    structure = structure || creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                        filter: s => s.hits < s.hitsMax / 2 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART});
                     if (structure) {
                         // try to repair it, if it is out of range
                         if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
@@ -34,7 +35,7 @@ module.exports = {
                             creep.moveToRange(structure, 3);
                         }
                     } else {
-                        let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                        let container = creep.room.storage || creep.pos.findClosestByRange(FIND_STRUCTURES, {
                             filter: c => c.structureType === STRUCTURE_CONTAINER && _.sum(c.store) < c.storeCapacity});
 
                         if (container) {

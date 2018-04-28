@@ -1,3 +1,5 @@
+const whitelist = require('white.list');
+
 module.exports = {
 
     /** @param {Creep} creep **/
@@ -22,7 +24,7 @@ module.exports = {
 
 
 
-        target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS,{filter: c => !whitelist.isFriend(c)});
         if (target) {
             console.log('destroy creep');
             if (creep.attack(target) === ERR_NOT_IN_RANGE) {
