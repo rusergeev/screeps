@@ -63,7 +63,7 @@ module.exports = {
                 } else if ( transport < 1 && spawn.room.energyAvailable >= _.min([spawn.room.energyCapacityAvailable, 16*BODYPART_COST[CARRY]+8*BODYPART_COST[MOVE]]) ) {
                     let role = 'transport';
                     let target = spawn.room.storage
-                        || spawn.pos.findInRange(FIND_MY_STRUCTURES, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER})[0];
+                        || spawn.pos.findInRange(FIND_STRUCTURES, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER})[0];
                     if (target === undefined) {
                         target = spawn;
                     }

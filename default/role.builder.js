@@ -45,7 +45,7 @@ module.exports = {
         }
         else {
 
-            let container = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+            let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: s => ((s.structureType === STRUCTURE_CONTAINER ||
                     s.structureType === STRUCTURE_STORAGE) &&
                     s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 4) ||

@@ -34,7 +34,7 @@ module.exports = {
                             creep.moveToRange(structure, 3);
                         }
                     } else {
-                        let container = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+                        let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                             filter: c => c.structureType === STRUCTURE_CONTAINER && _.sum(c.store) < c.storeCapacity});
 
                         if (container) {

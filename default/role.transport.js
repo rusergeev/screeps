@@ -41,7 +41,7 @@ module.exports = {
                             break;
                     }
                 } else {
-                    let container = source.pos.findInRange(FIND_MY_STRUCTURES, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER })[0];
+                    let container = source.pos.findInRange(FIND_STRUCTURES, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER })[0];
                     if (container) {
                         let result = creep.withdraw(container, RESOURCE_ENERGY);
                         switch (result) {
@@ -66,7 +66,7 @@ module.exports = {
                     }
                 }
             } else {
-                let   target = creep.room.controller.pos.findInRange( FIND_MY_STRUCTURES, 4, { filter:
+                let   target = creep.room.controller.pos.findInRange( FIND_STRUCTURES, 4, { filter:
                         s => (s.structureType === STRUCTURE_CONTAINER ||
                               s.structureType === STRUCTURE_STORAGE)
                                 && _.sum(s.store) < s.storeCapacity/10}).sort(
@@ -75,7 +75,7 @@ module.exports = {
                     || creep.pos.findClosestByRange( FIND_MY_STRUCTURES,
                         {filter: s => ( s.structureType === STRUCTURE_SPAWN || s.structureType === STRUCTURE_SPAWN || s.structureType === STRUCTURE_TOWER)
                                 && _.sum(s.store)===0 })
-                    || creep.room.controller.pos.findInRange( FIND_MY_STRUCTURES, 4, { filter:
+                    || creep.room.controller.pos.findInRange( FIND_STRUCTURES, 4, { filter:
                             s => (s.structureType === STRUCTURE_CONTAINER ||
                                 s.structureType === STRUCTURE_STORAGE)
                                 && _.sum(s.store) < s.storeCapacity/2}).sort(

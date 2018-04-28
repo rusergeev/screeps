@@ -2,22 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e235074b-4c70-4395-8a86-be685e966af0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/default/role.remote.builder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/default/role.remote.harvester.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/default/role.watchdog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/.sync" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/prototype.Creep.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/prototype.Creep.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/prototype.tower.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/prototype.tower.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.blocker.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.blocker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/role.builder.experimental.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.builder.experimental.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/role.builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.builder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.claimer.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.claimer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.creep.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.creep.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.destroyer.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.destroyer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/role.harvester.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.harvester.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.medic.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.medic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/role.miner.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.miner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/default/role.remote.builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.remote.builder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/default/role.remote.harvester.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.remote.harvester.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/role.spawn.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.spawn.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/role.transport.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.transport.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/role.upgrader.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.upgrader.js" afterDir="false" />
@@ -31,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="role.spawn.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="role.spawn.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/default/role.spawn.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="86" column="75" selection-start-line="86" selection-start-column="75" selection-end-line="86" selection-end-column="75" />
+            <state relative-caret-position="400">
+              <caret line="82" column="17" lean-forward="true" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -44,25 +35,7 @@
         <entry file="file://$PROJECT_DIR$/default/role.remote.harvester.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="219">
-              <caret line="36" column="83" selection-start-line="36" selection-start-column="83" selection-end-line="36" selection-end-column="83" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="role.miner.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/default/role.miner.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="77" selection-start-line="20" selection-start-column="77" selection-end-line="20" selection-end-column="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="role.watchdog.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/default/role.watchdog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="25" column="45" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+              <caret line="36" column="80" selection-start-line="36" selection-start-column="80" selection-end-line="36" selection-end-column="80" />
             </state>
           </provider>
         </entry>
@@ -76,20 +49,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="role.remote.builder.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="role.remote.builder.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.remote.builder.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="189">
-              <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="role.upgrader.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/default/role.upgrader.js">
+      <file leaf-file-name="role.harvester.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/default/role.harvester.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="95" selection-start-line="95" selection-end-line="105" selection-end-column="13" />
+            <state relative-caret-position="161">
+              <caret line="65" column="64" selection-start-line="65" selection-start-column="64" selection-end-line="65" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -97,8 +70,26 @@
       <file leaf-file-name="role.transport.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.transport.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="77" column="80" selection-start-line="77" selection-start-column="80" selection-end-line="77" selection-end-column="80" />
+            <state relative-caret-position="866">
+              <caret line="77" column="77" selection-start-line="77" selection-start-column="77" selection-end-line="77" selection-end-column="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="role.creep.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/default/role.creep.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="role.miner.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/default/role.miner.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="132" selection-start-line="20" selection-start-column="113" selection-end-line="20" selection-end-column="132" />
             </state>
           </provider>
         </entry>
@@ -132,7 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>builder_e</find>
       <find>console.log</find>
       <find>FIND_</find>
       <find>RoomPosition</find>
@@ -160,8 +150,9 @@
       <find>FIND_STR</find>
       <find>1</find>
       <find>FIND_STRUCTURES</find>
-      <find>s.</find>
       <find>repair</find>
+      <find>s.</find>
+      <find>STRUCTURE_CONTAINER</find>
     </findStrings>
     <replaceStrings>
       <replace>healing</replace>
@@ -231,9 +222,6 @@
         <option value="$PROJECT_DIR$/default/prototype.Creep.js" />
         <option value="$PROJECT_DIR$/default/role.claimer.js" />
         <option value="$PROJECT_DIR$/default/role.watchdog.js" />
-        <option value="$PROJECT_DIR$/default/role.harvester.js" />
-        <option value="$PROJECT_DIR$/default/role.miner.js" />
-        <option value="$PROJECT_DIR$/default/role.spawn.js" />
         <option value="$PROJECT_DIR$/default/role.upgrader.js" />
         <option value="$PROJECT_DIR$/default/role.transport.js" />
         <option value="$PROJECT_DIR$/default/role.remote.harvester.js" />
@@ -241,6 +229,9 @@
         <option value="$PROJECT_DIR$/default/prototype.tower.js" />
         <option value="$PROJECT_DIR$/default/role.builder.experimental.js" />
         <option value="$PROJECT_DIR$/default/role.remote.builder.js" />
+        <option value="$PROJECT_DIR$/default/role.miner.js" />
+        <option value="$PROJECT_DIR$/default/role.harvester.js" />
+        <option value="$PROJECT_DIR$/default/role.spawn.js" />
       </list>
     </option>
   </component>
@@ -492,7 +483,7 @@
       <workItem from="1524504568006" duration="8083000" />
       <workItem from="1524593435096" duration="11781000" />
       <workItem from="1524665554332" duration="27194000" />
-      <workItem from="1524855952570" duration="3968000" />
+      <workItem from="1524855952570" duration="4612000" />
     </task>
     <task id="LOCAL-00001" summary="Fix the bug with enemy creep blocks movement">
       <created>1519757707462</created>
@@ -512,7 +503,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="665086000" />
+    <option name="totallyTimeSpent" value="665730000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="839" extended-state="6" />
@@ -528,10 +519,10 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.490701" weight="0.20295699" />
       <window_info anchor="bottom" id="Run" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49713877" side_tool="true" visible="true" weight="0.22580644" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49713877" side_tool="true" visible="true" weight="0.22580644" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17167382" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17167382" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3293011" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24892704" />
@@ -792,13 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.creep.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/default/prototype.Creep.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
@@ -834,34 +818,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.harvester.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="65" column="78" selection-start-line="65" selection-start-column="78" selection-end-line="65" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.miner.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="77" selection-start-line="20" selection-start-column="77" selection-end-line="20" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.spawn.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="86" column="75" selection-start-line="86" selection-start-column="75" selection-end-line="86" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.transport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="77" column="80" selection-start-line="77" selection-start-column="80" selection-end-line="77" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/default/role.watchdog.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
@@ -879,7 +835,7 @@
     <entry file="file://$PROJECT_DIR$/default/role.remote.harvester.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
-          <caret line="36" column="83" selection-start-line="36" selection-start-column="83" selection-end-line="36" selection-end-column="83" />
+          <caret line="36" column="80" selection-start-line="36" selection-start-column="80" selection-end-line="36" selection-end-column="80" />
         </state>
       </provider>
     </entry>
@@ -907,7 +863,42 @@
     <entry file="file://$PROJECT_DIR$/default/role.remote.builder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
-          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.transport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="866">
+          <caret line="77" column="77" selection-start-line="77" selection-start-column="77" selection-end-line="77" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.creep.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.miner.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="132" selection-start-line="20" selection-start-column="113" selection-end-line="20" selection-end-column="132" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.harvester.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="65" column="64" selection-start-line="65" selection-start-column="64" selection-end-line="65" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.spawn.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="82" column="17" lean-forward="true" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
         </state>
       </provider>
     </entry>
