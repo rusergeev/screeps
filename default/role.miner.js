@@ -15,7 +15,7 @@ module.exports = {
                 case ERR_BUSY:
                     break;
                 case ERR_NOT_ENOUGH_RESOURCES:
-                    console.log(creep + ' cant harvest: should wait ');
+                    //console.log(creep, ' cant harvest: should wait ');
                     break;
                 case ERR_NOT_IN_RANGE:
                     let container = source.pos.findInRange(FIND_STRUCTURES, 1, {filter: s => s.structureType === STRUCTURE_CONTAINER })[0];

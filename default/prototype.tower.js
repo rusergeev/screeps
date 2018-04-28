@@ -5,6 +5,7 @@ StructureTower.prototype.defend =
         let target = this.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: c => !whitelist.isFriend(c)});
         if (target) {
             this.attack(target);
+            console.log(this, 'attacks', target, 'of',target.owner.username,'at', this.room.name);
         } else {
             let target = this.pos.findClosestByRange(FIND_CREEPS, {
                 filter: (s) => s.hits < s.hitsMax

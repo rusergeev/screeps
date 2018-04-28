@@ -12,7 +12,7 @@ module.exports = {
 
         let target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: c => !whitelist.isFriend(c)});
         if (target) {
-            console.log(creep, 'destroy creep at', creep.room.name);
+            console.log(creep, 'attacks', target, 'of',target.owner.username,'at', creep.room.name);
             if (creep.attack(target) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }

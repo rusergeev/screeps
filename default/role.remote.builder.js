@@ -36,14 +36,15 @@ module.exports = {
                         }
                     } else {
                         let container = creep.room.storage || creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                            filter: c => c.structureType === STRUCTURE_CONTAINER && _.sum(c.store) < c.storeCapacity});
+                            filter: c => c.structureType === STRUCTURE_CONTAINER && _.sum(c.store) < c.storeCapacity
+                                && _.filter(c.room.lookForAt(LOOK_CREEPS, c), c => c.memory && c.memory.role && c.memory.role === 'miner').length === 0 });
 
                         if (container) {
                             if (creep.transfer(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                                 creep.moveToRange(container, 1);
                             }
                         } else {
-                            if (creep.room.controller && creep.room.controller.my){
+                            if (creep.room.controller && creep.room.controller.owner && creep.room.controller.owner.username === 'Sergeev'){
                                 let result = creep.upgradeController(creep.room.controller);
                                 switch (result) {
                                     case ERR_NOT_IN_RANGE:
@@ -56,7 +57,8 @@ module.exports = {
                                         break;
                                 }
                             }else {
-                                creep.memory.role = 'remote_harvester';
+                                //creep.memory.role = 'remote_harvester';
+                                console.log(creep.room.name, 'needs more transport');
                             }
                         }
 
@@ -71,8 +73,21 @@ module.exports = {
                     }
                 } else {
                     let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {filter: s => s.energy > 0});
-                    if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                        creep.moveToRange(source, 1);
+                    let result = creep.harvest(source);
+                    switch (result) {
+                        case OK:
+                        case ERR_BUSY:
+                            break;
+                        case ERR_INVALID_TARGET:
+                        case ERR_NOT_ENOUGH_RESOURCES:
+                            creep.memory.building = true;
+                            break;
+                        case ERR_NOT_IN_RANGE:
+                            creep.moveToRange(source, 1);
+                            break;
+                        default:
+                            console.log(creep + ' cant harvest ' + source + ' : ' + result);
+                            break;
                     }
                 }
             }
