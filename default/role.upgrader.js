@@ -23,7 +23,7 @@ module.exports = {
                 container = Game.getObjectById(creep.memory.container);
             } else {
                 if ( creep.room.controller ){
-                    container = creep.room.controller.pos.findInRange(FIND_STRUCTURES, 4, {
+                    container = creep.room.controller.pos.findInRange(FIND_MY_STRUCTURES, 4, {
                         filter: s =>
                             s.structureType === STRUCTURE_CONTAINER ||
                             s.structureType === STRUCTURE_STORAGE ||
@@ -34,7 +34,7 @@ module.exports = {
                         creep.memory.container = container.id;
                     }
                 }
-                container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                container = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                     filter: s => (  (
                             s.structureType === STRUCTURE_CONTAINER ||
                             s.structureType === STRUCTURE_STORAGE ||
@@ -47,13 +47,23 @@ module.exports = {
             if (container) {
                 let result = creep.withdraw(container, RESOURCE_ENERGY);
                 switch (result) {
+                    case OK:
+                    case ERR_BUSY:
+                    break;
                     case ERR_NOT_IN_RANGE:
                         creep.say('Moving');
                         creep.moveToRange(container, 1);
                         break;
                     case ERR_FULL:
-                        creep.memory.harvesting = false;
+                        creep.memory.loading = false;
                         creep.say('Full');
+                        break;
+                    case ERR_NOT_ENOUGH_RESOURCES:
+                        creep.memory.loading = false;
+                        creep.say('No energy');
+                        break;
+                    default:
+                        console.log(creep, 'withdraw from', container, 'result:', result)
                         break;
                 }
             } else {
@@ -66,7 +76,7 @@ module.exports = {
                             creep.moveToRange(source, 1);
                             break;
                         case ERR_FULL:
-                            creep.memory.harvesting = false;
+                            creep.memory.loading = false;
                             creep.say('Full');
                             break;
                         case OK:

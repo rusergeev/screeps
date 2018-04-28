@@ -12,7 +12,10 @@ let roles = {
     medic: require('role.medic'),
     blocker: require('role.blocker'),
     atob: require('role.atob'),
-    harvester_exp: require('role.builder.experimental')
+    harvester_exp: require('role.builder.experimental'),
+    watchdog: require('role.watchdog'),
+    remote_builder: require('role.remote.builder'),
+    remote_harvester: require('role.remote.harvester')
 };
 
 module.exports = {
@@ -28,7 +31,7 @@ module.exports = {
                 console.log(creep + ': cannot handle role ' + creep.memory.role);
             }
         } catch (e) {
-            console.log('creep exception:', e);
+            console.log(creep, 'creep exception:', e);
         }
     }
 };

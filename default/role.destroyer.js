@@ -2,58 +2,61 @@ module.exports = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
+        const flag = Game.flags.Flag1;
+        const distance = 2;
+        if(!creep.pos.findInRange(flag,distance)[0]) {
+            creep.moveToRange(flag, distance);
+        }
+        return;
+        //creep.moveToRange(Game.flags.Flag1,1);
+        //return;
 
-
-        const route = Game.map.findRoute(creep.room, 'E36N49');
-        if (route.length > 0) {
-            const exit = creep.pos.findClosestByRange(route[0].exit);
-            creep.moveToRange(exit, 0);
-            console.log(creep, 'rolls to', exit, 'at', creep.room);
+        let target = Game.getObjectById('5abc9c2f7ff91e7fe8e75b37');
+        if (target) {
+            console.log(creep, creep.room,'destroy zabor');
+            if (creep.attack(target) === ERR_NOT_IN_RANGE) {
+                creep.moveToRange(target);
+            }
             return;
         }
 
-        if (!creep.room.controller.safeMode) {
 
-            let target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-            if (target) {
-                console.log('destroy creep');
-                if (creep.attack(target) === ERR_NOT_IN_RANGE) {
-                    creep.moveToRange(target);
-                }
-                return;
-            }
 
-            const t1 = creep.pos.findClosestByRange(FIND_HOSTILE_SPAWNS);
-            if (t1) {
-                console.log('destroy spawn');
-                let result = creep.attack(t1);
-                if (result == ERR_NOT_IN_RANGE) {
-                    creep.moveToRange(t1, 1);
-                }
-                return;
+        target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if (target) {
+            console.log('destroy creep');
+            if (creep.attack(target) === ERR_NOT_IN_RANGE) {
+                creep.moveTo(target);
             }
-
-            const t2 = creep.room.controller;
-            if (false&&t2 && !t2.my) {
-                console.log('destroy controller');
-                let result = creep.attackController(t2);
-                if (result == ERR_NOT_IN_RANGE) {
-                    creep.moveToRange(t2, 1);
-                }
-                return;
-            }
-
-            const t3 = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES) || creep.pos.findClosestByRange(FIND_HOSTILE_CONSTRUCTION_SITES);
-            if (t3) {
-                console.log('destroy structures', t3);
-                let result = creep.attack(t3);
-                if (result == ERR_NOT_IN_RANGE) {
-                    creep.moveToRange(t3, 1);
-                }
-                //console.log(creep, result);
-                return;
-            }
+            return;
         }
 
+        const t1 = creep.pos.findClosestByRange(FIND_HOSTILE_SPAWNS);
+        if (t1) {
+            console.log('destroy spawn');
+            let result = creep.attack(t1);
+            if (result == ERR_NOT_IN_RANGE) {
+                creep.moveToRange(t1, 1);
+            }
+            return;
+        }
+
+
+
+        const t3 = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES) || creep.pos.findClosestByRange(FIND_HOSTILE_CONSTRUCTION_SITES);
+        if (t3) {
+            console.log('destroy structures', t3);
+            let result = creep.attack(t3);
+            if (result == ERR_NOT_IN_RANGE) {
+                creep.moveToRange(t3, 1);
+            }
+            //console.log(creep, result);
+            return;
+        }
+
+        if(!creep.pos.findInRange(flag,distance)[0]) {
+            creep.moveToRange(flag, distance);
+        }
     }
+
 };

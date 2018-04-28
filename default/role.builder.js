@@ -13,12 +13,12 @@ module.exports = {
         }
 
         if(creep.memory.building) {
-            let structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            let structure = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                 filter: (s) => s.hits < s.hitsMax / 20 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART
             });
-            let target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, {filter: c=>c.structureType === STRUCTURE_EXTENSION})
-                || creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, {filter: c=>c.structureType === STRUCTURE_CONTAINER})
-                || creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+            let target = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES, {filter: c=>c.structureType === STRUCTURE_EXTENSION})
+                || creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES, {filter: c=>c.structureType === STRUCTURE_CONTAINER})
+                || creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
             if(target && !structure) {
                 if(creep.build(target) === ERR_NOT_IN_RANGE) {
                     creep.moveToRange(target, 3);
@@ -45,7 +45,7 @@ module.exports = {
         }
         else {
 
-            let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            let container = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                 filter: s => ((s.structureType === STRUCTURE_CONTAINER ||
                     s.structureType === STRUCTURE_STORAGE) &&
                     s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 4) ||

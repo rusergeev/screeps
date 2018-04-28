@@ -24,16 +24,16 @@ module.exports = {
 	    if(creep.memory.harvesting) {
 
             let container =
-                creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                     filter: s => (s.structureType === STRUCTURE_STORAGE) &&
                         s.store[RESOURCE_ENERGY] > creep.carryCapacity - creep.carry.energy
                 })
-                || creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                || creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                     filter: s => (s.structureType === STRUCTURE_CONTAINER) &&
                         s.store[RESOURCE_ENERGY] > creep.carryCapacity - creep.carry.energy &&
                         (!s.room.controller || !s.pos.inRangeTo(s.room.controller, 3))
                 })
-                || creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                || creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                     filter: s => (s.structureType === STRUCTURE_CONTAINER) &&
                         s.store[RESOURCE_ENERGY] > creep.carryCapacity - creep.carry.energy
                 });
@@ -58,14 +58,14 @@ module.exports = {
 
         }
         else {
-            let target =  creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            let target =  creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                     filter: s =>
                         (s.structureType === STRUCTURE_EXTENSION ||
                             s.structureType === STRUCTURE_SPAWN )&& s.energy < s.energyCapacity ||
                         s.structureType === STRUCTURE_TOWER && s.energy < s.energyCapacity/2})
-                || creep.room.controller.pos.findInRange(4, FIND_STRUCTURES, {
+                || creep.room.controller.pos.findInRange(4, FIND_MY_STRUCTURES, {
                     filter: s => s.structureType === STRUCTURE_CONTAINER && s.energy < s.energyCapacity})[0]
-                || creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                || creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                     filter: s => s.structureType === STRUCTURE_TOWER && s.energy < s.energyCapacity});
             if(target !== null) {
                 let result = creep.transfer(target, RESOURCE_ENERGY);
@@ -81,7 +81,7 @@ module.exports = {
                 }
             }
             else{
-                target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+                target = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
                 if(target) {
                     if(creep.build(target) === ERR_NOT_IN_RANGE) {
                         creep.moveToRange(target, 1);

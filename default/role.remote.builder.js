@@ -2,11 +2,9 @@ module.exports = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        const route = Game.map.findRoute(creep.room, creep.memory.room || 'E36N48');
-        if (route.length > 0) {
-            creep.say('To ' + route[0].room);
-            const exit = creep.pos.findClosestByRange(route[0].exit);
-            creep.moveToRange(exit, 0);
+        const flag = Game.flags[creep.memory.flag];
+        if(flag && flag.room !== creep.room) {
+            creep.moveToRange(flag, 1);
         } else {
 
             if (creep.memory.building && creep.carry.energy === 0) {
@@ -20,7 +18,7 @@ module.exports = {
 
             if (creep.memory.building) {
                 let structure = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
-                    filter: (s) => s.hits < s.hitsMax / 20 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART
+                    filter: s => s.hits < s.hitsMax / 20 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART
                 });
                 let target = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
                 if(target && !structure) {
@@ -37,7 +35,29 @@ module.exports = {
                         }
                     } else {
                         let container = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
-                            filter: c => c.structureType === STRUCTURE_CONTAINER && c.energy});
+                            filter: c => c.structureType === STRUCTURE_CONTAINER && _.sum(c.store) < c.storeCapacity});
+
+                        if (container) {
+                            if (creep.transfer(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                                creep.moveToRange(container, 1);
+                            }
+                        } else {
+                            if (creep.room.controller && creep.room.controller.my){
+                                let result = creep.upgradeController(creep.room.controller);
+                                switch (result) {
+                                    case ERR_NOT_IN_RANGE:
+                                        creep.say('Moving');
+                                        creep.moveToRange(creep.room.controller, 3);
+                                        break;
+                                    case ERR_NOT_ENOUGH_RESOURCES:
+                                        creep.memory.building = false;
+                                        creep.say('Harvest');
+                                        break;
+                                }
+                            }else {
+                                creep.memory.role = 'remote_harvester';
+                            }
+                        }
 
                     }
                 }
