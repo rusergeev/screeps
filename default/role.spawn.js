@@ -207,7 +207,7 @@ module.exports = {
             }
 
             if (false) {
-                let role = 'atob';
+                const role = 'atob';
                 let creeps = _.filter(Game.creeps, creep => creep.memory.role === role).length;
                 if (creeps < 1 && spawn.room.energyAvailable >= _.min([spawn.room.energyCapacityAvailable, 16 * BODYPART_COST[CARRY] + 8 * BODYPART_COST[MOVE]])) {
                     let source = Game.rooms.E39N46.storage;
@@ -234,16 +234,17 @@ module.exports = {
                 for (let i in related_flags) {
                     const flag = related_flags[i];
                     if (flag.color === COLOR_RED) {
-                        let watchdogs = _.filter(Game.creeps, creep => creep.memory.role === 'watchdog' && creep.memory.flag === flag.name);
+                        let role = 'watchdog';
+                        let creeps = _.filter(Game.creeps, creep => creep.memory.role === role && creep.memory.flag === flag.name);
                         const abilities = [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, HEAL, HEAL, HEAL];
                         //const abilities = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,HEAL,HEAL,HEAL];
                         const cost = abilities.reduce(function (cost, part) {
                             return cost + BODYPART_COST[part];
                         }, 0);
-                        if (watchdogs.length < 1 && spawn.room.energyAvailable >= cost) {
-                            let role = 'watchdog';
+                        if (creeps.length < 1 && spawn.room.energyAvailable >= cost) {
+
                             let newName = role + Game.time;
-                            console.log(spawn + ': spawning ' + newName);
+                            console.log(spawn, 'spawning', newName, 'with', flag.name);
                             spawn.spawnCreep(abilities, newName, {memory: {role: role, flag: flag.name}});
                             return;
                         }
@@ -291,13 +292,14 @@ module.exports = {
                         }
                     }
                     if (flag.color === COLOR_YELLOW) {
-                        let r_builders = _.filter(Game.creeps, creep => creep.memory.role === 'remote_harvester' && creep.memory.flag === flag.name);
-                        const abilities = [WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY];
+                        const role = 'remote_harvester';
+                        const creeps = _.filter(Game.creeps, creep => creep.memory.role === role && creep.memory.flag === flag.name);
+                        const abilities = [WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY];
                         const cost = abilities.reduce(function (cost, part) {
                             return cost + BODYPART_COST[part];
                         }, 0);
-                        if (r_builders.length < 1 && spawn.room.energyAvailable >= cost) {
-                            let role = 'remote_harvester';
+                        if (creeps.length < 1 && spawn.room.energyAvailable >= cost) {
+
                             let newName = role + Game.time;
                             console.log(spawn, 'spawning', newName, 'with', flag.name);
                             const target = (spawn.room.storage || spawn).id;
@@ -312,10 +314,10 @@ module.exports = {
                         }
                     }
                     if (flag.color === COLOR_ORANGE) {
-                        let role = 'upgrader';
-                        let creeps = _.filter(Game.creeps, creep => creep.memory.role === role && creep.memory.flag === flag.name);
+                        const role = 'upgrader';
+                        const creeps = _.filter(Game.creeps, creep => creep.memory.role === role && creep.memory.flag === flag.name);
                         if (creeps.length < 1) {
-                            let newName = role + Game.time;
+                            const newName = role + Game.time;
                             let abilities = [MOVE, CARRY, CARRY, CARRY, CARRY];
                             let cost = abilities.reduce(function (cost, part) {
                                 return cost + BODYPART_COST[part];

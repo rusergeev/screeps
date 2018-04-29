@@ -14,6 +14,7 @@ module.exports = {
             } else {
                 result = creep.reserveController(structure);
                 //console.log(creep, 'reserves', structure, 'in', creep.room);
+                creep.signController(structure, 'Sergeev and maxibra can be here.')
             }
 
             if (result === ERR_NOT_IN_RANGE) {

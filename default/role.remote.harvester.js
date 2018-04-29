@@ -28,7 +28,9 @@ module.exports = {
                 creep.moveToRange(flag, 1);
 
             } else {
-                const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+                const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
+                    filter: t => t.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
+                });
                 if (target) {
                     if (creep.pickup(target) === ERR_NOT_IN_RANGE) {
                         creep.moveToRange(target, 1);
@@ -36,13 +38,16 @@ module.exports = {
                 } else {
                     let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                         filter: s => (s.structureType === STRUCTURE_CONTAINER) && s.store[RESOURCE_ENERGY] > 0
+                            && s.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
                     });
                     if (container) {
                         if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                             creep.moveToRange(container, 1);
                         }
                     } else {
-                        let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {filter: s => s.energy > 0});
+                        let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {
+                            filter: s => s.energy > 0 && s.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
+                        });
                         if (source) {
                             if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                                 creep.moveToRange(source, 1);

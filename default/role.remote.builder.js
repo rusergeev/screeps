@@ -66,13 +66,17 @@ module.exports = {
                 }
             }
             else {
-                const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+                const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
+                    filter: t => t.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
+                });
                 if (target) {
                     if (creep.pickup(target) === ERR_NOT_IN_RANGE) {
                         creep.moveToRange(target, 1);
                     }
                 } else {
-                    let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {filter: s => s.energy > 0});
+                    let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {
+                        filter: s => s.energy > 0 && s.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
+                    });
                     let result = creep.harvest(source);
                     switch (result) {
                         case OK:
