@@ -10,21 +10,27 @@ module.exports = {
             creep.heal(patient);
         }
 
-        let target;
-        if (flag && flag.secondaryColor === COLOR_RED) {
+        const target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: c => !whitelist.isFriend(c)});
 
-            target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: c => !whitelist.isFriend(c)});
-        } else {
-
-            target = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 4, {filter: c => !whitelist.isFriend(c)})[0];
-        }
         if (target) {
-            console.log(creep, 'attacks', target, 'of',target.owner.username,'at', creep.room.name);
             if (creep.attack(target) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
+            }else {
+                console.log(creep, 'attacks', target, 'of',target.owner.username,'at', creep.room.name);
             }
             return;
-        } /*else {
+        } else {
+            const spawning_lair = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: s => s.structureType === STRUCTURE_KEEPER_LAIR && s.ticksToSpawn < 30});
+            if (spawning_lair) {
+
+                creep.moveToRange(spawning_lair, 1);
+                return;
+            }
+        }
+
+
+        /*else {
             let patient = creep.pos.findClosestByRange(FIND_MY_CREEPS, { filter: c => c.hits < c.hitsMax });
             if (patient) {
                 if (creep.heal(patient) === ERR_NOT_IN_RANGE) {

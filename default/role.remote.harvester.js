@@ -1,7 +1,26 @@
+'use strict';
+
+const whitelist = require('white.list');
+
 module.exports = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+
+        const hostile = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: c => !whitelist.isFriend(c)});
+        if (hostile.length > 0) {
+            console.log(creep, 'flee from', hostile[0], 'in', creep.room);
+            creep.moveToRange(hostile[0], 4, {flee: true});
+            return;
+        }
+
+        const spawning_lairs = creep.pos.findInRange(FIND_STRUCTURES, 3, {
+            filter: s => s.structureType === STRUCTURE_KEEPER_LAIR && s.ticksToSpawn < 10});
+        if (spawning_lairs.length > 0) {
+            console.log(creep, 'flee from', spawning_lairs[0], 'in', creep.room);
+            creep.moveToRange(spawning_lairs[0], 4, {flee: true});
+            return;
+        }
 
         if(!creep.memory.harvesting && creep.isEmpty) {
             creep.memory.harvesting = true;
@@ -13,7 +32,7 @@ module.exports = {
         }
         if(creep.isFull && creep.hasMinerals && creep.room.storage) {
             creep.say('Deposite minerals');
-            target = creep.room.storage;
+            const target = creep.room.storage;
             if(target) {
                 if(creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     creep.moveToRange(target, 1);
@@ -36,8 +55,9 @@ module.exports = {
                         creep.moveToRange(target, 1);
                     }
                 } else {
-                    let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                        filter: s => (s.structureType === STRUCTURE_CONTAINER) && s.store[RESOURCE_ENERGY] > 0
+                    const container = creep.pos.findClosestByRange(FIND_TOMBSTONES, {filter: t => _.sum(t.store) > 0})
+                    || creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                        filter: s => (s.structureType === STRUCTURE_CONTAINER) && _.sum(s.store) > 0
                             && s.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
                     });
                     if (container) {
@@ -45,7 +65,7 @@ module.exports = {
                             creep.moveToRange(container, 1);
                         }
                     } else {
-                        let source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {
+                        const source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {
                             filter: s => s.energy > 0 && s.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
                         });
                         if (source) {
@@ -54,16 +74,14 @@ module.exports = {
                             }
                         } else {
                             creep.memory.harvesting = false;
-                            let target = Game.getObjectById(creep.memory.target);
-                            creep.moveToRange(target, 1);
                         }
                     }
                 }
             }
    
         } else {
-            let target = Game.getObjectById(creep.memory.target);
-            let result = creep.transfer(target, RESOURCE_ENERGY);
+            const target = Game.getObjectById(creep.memory.target);
+            const result = creep.transfer(target, RESOURCE_ENERGY);
             switch (result) {
                 case OK:
                     break;

@@ -1,4 +1,5 @@
 'use strict';
+const whitelist = require('white.list');
 
 require('prototype.Source');
 
@@ -34,12 +35,18 @@ Object.defineProperty(Creep.prototype, 'isMoving', {
     configurable: true
 });
 
-Creep.prototype.moveToRange = function (destination, range) {
+Creep.prototype.moveToRange = function (destination, range, opt) {
 
     let pos = destination.pos === undefined ? destination : destination.pos;
     let pos_json = JSON.stringify(pos);
     if (!this.memory.path || pos_json !== this.memory.path_destination || range !== this.memory.path_range) {
         this.say('pathing =/');
+        if (opt && opt.flee) {
+            const path = PathFinder.search(this.pos, {pos: pos, range: range}, {flee: true}).path;
+            //console.log(this, 'PathFinder.search(', this.pos, ',', JSON.stringify(pos), ')=', JSON.stringify(path));
+            pos = path[0];
+            this.moveTo(pos);
+        }
         this.memory.path = this.pos.findPathTo(pos, {
             range: range,
             ignoreCreeps: true,
@@ -108,6 +115,13 @@ Creep.prototype.rollToRange = function () {
             return ERR_NO_PATH;
         }
 
+        const hostile = this.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: c => !whitelist.isFriend(c)});
+        if (hostile.length > 0) {
+            console.log(this, 'flee from', hostile[0], 'in', this.room);
+            this.moveToRange(hostile[0], 4, {flee: true});
+            return;
+        }
+
         let result = this.moveByPath(this.memory.path);
         switch (result) {
             case OK:
@@ -133,4 +147,19 @@ Creep.prototype.rollToRange = function () {
         delete this.memory.path_prev_pos;
     }
 
+};
+
+
+Creep.prototype.transferAll = function (target) {
+    for (let resource in this.carry) {
+        console.log(resource);
+        if (this.carry[resource] > 0) {
+            const result = this.transfer(target, resource);
+            if (result !== OK) {
+                console.log('result', result);
+                return result;
+            }
+        }
+    }
+    return OK;
 };

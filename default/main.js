@@ -36,7 +36,9 @@ module.exports.loop = function () {
         for (let tower of towers) {
             tower.defend();
         }
-
+        const brown_flags_0 = _.filter(Game.flags, f => f.color === COLOR_BROWN && f.room && f.room.lookForAt(LOOK_STRUCTURES, f).length === 0);
+        if (brown_flags_0.length > 0)
+            brown_flags_0.forEach(f => f.remove());
     } catch (e) {
         console.log('main exception:', e);
     }

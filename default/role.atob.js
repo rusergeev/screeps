@@ -41,7 +41,7 @@ module.exports = {
                     creep.moveToRange(target, 1);
                     break;
                 case ERR_FULL:
-                    creep.drop(RESOURCE_ENERGY);
+                    creep.drop();
                     break;
                 case ERR_NOT_ENOUGH_RESOURCES:
                     creep.say('WTF: not enough resources?');

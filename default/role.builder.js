@@ -52,10 +52,11 @@ module.exports = {
                 return;
             }
 
-            let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            let container = creep.pos.findClosestByRange(FIND_TOMBSTONES, {filter: t => _.sum(t.store) > 0})
+            || creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: s => ((s.structureType === STRUCTURE_CONTAINER ||
                     s.structureType === STRUCTURE_STORAGE) &&
-                    s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 4) ||
+                    _.sum(s.store) > (creep.carryCapacity - creep.carry.energy) / 4) ||
                     s.structureType === STRUCTURE_LINK && s.energy > (creep.carryCapacity - creep.carry.energy) / 2
             });
             if (container) {
