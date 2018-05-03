@@ -44,7 +44,9 @@ module.exports = {
 
         }
         else {
-            const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+            const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
+                filter: t => t.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
+            });
             if(target) {
                 if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
                     creep.moveToRange(target,1);

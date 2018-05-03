@@ -1,4 +1,5 @@
 'use strict';
+const whitelist = require('white.list');
 
 require('prototype.Source');
 
@@ -12,141 +13,153 @@ Object.defineProperty(Creep.prototype, 'isFull', {
 
 Object.defineProperty(Creep.prototype, 'isEmpty', {
     get: function() {
-        return _.sum(this.carry) === 0;
+        return this.carry[RESOURCE_ENERGY] === 0;
     },
     enumerable: false,
     configurable: true
 });
 
-Creep.prototype.moveToX = function (pos) {
+Object.defineProperty(Creep.prototype, 'hasMinerals', {
+    get: function() {
+        return _.sum(this.carry) - this.carry[RESOURCE_ENERGY] > 0;
+    },
+    enumerable: false,
+    configurable: true
+});
+
+Object.defineProperty(Creep.prototype, 'isMoving', {
+    get: function() {
+        return this.memory.path !== undefined && !this.memory.stuck;
+    },
+    enumerable: false,
+    configurable: true
+});
+
+Creep.prototype.moveToRange = function (destination, range, opt) {
+
+    let pos = destination.pos === undefined ? destination : destination.pos;
     let pos_json = JSON.stringify(pos);
-    if(!this.memory.path || pos_json !== this.memory.path_destination) {
-        this.say('pathing 🐽');
-        this.memory.path = this.pos.findPathTo(pos, {ignoreCreeps: true});
+    if (!this.memory.path || pos_json !== this.memory.path_destination || range !== this.memory.path_range) {
+        this.say('pathing =/');
+        if (opt && opt.flee) {
+            const path = PathFinder.search(this.pos, {pos: pos, range: range}, {flee: true}).path;
+            //console.log(this, 'PathFinder.search(', this.pos, ',', JSON.stringify(pos), ')=', JSON.stringify(path));
+            pos = path[0];
+            this.moveTo(pos);
+        }
+        this.memory.path = this.pos.findPathTo(pos, {
+            range: range,
+            ignoreCreeps: true,
+            ignoreDestructibleStructures: false,
+            costCallback:
+                function (roomName, costMatrix) {
+                    const room = Game.rooms[roomName];
+                    if (room !== undefined){
+                        room.find(FIND_MY_CREEPS, {filter: c => !c.isMoving}).forEach(c => costMatrix.set(c.pos.x, c.pos.y, 0xff));
+                        room.find(FIND_HOSTILE_CREEPS, {filter: c => c.getActiveBodyparts(ATTACK)}).forEach(function (c) {
+                            for(let x = _.max([0,c.pos.x-1]); x <= _.min([49,c.pos.x+1]); x++)
+                                for(let y = _.max([0,c.pos.y-1]); y <= _.min([49,c.pos.y+1]); y++) {
+                                    costMatrix.set(x, y, 0xff);
+                                }
+                        });
+                        room.find(FIND_HOSTILE_CREEPS, {filter: c => c.getActiveBodyparts(RANGED_ATTACK)}).forEach(function (c) {
+                            for(let x = _.max([0,c.pos.x-3]); x <= _.min([49,c.pos.x+3]); x++)
+                                for(let y = _.max([0,c.pos.y-3]); y <= _.min([49,c.pos.y+3]); y++) {
+                                    costMatrix.set(x, y, 0xff);
+                                }
+                        });
+                    }
+                }
+        });
         this.memory.path_destination = pos_json;
+        this.memory.path_range = range;
+        new RoomVisual(this.room.name).poly(this.memory.path, {
+            stroke: '#fff', strokeWidth: .15,
+            opacity: .2, lineStyle: 'dashed'
+        });
     }
 
-    let result = this.moveByPath(this.memory.path);
-    switch (result) {
-        case OK:
-        case ERR_TIRED:
-            break;
-        case ERR_NOT_FOUND:
+    return this.rollToRange();
+};
+
+Creep.prototype.rollToRange = function () {
+    try {
+        if (this.spawning || this.fatigue) {
+            this.memory.stuck = true;
+            return OK;
+        }
+
+        let prev_pos = this.memory.path_prev_pos;
+
+        if (prev_pos !== undefined && JSON.stringify(this.pos) === prev_pos ) {
+            //console.log(this, ": stuck!");
+            this.say("stuck =(");
             delete this.memory.path;
-            this.moveToX(pos);
-            break;
-        default:
-            console.log(this + ' cant move to' + pos + ' : ' + result);
-            break;
-    }
-    return result;
-};
-
-Creep.prototype.pickupX = function (energy) {
-
-    if (this.memory.destination) {
-        let destination  = new RoomPosition(this.memory.destination.x, this.memory.destination.y, this.memory.destination.roomName);
-        if (this.pos.isNearTo(destination)) {
-            delete this.memory.destination;
+            delete this.memory.path_destination;
+            delete this.memory.path_range;
+            delete this.memory.path_prev_pos;
+            this.memory.stuck = true;
+            return ERR_NO_PATH;
         } else {
-            return this.moveToX(destination);
+            this.memory.path_prev_pos = JSON.stringify(this.pos);
         }
+
+        let destination = JSON.parse(this.memory.path_destination);
+        let range = this.memory.path_range;
+
+        if (this.pos.inRangeTo(destination, range)) {
+            delete this.memory.path;
+            delete this.memory.path_destination;
+            delete this.memory.path_range;
+            delete this.memory.path_prev_pos;
+            return ERR_NO_PATH;
+        }
+
+        const hostile = this.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: c => !whitelist.isFriend(c)});
+        if (hostile.length > 0) {
+            console.log(this, 'flee from', hostile[0], 'in', this.room);
+            this.moveToRange(hostile[0], 4, {flee: true});
+            return;
+        }
+
+        let result = this.moveByPath(this.memory.path);
+        switch (result) {
+            case OK:
+                this.memory.stuck = false;
+                break;
+            case ERR_TIRED:
+                result = OK;
+                break;
+            case ERR_NOT_FOUND:
+                delete this.memory.path;
+                this.say('out of range: WTF?');
+                break;
+            default:
+                console.log(this + ' cant move to' + JSON.stringify(destination) + ' range ' + range + ': ' + result);
+                break;
+        }
+        return result;
+    } catch (e) {
+        console.log(this, '- roll exception:', e);
+        delete this.memory.path;
+        delete this.memory.path_destination;
+        delete this.memory.path_range;
+        delete this.memory.path_prev_pos;
     }
 
-    let result = this.pickup(energy);
-    switch (result) {
-        case OK:
-            break;
-        case ERR_NOT_IN_RANGE:
-            let port = Game.getObjectById(this.memory.source).port;
-            this.memory.destination = port;
-            this.moveToX(port);
-            break;
-        case ERR_FULL:
-            this.memory.loading = false;
-            this.say('full: WTF?');
-            break;
-        default:
-            console.log(this + ' cant pickup ' + energy + ' : ' + result);
-            break;
-    }
-    return result;
 };
 
-Creep.prototype.withdrawX = function (from) {
 
-    if (this.memory.destination) {
-        let destination  = new RoomPosition(this.memory.destination.x, this.memory.destination.y, this.memory.destination.roomName);
-        if (this.pos.isNearTo(destination)) {
-            delete this.memory.destination;
-        } else {
-            return this.moveToX(destination);
+Creep.prototype.transferAll = function (target) {
+    for (let resource in this.carry) {
+        console.log(resource);
+        if (this.carry[resource] > 0) {
+            const result = this.transfer(target, resource);
+            if (result !== OK) {
+                console.log('result', result);
+                return result;
+            }
         }
     }
-
-    let result = this.withdraw(from, RESOURCE_ENERGY);
-    switch (result) {
-        case OK:
-            break;
-        case ERR_NOT_IN_RANGE:
-            let port = Game.getObjectById(this.memory.source).port;
-            this.memory.destination = port;
-            this.moveToX(port);
-            break;
-        case ERR_FULL:
-            this.memory.loading = false;
-            this.say('full: WTF?');
-            break;
-        default:
-            console.log(this + ' cant pickup ' + from + ' : ' + result);
-            break;
-    }
-    return result;
-};
-
-Creep.prototype.load = function () {
-    let source = Game.getObjectById(this.memory.source);
-    let port = source.port;
-    let energy = source.room.lookForAt(LOOK_ENERGY, port)[0];
-
-    if (energy) {
-        this.pickupX(energy);
-    } else {
-        let container = _.filter(
-            source.room.lookForAt(LOOK_STRUCTURES, port),
-            s => s.structureType === STRUCTURE_CONTAINER)[0];
-        if (container) {
-            this.withdrawX(container);
-        }
-    }
-};
-
-Creep.prototype.deliver = function () {
-
-    if (this.memory.destination) {
-        let destination  = new RoomPosition(this.memory.destination.x, this.memory.destination.y, this.memory.destination.roomName);
-        if (this.pos.isNearTo(destination)) {
-            delete this.memory.destination;
-        } else {
-            return this.moveToX(destination);
-        }
-    }
-
-    let target = Game.getObjectById(this.memory.target);
-    let result = this.transfer(target, RESOURCE_ENERGY);
-    switch (result) {
-        case OK: break;
-        case ERR_NOT_IN_RANGE:
-            let port = Game.getObjectById(this.memory.target).port;
-            this.memory.destination = port;
-            this.moveToX(port);
-            break;
-        case ERR_FULL:
-            this.drop(RESOURCE_ENERGY);
-            break;
-        default:
-            console.log(this + ' cant transfer to ' + target + ' : ' + result);
-            break;
-    }
-    return result;
+    return OK;
 };
