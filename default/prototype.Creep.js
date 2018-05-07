@@ -115,7 +115,10 @@ Creep.prototype.rollToRange = function () {
             return ERR_NO_PATH;
         }
 
-        const hostile = this.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: c => !whitelist.isFriend(c)});
+        const hostile = this.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {
+            filter: c => !whitelist.isFriend(c)
+                && (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
+        });
         if (hostile.length > 0) {
             console.log(this, 'flee from', hostile[0], 'in', this.room);
             this.moveToRange(hostile[0], 4, {flee: true});

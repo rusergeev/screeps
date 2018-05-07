@@ -10,7 +10,10 @@ module.exports = {
             creep.heal(patient);
         }
 
-        const target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: c => !whitelist.isFriend(c)});
+        const target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
+            filter: c => !whitelist.isFriend(c)
+                && (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
+        });
 
         if (target) {
             if (creep.attack(target) === ERR_NOT_IN_RANGE) {

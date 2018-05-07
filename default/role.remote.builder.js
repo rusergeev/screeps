@@ -2,12 +2,16 @@
 
 const whitelist = require('white.list');
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
 module.exports = {
 
     isSafe: function(s){
-        return s.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
-            && s.pos.findInRange(FIND_STRUCTURES, 3, {
-                filter: s => s.structureType === STRUCTURE_KEEPER_LAIR && s.ticksToSpawn < 10})
+        return s.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: c => c.getActiveBodyparts(RANGED_ATTACK) }).length === 0
+            && s.pos.findInRange(FIND_HOSTILE_CREEPS, 1, {filter: c => c.getActiveBodyparts(ATTACK) }).length === 0
+            && s.pos.findInRange(FIND_STRUCTURES, 3, {filter: s => s.structureType === STRUCTURE_KEEPER_LAIR && s.ticksToSpawn < 20})
     },
     /** @param {Creep} creep **/
     run: function(creep) {
@@ -67,12 +71,17 @@ module.exports = {
                             creep.moveToRange(structure, 3);
                         }
                     } else {
-                        let container = creep.room.storage || creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                            filter: c => c.structureType === STRUCTURE_CONTAINER
+                        let container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                            filter: c => [STRUCTURE_CONTAINER, STRUCTURE_STORAGE].indexOf( c.structureType) !== -1
+                                && c.isActive()
                                 && _.sum(c.store) < c.storeCapacity
                                 && _.filter(c.room.lookForAt(LOOK_CREEPS, c), c => c.memory && c.memory.role && c.memory.role === 'miner').length === 0
-                                && this.isSafe(c)
-                       });
+                                && this.isSafe(c)})
+                            || creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                                filter: c => c.structureType === STRUCTURE_TOWER
+                                    && c.isActive()
+                                    && _.sum(c.energy) < c.energyCapacity
+                                    && this.isSafe(c)});
 
                         if (container) {
                             if (creep.transfer(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
@@ -106,9 +115,15 @@ module.exports = {
                                         creep.moveToRange(structure, 3);
                                     }
                                 } else {
-                                    //creep.memory.role = 'remote_harvester';
-                                    creep.memory.building = false;
-                                    console.log(creep.room.name, 'needs more transport');
+                                    const sources = creep.room.find(FIND_SOURCES_ACTIVE, {filter: s => s.pos.free_adj_pos()});
+                                    if (sources) {
+                                        console.log(creep.room, 'building container')
+                                        sources.forEach( s => creep.room.createConstructionSite(s.pos.free_adj_pos()[getRandomInt(s.pos.free_adj_pos_count())], STRUCTURE_CONTAINER));
+                                    } else {
+                                        //creep.memory.role = 'remote_harvester';
+                                        creep.memory.building = false;
+                                        console.log(creep.room.name, 'needs more transport');
+                                    }
                                 }
                             }
                         }

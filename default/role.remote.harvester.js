@@ -7,7 +7,10 @@ module.exports = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
-        const hostile = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: c => !whitelist.isFriend(c)});
+        const hostile = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {
+            filter: c => !whitelist.isFriend(c)
+            && (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
+        });
         if (hostile.length > 0) {
             console.log(creep, 'flee from', hostile[0], 'in', creep.room);
             creep.moveToRange(hostile[0], 4, {flee: true});
@@ -48,7 +51,9 @@ module.exports = {
 
             } else {
                 const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
-                    filter: t => t.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
+                    filter: t => t.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {
+                        filter: c =>  (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
+                    }).length === 0
                 });
                 if (target) {
                     if (creep.pickup(target) === ERR_NOT_IN_RANGE) {
@@ -58,7 +63,9 @@ module.exports = {
                     const container = creep.pos.findClosestByRange(FIND_TOMBSTONES, {filter: t => _.sum(t.store) > 0})
                     || creep.pos.findClosestByRange(FIND_STRUCTURES, {
                         filter: s => (s.structureType === STRUCTURE_CONTAINER) && _.sum(s.store) > 0
-                            && s.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
+                            && s.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {
+                                filter: c =>  (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
+                            }).length === 0
                     });
                     if (container) {
                         if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {

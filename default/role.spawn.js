@@ -17,7 +17,7 @@ module.exports = {
             const miners = _.filter(Game.creeps, creep =>
                 creep.memory.role === 'miner'
                 && creep.room === spawn.room).length;
-            if (harvesters < sources.length) {
+            if (harvesters < sources.length+1) {
                 let role = 'atob';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
@@ -30,7 +30,7 @@ module.exports = {
                     abilities.push((miners > 0) ? CARRY : WORK);
                     cost += BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK];
                 }
-                while (cost + BODYPART_COST[MOVE] + 2 * BODYPART_COST[CARRY] <= spawn.room.energyAvailable && abilities.length < 24) {
+                while (cost + BODYPART_COST[MOVE] + 2 * BODYPART_COST[CARRY] <= spawn.room.energyAvailable && abilities.length < 30) {
                     abilities.push(MOVE);
                     abilities.push(CARRY);
                     abilities.push((miners > 0) ? CARRY : WORK);
@@ -301,12 +301,13 @@ module.exports = {
                         const creeps = _.filter(Game.creeps, creep => creep.memory.role === role && creep.memory.flag === flag.name);
                         if (creeps.length < 1) {
                             const newName = role + Game.time;
-                            let abilities = [MOVE, CARRY, CARRY, CARRY, CARRY];
+                            let abilities = [MOVE, CARRY, WORK, WORK, WORK, WORK];
                             let cost = abilities.reduce(function (cost, part) {
                                 return cost + BODYPART_COST[part];
                             }, 0);
-                            while (cost + BODYPART_COST[MOVE] + 4 * BODYPART_COST[WORK] <= spawn.room.energyAvailable) {
+                            while (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY]  + 4 * BODYPART_COST[WORK] <= spawn.room.energyAvailable) {
                                 abilities.push(MOVE);
+                                abilities.push(CARRY);
                                 abilities.push(WORK);
                                 abilities.push(WORK);
                                 abilities.push(WORK);

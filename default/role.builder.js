@@ -45,7 +45,9 @@ module.exports = {
         }
         else {
             const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
-                filter: t => t.pos.findInRange(FIND_HOSTILE_CREEPS, 3).length === 0
+                filter: t => t.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {
+                    filter: c => (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
+                }).length === 0
             });
             if(target) {
                 if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
