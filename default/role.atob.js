@@ -11,6 +11,15 @@ module.exports = {
             creep.say('full');
         }
 
+/*
+        let spawn = creep.pos.findClosestByRange(STRUCTURE_SPAWN, {filter: s.energy < s.energyCapacity});
+        if (spawn.recycleCreep(creep) === ERR_NOT_IN_RANGE){
+            creep.moveTo(spawn);
+        }
+
+
+        return;*/
+
         const consumers  = [STRUCTURE_TOWER, STRUCTURE_EXTENSION, STRUCTURE_SPAWN, STRUCTURE_POWER_SPAWN, STRUCTURE_NUKER, STRUCTURE_LINK];
         const storages = [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_TERMINAL];
 
@@ -51,7 +60,7 @@ module.exports = {
                             && t.store[RESOURCE_ENERGY] > 0
                     } )
                 );
-                containers.sort( (a,b) => b.store[RESOURCE_ENERGY]* (a.storeCapacity - _.sum(a.store))*a.pos.getRangeTo(creep) - a.store[RESOURCE_ENERGY] * (b.storeCapacity - _.sum(b.store))*b.pos.getRangeTo(creep)  );
+                containers.sort( (a,b) => b.store[RESOURCE_ENERGY]* (a.storeCapacity - _.sum(a.store))*(a.pos.getRangeTo(creep)+1) - a.store[RESOURCE_ENERGY] * (b.storeCapacity - _.sum(b.store))*(b.pos.getRangeTo(creep)+1)  );
                 container = containers[0];
             }
 
@@ -61,11 +70,17 @@ module.exports = {
                         && t.pos.findInRange( FIND_HOSTILE_CREEPS, 3, {filter: c => c.getActiveBodyparts(RANGED_ATTACK)}).length === 0
                 } );
 
-                resources.sort( (a,b) => b.amount*a.pos.getRangeTo(creep) - a.amount*b.pos.getRangeTo(creep));
+                resources.sort( (a,b) => b.amount*(a.pos.getRangeTo(creep)+1) - a.amount*(b.pos.getRangeTo(creep)+1));
                 resource = resources[0];
+            }
+            if (creep.name === 'atob5916709'){
+                console.log(resource, container);
             }
 
             if (resource) {
+                if (creep.name === 'atob5916709') {
+                    console.log('pickup');
+                }
                 const result = creep.pickup(resource);
                 switch (result) {
                     case OK:
@@ -82,6 +97,9 @@ module.exports = {
                         break;
                 }
             } else if (container) {
+                if (creep.name === 'atob5916709') {
+                    console.log('withdraw');
+                }
                 const result = creep.withdraw(container, RESOURCE_ENERGY);
                 switch (result) {
                     case OK:
@@ -144,7 +162,7 @@ module.exports = {
                     && t.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: c => c.getActiveBodyparts(RANGED_ATTACK)}).length === 0
                     && t.energy < t.energyCapacity
                 });
-                targets.sort((a,b) => a.energy*b.pos.getRangeTo(creep)  - b.energy*a.pos.getRangeTo(creep) );
+                targets.sort((a,b) => a.energy*(b.pos.getRangeTo(creep)+1)  - b.energy*(a.pos.getRangeTo(creep)+1) );
                 target = targets[0];
                 //console.log('target', target);
             }
@@ -172,7 +190,7 @@ module.exports = {
                         && t.pos.findInRange( FIND_HOSTILE_CREEPS, 1, {filter: c => c.getActiveBodyparts(ATTACK)}).length === 0
                         && t.pos.findInRange( FIND_HOSTILE_CREEPS, 3, {filter: c => c.getActiveBodyparts(RANGED_ATTACK)}).length === 0
                 } );
-                containers.sort( (a,b) => a.store[RESOURCE_ENERGY]*(b.storeCapacity - _.sum(b.store))*b.pos.getRangeTo(creep) - b.store[RESOURCE_ENERGY]*(a.storeCapacity - _.sum(a.store))*a.pos.getRangeTo(creep) );
+                containers.sort( (a,b) => a.store[RESOURCE_ENERGY]*(b.storeCapacity - _.sum(b.store))*(b.pos.getRangeTo(creep)+1) - b.store[RESOURCE_ENERGY]*(a.storeCapacity - _.sum(a.store))*(a.pos.getRangeTo(creep)+1) );
                 target = containers[0];
             }
 
@@ -182,7 +200,7 @@ module.exports = {
                         && t.pos.findInRange( FIND_HOSTILE_CREEPS, 1, {filter: c => c.getActiveBodyparts(ATTACK)}).length === 0
                         && t.pos.findInRange( FIND_HOSTILE_CREEPS, 3, {filter: c => c.getActiveBodyparts(RANGED_ATTACK)}).length === 0
                 } );
-                creeps.sort( (a,b) => a.carry[RESOURCE_ENERGY]*b.pos.getRangeTo(creep)  - b.carry[RESOURCE_ENERGY]*a.pos.getRangeTo(creep) );
+                creeps.sort( (a,b) => a.carry[RESOURCE_ENERGY]*(b.pos.getRangeTo(creep)+1)  - b.carry[RESOURCE_ENERGY]*(a.pos.getRangeTo(creep)+1) );
                 target = creeps[0];
             }
 

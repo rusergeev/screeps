@@ -17,7 +17,7 @@ module.exports = {
             const miners = _.filter(Game.creeps, creep =>
                 creep.memory.role === 'miner'
                 && creep.room === spawn.room).length;
-            if (harvesters < sources.length+1) {
+            if (harvesters < sources.length) {
                 let role = 'atob';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
