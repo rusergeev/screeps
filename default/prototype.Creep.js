@@ -43,7 +43,6 @@ Creep.prototype.moveToRange = function (destination, range, opt) {
         this.say('pathing =/');
         if (opt && opt.flee) {
             const path = PathFinder.search(this.pos, {pos: pos, range: range}, {flee: true}).path;
-            //console.log(this, 'PathFinder.search(', this.pos, ',', JSON.stringify(pos), ')=', JSON.stringify(path));
             pos = path[0];
             this.moveTo(pos);
         }

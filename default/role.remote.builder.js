@@ -65,9 +65,7 @@ module.exports = {
                             && this.isSafe(s)
                     } );
                     if (structure) {
-                        // try to repair it, if it is out of range
                         if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
-                            // move towards it
                             creep.moveToRange(structure, 3);
                         }
                     } else {
@@ -111,7 +109,6 @@ module.exports = {
                                 });
                                 if (structure) {
                                     if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
-                                        // move towards it
                                         creep.moveToRange(structure, 3);
                                     }
                                 } else {
@@ -120,7 +117,6 @@ module.exports = {
                                         console.log(creep.room, 'building container')
                                         sources.forEach( s => creep.room.createConstructionSite(s.pos.free_adj_pos()[getRandomInt(s.pos.free_adj_pos_count())], STRUCTURE_CONTAINER));
                                     } else {
-                                        //creep.memory.role = 'remote_harvester';
                                         creep.memory.building = false;
                                         console.log(creep.room.name, 'needs more transport');
                                     }
@@ -183,7 +179,6 @@ module.exports = {
                                 if (creep.dismantle(structure) === ERR_NOT_IN_RANGE) {
                                     creep.moveToRange(structure, 1);
                                 }
-                                //console.log(creep, ' dismantles ', structure);
                             } else {
                                 creep.memory.building = true;
                             }
