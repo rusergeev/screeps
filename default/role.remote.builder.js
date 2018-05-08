@@ -114,7 +114,6 @@ module.exports = {
                                 } else {
                                     const sources = creep.room.find(FIND_SOURCES_ACTIVE, {filter: s => s.pos.free_adj_pos()});
                                     if (sources) {
-                                        console.log(creep.room, 'building container')
                                         sources.forEach( s => creep.room.createConstructionSite(s.pos.free_adj_pos()[getRandomInt(s.pos.free_adj_pos_count())], STRUCTURE_CONTAINER));
                                     } else {
                                         creep.memory.building = false;

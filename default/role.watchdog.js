@@ -5,6 +5,12 @@ module.exports = {
     /** @param {Creep} creep **/
     run: function (creep) {
         let flag = Game.flags[creep.memory.flag];
+
+        if(flag && flag.room !== creep.room) {
+            creep.moveToRange(flag, 1);
+            return;
+        }
+
         let patient = creep.pos.findInRange(FIND_MY_CREEPS, 1, { filter: c => c.hits < c.hitsMax })[0];
         if (patient) {
             creep.heal(patient);

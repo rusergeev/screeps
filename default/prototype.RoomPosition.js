@@ -17,7 +17,6 @@ RoomPosition.prototype.free_adj_pos = function () {
     [this.x - 1, this.x, this.x + 1].forEach(x => {
         [this.y - 1, this.y, this.y + 1].forEach(y => {
             if (Game.map.getTerrainAt(x, y, this.roomName) !== 'wall') {
-                console.log(x,y, this.roomName);
                 free_pos.push(new RoomPosition(x, y, this.roomName));
             }
         });
