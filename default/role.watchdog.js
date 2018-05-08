@@ -18,7 +18,7 @@ module.exports = {
 
         const target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
             filter: c => !whitelist.isFriend(c)
-                && (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
+
         });
 
         if (target) {

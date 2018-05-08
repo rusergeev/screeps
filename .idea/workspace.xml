@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e235074b-4c70-4395-8a86-be685e966af0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/.sync" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/prototype.RoomPosition.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/prototype.RoomPosition.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.claimer.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.claimer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.remote.builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.remote.builder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.spawn.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.spawn.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default/role.watchdog.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.watchdog.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,10 +32,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="role.remote.harvester.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="role.remote.harvester.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/default/role.remote.harvester.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
+            <state relative-caret-position="112">
               <caret line="52" selection-start-line="52" selection-end-line="56" selection-end-column="19" />
             </state>
           </provider>
@@ -93,13 +89,13 @@
       <file leaf-file-name="role.watchdog.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.watchdog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+            <state relative-caret-position="215">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="role.claimer.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="role.claimer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.claimer.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
@@ -231,8 +227,8 @@
         <option value="$PROJECT_DIR$/default/role.spawn.js" />
         <option value="$PROJECT_DIR$/default/role.remote.builder.js" />
         <option value="$PROJECT_DIR$/default/prototype.RoomPosition.js" />
-        <option value="$PROJECT_DIR$/default/role.watchdog.js" />
         <option value="$PROJECT_DIR$/default/role.claimer.js" />
+        <option value="$PROJECT_DIR$/default/role.watchdog.js" />
       </list>
     </option>
   </component>
@@ -479,7 +475,7 @@
       <workItem from="1525284395494" duration="8471000" />
       <workItem from="1525369285330" duration="29599000" />
       <workItem from="1525713911242" duration="7981000" />
-      <workItem from="1525798242772" duration="2285000" />
+      <workItem from="1525798242772" duration="3894000" />
     </task>
     <task id="LOCAL-00001" summary="Fix the bug with enemy creep blocks movement">
       <created>1519757707462</created>
@@ -499,11 +495,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="757554000" />
+    <option name="totallyTimeSpent" value="759163000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="240" y="71" width="1440" height="839" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="7" />
@@ -822,13 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.remote.harvester.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="52" selection-start-line="52" selection-end-line="56" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/default/prototype.Creep.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1118">
@@ -857,6 +845,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.claimer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.watchdog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/default/role.remote.builder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -864,17 +866,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.watchdog.js">
+    <entry file="file://$PROJECT_DIR$/default/role.remote.harvester.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.claimer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        <state relative-caret-position="112">
+          <caret line="52" selection-start-line="52" selection-end-line="56" selection-end-column="19" />
         </state>
       </provider>
     </entry>
