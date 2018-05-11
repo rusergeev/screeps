@@ -24,13 +24,13 @@ module.exports = {
         const storages = [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_TERMINAL];
 
 	    if(creep.memory.loading) {
-	        let container;
+	        let container = Game.getObjectById(creep.memory.container);
             let resource = creep.pos.findClosestByRange( FIND_DROPPED_RESOURCES, {
                 filter: t => t.pos.findInRange( FIND_HOSTILE_CREEPS, 1, {filter: c => c.getActiveBodyparts(ATTACK)}).length === 0
                     && t.pos.findInRange( FIND_HOSTILE_CREEPS, 3, {filter: c => c.getActiveBodyparts(RANGED_ATTACK)}).length === 0
                     && t.amount >= creep.carryCapacity - _.sum(creep.carry)
             } );
-            if ( !resource ) {
+            if ( !resource && !container) {
                 container =
                     creep.pos.findClosestByRange(FIND_TOMBSTONES, {
                         filter: t => t.pos.findInRange(FIND_HOSTILE_CREEPS, 1, {filter: c => c.getActiveBodyparts(ATTACK)}).length === 0
@@ -41,7 +41,7 @@ module.exports = {
                         filter: t => storages.indexOf(t.structureType) !== -1
                             && t.pos.findInRange(FIND_HOSTILE_CREEPS, 1, {filter: c => c.getActiveBodyparts(ATTACK)}).length === 0
                             && t.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: c => c.getActiveBodyparts(RANGED_ATTACK)}).length === 0
-                            && t.pos.findInRange( FIND_MY_STRUCTURES, 4, {filter: s => s.structureType === STRUCTURE_CONTROLLER}).length === 0
+                            && (t.pos.findInRange( FIND_MY_STRUCTURES, 4, {filter: s => s.structureType === STRUCTURE_CONTROLLER}).length === 0 || t.store[RESOURCE_ENERGY] > 2000)
                             && t.store[RESOURCE_ENERGY] >= creep.carryCapacity - _.sum(creep.carry)
                     });
             }
@@ -127,7 +127,7 @@ module.exports = {
             }
         }
         else {
-            let target;
+            let target = Game.getObjectById(creep.memory.target);
 
             if (!target) {
                 target = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
