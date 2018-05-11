@@ -4,8 +4,7 @@
     <list default="true" id="e235074b-4c70-4395-8a86-be685e966af0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/.sync" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.atob.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.atob.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default/role.spawn.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.spawn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/default/role.remote.harvester.js" beforeDir="false" afterPath="$PROJECT_DIR$/default/role.remote.harvester.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="role.remote.harvester.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="role.remote.harvester.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/default/role.remote.harvester.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="52" selection-start-line="52" selection-end-line="56" selection-end-column="19" />
+            <state relative-caret-position="307">
+              <caret line="64" column="95" selection-start-line="64" selection-start-column="95" selection-end-line="64" selection-end-column="95" />
             </state>
           </provider>
         </entry>
@@ -34,7 +33,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="role.spawn.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="role.spawn.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/default/role.spawn.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="239">
@@ -215,7 +214,6 @@
         <option value="$PROJECT_DIR$/default/role.creep.js" />
         <option value="$PROJECT_DIR$/default/role.miner.js" />
         <option value="$PROJECT_DIR$/default/prototype.tower.js" />
-        <option value="$PROJECT_DIR$/default/role.remote.harvester.js" />
         <option value="$PROJECT_DIR$/default/main.js" />
         <option value="$PROJECT_DIR$/default/role.transport.js" />
         <option value="$PROJECT_DIR$/default/role.builder.js" />
@@ -231,6 +229,7 @@
         <option value="$PROJECT_DIR$/default/role.watchdog.js" />
         <option value="$PROJECT_DIR$/default/role.atob.js" />
         <option value="$PROJECT_DIR$/default/role.spawn.js" />
+        <option value="$PROJECT_DIR$/default/role.remote.harvester.js" />
       </list>
     </option>
   </component>
@@ -256,7 +255,7 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="240" />
-    <option name="y" value="101" />
+    <option name="y" value="130" />
     <option name="width" value="1440" />
     <option name="height" value="839" />
   </component>
@@ -478,7 +477,7 @@
       <workItem from="1525369285330" duration="29599000" />
       <workItem from="1525713911242" duration="7981000" />
       <workItem from="1525798242772" duration="7104000" />
-      <workItem from="1525952795310" duration="1517000" />
+      <workItem from="1525952795310" duration="2057000" />
     </task>
     <task id="LOCAL-00001" summary="Fix the bug with enemy creep blocks movement">
       <created>1519757707462</created>
@@ -498,10 +497,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="763890000" />
+    <option name="totallyTimeSpent" value="764430000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="240" y="101" width="1440" height="839" extended-state="0" />
+    <frame x="240" y="130" width="1440" height="839" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -849,13 +848,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/default/role.remote.harvester.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="52" selection-start-line="52" selection-end-line="56" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/default/role.upgrader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -874,6 +866,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="23" column="45" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/default/role.remote.harvester.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="64" column="95" selection-start-line="64" selection-start-column="95" selection-end-line="64" selection-end-column="95" />
         </state>
       </provider>
     </entry>

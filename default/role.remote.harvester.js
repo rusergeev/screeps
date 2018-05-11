@@ -61,12 +61,18 @@ module.exports = {
                     }
                 } else {
                     const container = creep.pos.findClosestByRange(FIND_TOMBSTONES, {filter: t => _.sum(t.store) > 0})
-                    || creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                        filter: s => (s.structureType === STRUCTURE_CONTAINER) && _.sum(s.store) > 0
-                            && s.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {
-                                filter: c =>  (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
-                            }).length === 0
-                    });
+                        || creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                            filter: s => (!s.isActive()) && (_.sum(s.store) > 0 || s.energy > 0)
+                                && s.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {
+                                    filter: c =>  (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
+                                }).length === 0
+                        })
+                        || creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                            filter: s => (s.structureType === STRUCTURE_CONTAINER) && _.sum(s.store) > 0
+                                && s.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {
+                                    filter: c =>  (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
+                                }).length === 0
+                        });
                     if (container) {
                         if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                             creep.moveToRange(container, 1);
