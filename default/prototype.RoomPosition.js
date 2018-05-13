@@ -33,3 +33,15 @@ RoomPosition.prototype.adj_pos_with_max_access = function () {
     let i = candidates_space_count.indexOf(max);
     return candidates[i];
 };
+
+RoomPosition.prototype.isInDoors = function () {
+    return this.x === 0 || this.x === 49 || this.y === 0 || this.y === 49;
+};
+
+RoomPosition.prototype.isSafe = function(){
+    return this.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: c => c.getActiveBodyparts(RANGED_ATTACK) }).length === 0
+        && this.findInRange(FIND_HOSTILE_CREEPS, 1, {filter: c => c.getActiveBodyparts(ATTACK) }).length === 0
+        && this.findInRange(FIND_STRUCTURES, 3, {
+            filter: s => s.structureType === STRUCTURE_KEEPER_LAIR
+                && s.ticksToSpawn < 20})
+};

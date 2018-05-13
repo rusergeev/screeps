@@ -103,7 +103,7 @@ module.exports = {
                 spawn.spawnCreep(abilities, newName, {memory: {role: role}});
                 return;
             }
-            let upgraders = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100) 
+            let upgraders = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 50)
                 && creep.memory.role === 'upgrader' && creep.room === spawn.room).length;
             if (upgraders < 1 && spawn.room.energyAvailable >= _.min([spawn.room.energyCapacityAvailable, 23 * BODYPART_COST[WORK] + 3 * BODYPART_COST[CARRY] + 12 * BODYPART_COST[MOVE]])) {
                 let role = 'upgrader';
