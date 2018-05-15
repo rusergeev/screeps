@@ -21,24 +21,27 @@ module.exports = {
             const miners = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 50)
                 && creep.memory.role === 'miner'
                 && creep.room === spawn.room).length;
-            if (atob_carry < sources.length*10) {
+            if ( atob_carry === 0
+                || atob_carry < sources.length*15
+                && spawn.room.energyAvailable >= _.min([spawn.room.energyCapacityAvailable, 16 * BODYPART_COST[CARRY] + 8 * BODYPART_COST[MOVE]]) ) {
                 let role = 'atob';
                 let newName = role + Game.time;
                 let abilities = [MOVE, CARRY, WORK];
                 let cost = abilities.reduce(function (cost, part) {
                     return cost + BODYPART_COST[part];
                 }, 0);
-                if (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK] <= spawn.room.energyAvailable) {
+                const CARRY_OR_WORK = (miners > 0) ? CARRY : WORK;
+                if (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[CARRY_OR_WORK] <= spawn.room.energyAvailable) {
                     abilities.push(MOVE);
                     abilities.push(CARRY);
-                    abilities.push((miners > 0) ? CARRY : WORK);
-                    cost += BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[WORK];
+                    abilities.push(CARRY_OR_WORK);
+                    cost += BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[CARRY_OR_WORK];
                 }
-                while (cost + BODYPART_COST[MOVE] + 2 * BODYPART_COST[CARRY] <= spawn.room.energyAvailable && abilities.length < 30) {
+                while (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[CARRY_OR_WORK] <= spawn.room.energyAvailable && abilities.length < 30) {
                     abilities.push(MOVE);
                     abilities.push(CARRY);
-                    abilities.push((miners > 0) ? CARRY : WORK);
-                    cost += BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[CARRY];
+                    abilities.push(CARRY_OR_WORK);
+                    cost += BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + BODYPART_COST[CARRY_OR_WORK];
                 }
                 console.log(spawn + ': spawning ' + newName);
                 spawn.spawnCreep(abilities, newName, {memory: {role: role, spawn: spawn.id}});
@@ -202,30 +205,6 @@ module.exports = {
 
             }
 
-            if (false) {
-                const role = 'atob';
-                let creeps = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100) 
-                && creep.memory.role === role).length;
-                if (creeps < 1 && spawn.room.energyAvailable >= _.min([spawn.room.energyCapacityAvailable, 16 * BODYPART_COST[CARRY] + 8 * BODYPART_COST[MOVE]])) {
-                    let source = Game.rooms.E39N46.storage;
-                    let target = Game.rooms.E39N47.storage;
-
-                    let newName = role + Game.time;
-                    let abilities = [MOVE, CARRY, CARRY];
-                    let cost = abilities.reduce(function (cost, part) {
-                        return cost + BODYPART_COST[part];
-                    }, 0);
-                    while (cost + BODYPART_COST[MOVE] + 2 * BODYPART_COST[CARRY] <= spawn.room.energyAvailable && abilities.length < 15) {
-                        abilities.push(MOVE);
-                        abilities.push(CARRY);
-                        abilities.push(CARRY);
-                        cost += BODYPART_COST[MOVE] + 2 * BODYPART_COST[CARRY];
-                    }
-                    console.log(spawn + ': spawning ' + newName);
-                    spawn.spawnCreep(abilities, newName, {memory: {role: role, source: source.id, target: target.id}});
-                    return;
-                }
-            }
             if (true) {
                 const related_flags = _.filter(Game.flags, flag => flag.name.startsWith(spawn.room.name));
                 for (let i in related_flags) {
@@ -237,7 +216,7 @@ module.exports = {
                         let abilities = [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, HEAL, HEAL, HEAL];
                         //const abilities = [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,HEAL,HEAL,HEAL];
                         if (flag.secondaryColor === COLOR_WHITE){
-                            abilities = [MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK]
+                            abilities = [MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,HEAL];
                         }
                         const cost = abilities.reduce(function (cost, part) {
                             return cost + BODYPART_COST[part];
@@ -251,32 +230,12 @@ module.exports = {
                         }
                     }
                     if (flag.color === COLOR_GREEN) {
-                        const role = 'remote_builder';
-                        const creeps = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100 * (Game.map.getRoomLinearDistance(flag.pos.roomName, spawn.room.name)+1))
-                && creep.memory.role === role && creep.memory.flag === flag.name);
-                        const abilities = [WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY];
-                        let cost = abilities.reduce(function (cost, part) {
-                            return cost + BODYPART_COST[part];
-                        }, 0);
-                        if (creeps.length < 1 && spawn.room.energyAvailable >= cost) {
-                            let newName = role + Game.time;
-                            console.log(spawn, 'spawning', newName, 'with', flag.name);
-                            const target = (spawn.room.storage || spawn).id;
-                            spawn.spawnCreep(abilities, newName, {
-                                memory: {
-                                    role: role,
-                                    flag: flag.name,
-                                    target: target
-                                }
-                            });
-                            return;
-                        }
                         if (flag.secondaryColor === COLOR_GREEN) {
-                            const role = 'claimer';
-                            const creeps = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100 * (Game.map.getRoomLinearDistance(flag.pos.roomName, spawn.room.name)+1))
-                && creep.memory.role === role && creep.memory.flag === flag.name);
-                            const abilities = [CLAIM, MOVE, CLAIM, MOVE];
-                            cost = abilities.reduce(function (cost, part) {
+                            const role = 'remote_builder';
+                            const creeps = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100 * (Game.map.getRoomLinearDistance(flag.pos.roomName, spawn.room.name) + 1))
+                                && creep.memory.role === role && creep.memory.flag === flag.name);
+                            const abilities = [WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY];
+                            let cost = abilities.reduce(function (cost, part) {
                                 return cost + BODYPART_COST[part];
                             }, 0);
                             if (creeps.length < 1 && spawn.room.energyAvailable >= cost) {
@@ -293,12 +252,70 @@ module.exports = {
                                 return;
                             }
                         }
+                        if (flag.secondaryColor !== COLOR_WHITE) {
+                            const role = 'claimer';
+                            const creeps = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100 * (Game.map.getRoomLinearDistance(flag.pos.roomName, spawn.room.name)+1))
+                                && creep.memory.role === role && creep.memory.flag === flag.name);
+                            const abilities = [CLAIM, MOVE, CLAIM, MOVE];
+                            const cost = abilities.reduce(function (cost, part) {
+                                return cost + BODYPART_COST[part];
+                            }, 0);
+                            if (creeps.length < 1 && spawn.room.energyAvailable >= cost) {
+                                let newName = role + Game.time;
+                                console.log(spawn, 'spawning', newName, 'with', flag.name);
+                                const target = (spawn.room.storage || spawn).id;
+                                spawn.spawnCreep(abilities, newName, {
+                                    memory: {
+                                        role: role,
+                                        flag: flag.name,
+                                        target: target
+                                    }
+                                });
+                                return;
+                            }
+
+                            if (flag.room){
+                                const sources = flag.room.find(FIND_SOURCES).map(source => source.id);
+                                for (let i in sources) {
+                                    let source = sources[i];
+                                    let miner = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100 * (Game.map.getRoomLinearDistance(flag.pos.roomName, spawn.room.name)+1))
+                                        && creep.memory.role === 'miner' && creep.memory.source === source).length;
+                                    if (miner < 1 && spawn.room.energyAvailable >= _.min([spawn.room.energyCapacityAvailable, 5 * BODYPART_COST[WORK] + 3 * BODYPART_COST[MOVE]])) {
+                                        let role = 'miner';
+                                        let newName = role + Game.time;
+                                        console.log(spawn + ': spawning ' + newName);
+                                        let abilities = [MOVE, WORK];
+                                        let cost = abilities.reduce(function (cost, part) {
+                                            return cost + BODYPART_COST[part];
+                                        }, 0);
+                                        while (cost + BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK] <= spawn.room.energyAvailable &&
+                                        abilities.length < 6) {
+                                            abilities.push(MOVE);
+                                            abilities.push(WORK);
+                                            abilities.push(WORK);
+                                            cost += BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK];
+                                        }
+                                        if (cost + BODYPART_COST[MOVE] + BODYPART_COST[WORK] <= spawn.room.energyAvailable &&
+                                            abilities.length < 8) {
+                                            abilities.push(MOVE);
+                                            abilities.push(WORK);
+                                        }
+                                        spawn.spawnCreep(abilities, newName, {memory: {role: role, source: source}});
+                                        return;
+                                    }
+                                }
+                            }
+                        }
                     }
                     if (flag.color === COLOR_YELLOW) {
                         const role = 'remote_harvester';
                         const creeps = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100 * (Game.map.getRoomLinearDistance(flag.pos.roomName, spawn.room.name)+1))
-                && creep.memory.role === role && creep.memory.flag === flag.name);
-                        const abilities = [WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY];
+                            && creep.memory.role === role && creep.memory.flag === flag.name);
+                        //const abilities = [MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY];
+                        let abilities = [WORK,WORK,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY];
+                        /*if (spawn.room.name === 'E37N43'){
+                            abilities = [MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY];
+                        }*/
                         const cost = abilities.reduce(function (cost, part) {
                             return cost + BODYPART_COST[part];
                         }, 0);

@@ -70,7 +70,7 @@ module.exports = {
                 }
             } else {
                 const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
-                    filter: t => t.pos.isSafe()
+                    filter: t => t.pos.isSafe() && t.amount > 50
                 });
                 if (target) {
                     if (creep.pickup(target) === ERR_NOT_IN_RANGE) {
@@ -108,8 +108,8 @@ module.exports = {
         } else {
             const target = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES, {filter: s => s.pos.isSafe()});
             const structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: s => s.hits < s.hitsMax / 2
-                    && s.structureType === STRUCTURE_ROAD
+                filter: s => s.hits < s.hitsMax / 4
+                    && [STRUCTURE_ROAD, STRUCTURE_CONTAINER].indexOf( s.structureType) !== -1
                     && s.pos.isSafe()
             } );
             if(target && !creep.pos.isInDoors()) {

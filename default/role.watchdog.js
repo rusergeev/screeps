@@ -61,7 +61,7 @@ module.exports = {
 
 
 
-        const t3 = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {filter: s => s.structureType !== STRUCTURE_CONTROLLER}) || creep.pos.findClosestByRange(FIND_HOSTILE_CONSTRUCTION_SITES);
+        const t3 = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {filter: s => s.structureType !== STRUCTURE_CONTROLLER});
         if (t3) {
             console.log('destroy structures', t3);
             let result = creep.attack(t3);
@@ -72,7 +72,16 @@ module.exports = {
             return;
         }
 
-
+        const t4 = creep.pos.findClosestByRange(FIND_HOSTILE_CONSTRUCTION_SITES);
+        if (t4) {
+            console.log('destroy construction site', t4);
+            let result = creep.attack(t4);
+            if (result == ERR_NOT_IN_RANGE) {
+                creep.moveToRange(t4, 1);
+            }
+            console.log(creep, result);
+            return;
+        }
 
         const range = 1;
         if(flag && !creep.pos.isNearTo(flag)){

@@ -25,10 +25,13 @@ module.exports = {
 
 	    if(creep.memory.loading) {
 	        let container = Game.getObjectById(creep.memory.container);
-            let resource = creep.pos.findClosestByRange( FIND_DROPPED_RESOURCES, {
-                filter: t => t.pos.isSafe()
-                    && t.amount >= creep.carryCapacity - _.sum(creep.carry)
-            } );
+            let resource = Game.getObjectById(creep.memory.resource);
+            if ( !resource && !container) {
+                resource = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
+                    filter: t => t.pos.isSafe()
+                        && t.amount >= creep.carryCapacity - _.sum(creep.carry)
+                });
+            }
             if ( !resource && !container) {
                 container =
                     creep.pos.findClosestByRange(FIND_TOMBSTONES, {
