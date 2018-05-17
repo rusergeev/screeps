@@ -6,6 +6,9 @@ module.exports = {
             creep.moveToRange(flag, 1);
         }else {
             let structure = creep.room.controller;
+            if (!structure) {
+                return;
+            }
 
             let result;
             if (structure.owner && structure.owner.username !== 'Sergeev') {

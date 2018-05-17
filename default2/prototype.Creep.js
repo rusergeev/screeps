@@ -43,7 +43,6 @@ Creep.prototype.moveToRange = function (destination, range, opt) {
         this.say('pathing =/');
         if (opt && opt.flee) {
             const path = PathFinder.search(this.pos, {pos: pos, range: range}, {flee: true}).path;
-            //console.log(this, 'PathFinder.search(', this.pos, ',', JSON.stringify(pos), ')=', JSON.stringify(path));
             pos = path[0];
             this.moveTo(pos);
         }
@@ -115,8 +114,11 @@ Creep.prototype.rollToRange = function () {
             return ERR_NO_PATH;
         }
 
-        const hostile = this.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: c => !whitelist.isFriend(c)});
-        if (hostile.length > 0) {
+        const hostile = this.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {
+            filter: c => !whitelist.isFriend(c)
+                && (c.getActiveBodyparts(RANGED_ATTACK) || c.getActiveBodyparts(ATTACK))
+        });
+        if (!this.pos.isSafe()) {
             console.log(this, 'flee from', hostile[0], 'in', this.room);
             this.moveToRange(hostile[0], 4, {flee: true});
             return;

@@ -27,7 +27,8 @@ module.exports = {
                         filter: s =>
                             s.structureType === STRUCTURE_CONTAINER ||
                             s.structureType === STRUCTURE_STORAGE ||
-                            s.structureType === STRUCTURE_TERMINAL
+                            s.structureType === STRUCTURE_TERMINAL ||
+                            s.structureType === STRUCTURE_LINK
                         }
                     )[0];
                     if (container) {
@@ -38,7 +39,8 @@ module.exports = {
                     filter: s => (  (
                             s.structureType === STRUCTURE_CONTAINER ||
                             s.structureType === STRUCTURE_STORAGE ||
-                            s.structureType === STRUCTURE_TERMINAL
+                            s.structureType === STRUCTURE_TERMINAL ||
+                            s.structureType === STRUCTURE_LINK
                         ) && s.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy) / 2
                     )
                 });
