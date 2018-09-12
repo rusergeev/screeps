@@ -112,8 +112,6 @@ module.exports = {
                                     filter: s => s.hits < s.hitsMax / 1.1
                                         && s.structureType !== STRUCTURE_WALL
                                         && s.structureType !== STRUCTURE_RAMPART
-                                        || (s.structureType === STRUCTURE_WALL || s.structureType === STRUCTURE_RAMPART)
-                                        && s.hits < 1750000
                                         && s.pos.isSafe()
                                 });
                                 if (structure) {

@@ -19,9 +19,9 @@ StructureTower.prototype.defend =
                 });
                 if (!structure && this.room.controller.level > 4) {
                     structure =
-                       this.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: s => (s.structureType === STRUCTURE_RAMPART || s.structureType === STRUCTURE_WALL) && s.hits < 17510})
-                    || this.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: s => (s.structureType === STRUCTURE_RAMPART || s.structureType === STRUCTURE_WALL) && s.hits < 175100})
-                    || this.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: s => (s.structureType === STRUCTURE_RAMPART || s.structureType === STRUCTURE_WALL) && s.hits < 1751000});
+                       this.pos.findClosestByRange(FIND_STRUCTURES, {filter: s => (s.structureType === STRUCTURE_RAMPART || s.structureType === STRUCTURE_WALL) && s.hits < 17510})
+                    || this.pos.findClosestByRange(FIND_STRUCTURES, {filter: s => (s.structureType === STRUCTURE_RAMPART || s.structureType === STRUCTURE_WALL) && s.hits < 175100})
+                    || this.pos.findClosestByRange(FIND_STRUCTURES, {filter: s => (s.structureType === STRUCTURE_RAMPART || s.structureType === STRUCTURE_WALL) && s.hits < 1751000});
                 }
                 if (structure) {
                     this.repair(structure);

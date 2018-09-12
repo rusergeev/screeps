@@ -129,7 +129,7 @@ module.exports = {
                 target = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                     filter: t => consumers.indexOf(t.structureType) !== -1
                         && t.pos.isSafe()
-                        && t.energy < 20
+                        && t.energy < 50
                 });
             }
             if (!target && creep.room.controller) {
@@ -147,14 +147,13 @@ module.exports = {
                     && t.pos.isSafe()
                     && t.energy < t.energyCapacity
                 });
-                targets.sort((a,b) => a.energy*a.pos.getRangeTo(creep) - b.energy*b.pos.getRangeTo(creep) );
+                targets.sort((a,b) => (a.energy-a.energyCapacity)*a.pos.getRangeTo(creep) - (b.energy-b.energyCapacity)*b.pos.getRangeTo(creep) );
                 target = targets[0];
             }
             if (!target && creep.room.controller) {
                 target = creep.room.controller.pos.findInRange(FIND_STRUCTURES, 4, {
                     filter:
-                        s => (s.structureType === STRUCTURE_CONTAINER ||
-                            s.structureType === STRUCTURE_STORAGE)
+                        s => [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_LINK].indexOf(s.structureType) !== -1
                             && s.store[RESOURCE_ENERGY] < s.storeCapacity / 10
                 }).sort(
                     (a, b) => (a.store[RESOURCE_ENERGY]-a.storeCapacity)*a.pos.getRangeTo(creep) - (b.store[RESOURCE_ENERGY]-b.storeCapacity)*b.pos.getRangeTo(creep))[0];
@@ -183,6 +182,14 @@ module.exports = {
                 } );
                 creeps.sort( (a,b) => a.carry[RESOURCE_ENERGY]*a.pos.getRangeTo(creep)  - b.carry[RESOURCE_ENERGY]*b.pos.getRangeTo(creep) );
                 target = creeps[0];
+            }
+
+            if(!target ){
+                let spawn = Game.getObjectById(creep.memory.spawn);
+                if (spawn.room !== creep.room) {
+                    creep.moveToRange(spawn, 1);
+                    return;
+                }
             }
 
             let result = creep.transfer(target, RESOURCE_ENERGY);

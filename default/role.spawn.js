@@ -78,12 +78,12 @@ module.exports = {
             let constructionSites = spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length;
             let builders = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100) 
                 && creep.memory.role === 'builder' && creep.room === spawn.room).length;
-            let structure = spawn.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+            let structure = spawn.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (s) => s.hits < s.hitsMax / 2 && s.structureType !== STRUCTURE_WALL && s.structureType !== STRUCTURE_RAMPART ||
                     (s.structureType === STRUCTURE_WALL || s.structureType === STRUCTURE_RAMPART) && s.hits < 1750000
             });
 
-            if ((!!structure || constructionSites > builders) && builders < sources.length
+            if ((structure || constructionSites > builders) && builders < sources.length
                 && spawn.room.energyAvailable >= _.min([spawn.room.energyCapacityAvailable, 8 * BODYPART_COST[WORK] + 8 * BODYPART_COST[CARRY] + 8 * BODYPART_COST[MOVE]])) {
                 let role = 'builder';
                 let newName = role + Game.time;
@@ -120,6 +120,9 @@ module.exports = {
                 while (cost + BODYPART_COST[CARRY] <= spawn.room.energyAvailable && abilities.length < 16 * sources.length) {
                     abilities.push(CARRY);
                     cost += BODYPART_COST[CARRY];
+                }
+                if (spawn.room.controller.level === 8){
+                    abilities = [MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY];
                 }
                 console.log(spawn + ': spawning ' + newName);
                 if ( spawn.spawnCreep(abilities, newName, {memory: {role: role}}) === OK ) {
@@ -176,7 +179,6 @@ module.exports = {
                         return;
                     }
                 }
-
 
                 let claimers = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100) 
                 && creep.memory.role === 'claimer');
@@ -343,7 +345,7 @@ module.exports = {
                             let cost = abilities.reduce(function (cost, part) {
                                 return cost + BODYPART_COST[part];
                             }, 0);
-                            while (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY]  + 4 * BODYPART_COST[WORK] <= spawn.room.energyAvailable) {
+                            while (cost + BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + 4 * BODYPART_COST[WORK] <= spawn.room.energyAvailable) {
                                 abilities.push(MOVE);
                                 abilities.push(CARRY);
                                 abilities.push(WORK);
@@ -351,6 +353,9 @@ module.exports = {
                                 abilities.push(WORK);
                                 abilities.push(WORK);
                                 cost += BODYPART_COST[MOVE] + 4 * BODYPART_COST[WORK];
+                            }
+                            if (spawn.room.controller.level === 8){
+                                abilities = [MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY];
                             }
                             console.log(spawn, 'spawning', newName, 'with', flag.name);
                             if ( spawn.spawnCreep(abilities, newName, {memory: {role: role, flag: flag.name}}) === OK ) {

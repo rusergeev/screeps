@@ -15,8 +15,15 @@ module.exports = {
         if (patient) {
             creep.heal(patient);
         }
-
-        const target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
+       const brown_flags = _.filter(Game.flags, f => f.color === COLOR_BROWN
+            && f.room === creep.room
+   
+        );
+        let flag_target;
+        if (brown_flags.length > 0) {
+            constflag_target = creep.room.lookForAt(LOOK_STRUCTURES, brown_flags[0])[0];
+        }
+        const target = flag_target || creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
             filter: c => !whitelist.isFriend(c)
 
         });
