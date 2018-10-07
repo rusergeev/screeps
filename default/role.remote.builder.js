@@ -1,5 +1,5 @@
 'use strict';
-
+require('prototype.Room');
 const whitelist = require('white.list');
 
 function getRandomInt(max) {
@@ -119,7 +119,7 @@ module.exports = {
                                         creep.moveToRange(structure, 3);
                                     }
                                 } else {
-                                    const sources = creep.room.find(FIND_SOURCES_ACTIVE, {filter: s => s.pos.free_adj_pos()});
+                                    const sources = creep.room.find_cached(FIND_SOURCES_ACTIVE, {filter: s => s.pos.free_adj_pos()});
                                     if (sources) {
                                         sources.forEach( s => creep.room.createConstructionSite(s.pos.free_adj_pos()[getRandomInt(s.pos.free_adj_pos_count())], STRUCTURE_CONTAINER));
                                     } else {

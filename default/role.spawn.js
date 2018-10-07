@@ -1,5 +1,5 @@
 'use strict';
-
+require('prototype.Room');
 require('prototype.RoomPosition');
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
             if (spawn.spawning !== null || !spawn.isActive()) {
                 return;
             }
-            let sources = spawn.room.find(FIND_SOURCES).map(source => source.id);
+            let sources = spawn.room.find_cached(FIND_SOURCES).map(source => source.id);
             const atob_carry = _.sum(_.map(_.filter(Game.creeps, creep =>
                 ['harvester', 'atob'].indexOf(creep.memory.role) !== -1
                 && creep.room === spawn.room), c => c.getActiveBodyparts(CARRY)));
@@ -75,7 +75,7 @@ module.exports = {
                     }
                 }
             }
-            let constructionSites = spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length;
+            let constructionSites = spawn.room.find_cached(FIND_MY_CONSTRUCTION_SITES).length;
             let builders = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100) 
                 && creep.memory.role === 'builder' && creep.room === spawn.room).length;
             let structure = spawn.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -299,7 +299,7 @@ module.exports = {
                             }
 
                             if (flag.room){
-                                const sources = flag.room.find(FIND_SOURCES).map(source => source.id);
+                                const sources = flag.room.find_cached(FIND_SOURCES).map(source => source.id);
                                 for (let i in sources) {
                                     let source = sources[i];
                                     let miner = _.filter(Game.creeps, creep => (!creep.ticksToLive || creep.ticksToLive > 100 * (Game.map.getRoomLinearDistance(flag.pos.roomName, spawn.room.name)+1))

@@ -83,7 +83,13 @@ module.exports = {
                                 && s.pos.isSafe()
                         })
                         || creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                            filter: s => (s.structureType === STRUCTURE_CONTAINER) && _.sum(s.store) > 0
+                            filter: s => (
+                                s.structureType === STRUCTURE_CONTAINER
+                                || s.structureType === STRUCTURE_STORAGE
+                                || s.structureType === STRUCTURE_TERMINAL
+                                || s.structureType === STRUCTURE_NUKER
+                                || s.structureType === STRUCTURE_TOWER
+                                ) && (_.sum(s.store) > 0 || s.energy)
                                 && s.pos.isSafe()
                         });
                     if (container) {

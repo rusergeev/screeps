@@ -22,7 +22,7 @@ module.exports = {
                 filter: (s) => s.hits < s.hitsMax });
             if (target) {
                 if (creep.heal(target) === ERR_NOT_IN_RANGE) {
-                    console.log(creep, 'rolls to', target, 'at', creep.room)
+                    console.log(creep, 'rolls to', target, 'at', creep.room);
                     creep.moveTo(target);
                 }
             }else {

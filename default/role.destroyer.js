@@ -4,16 +4,11 @@ module.exports = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
-        const flag = Game.flags.Flag1;
-        const distance = 2;
-        if(!creep.pos.findInRange(flag,distance)[0]) {
-            creep.moveToRange(flag, distance);
-        }
-        return;
+
         //creep.moveToRange(Game.flags.Flag1,1);
         //return;
 
-        let target = Game.getObjectById('5abc9c2f7ff91e7fe8e75b37');
+        let target = Game.flags.Flag1 || Game.flags.Flag2;
         if (target) {
             console.log(creep, creep.room,'destroy zabor');
             if (creep.attack(target) === ERR_NOT_IN_RANGE) {

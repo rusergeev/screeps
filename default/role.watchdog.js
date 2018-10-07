@@ -21,18 +21,18 @@ module.exports = {
         );
         let flag_target;
         if (brown_flags.length > 0) {
-            constflag_target = creep.room.lookForAt(LOOK_STRUCTURES, brown_flags[0])[0];
+            flag_target = creep.room.lookForAt(LOOK_STRUCTURES, brown_flags[0])[0];
         }
         const target = flag_target || creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
             filter: c => !whitelist.isFriend(c)
 
-        });
+        }) ;
 
         if (target) {
             if (creep.attack(target) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }else {
-                console.log(creep, 'attacks', target, 'of',target.owner.username,'at', creep.room.name);
+                console.log(creep, 'attacks', target, 'of',target.owner,'at', creep.room.name);
             }
             return;
         } else {
@@ -68,7 +68,14 @@ module.exports = {
 
 
 
-        const t3 = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {filter: s => s.structureType !== STRUCTURE_CONTROLLER});
+        const t3 = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {
+            filter: s => !s.energy &&  _.sum(s.store) == 0
+                || (s.structureType !== STRUCTURE_CONTROLLER
+                && s.structureType !== STRUCTURE_STORAGE
+                && s.structureType !== STRUCTURE_NUKER
+                && s.structureType !== STRUCTURE_TERMINAL
+                && s.structureType !== STRUCTURE_EXTENSION)
+        } );
         if (t3) {
             console.log('destroy structures', t3);
             let result = creep.attack(t3);

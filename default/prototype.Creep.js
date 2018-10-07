@@ -1,4 +1,5 @@
 'use strict';
+require('prototype.Room');
 const whitelist = require('white.list');
 
 require('prototype.Source');
@@ -54,14 +55,14 @@ Creep.prototype.moveToRange = function (destination, range, opt) {
                 function (roomName, costMatrix) {
                     const room = Game.rooms[roomName];
                     if (room !== undefined){
-                        room.find(FIND_MY_CREEPS, {filter: c => !c.isMoving}).forEach(c => costMatrix.set(c.pos.x, c.pos.y, 0xff));
-                        room.find(FIND_HOSTILE_CREEPS, {filter: c => c.getActiveBodyparts(ATTACK)}).forEach(function (c) {
+                        room.find_cached(FIND_MY_CREEPS, {filter: c => !c.isMoving}).forEach(c => costMatrix.set(c.pos.x, c.pos.y, 0xff));
+                        room.find_cached(FIND_HOSTILE_CREEPS, {filter: c => c.getActiveBodyparts(ATTACK)}).forEach(function (c) {
                             for(let x = _.max([0,c.pos.x-1]); x <= _.min([49,c.pos.x+1]); x++)
                                 for(let y = _.max([0,c.pos.y-1]); y <= _.min([49,c.pos.y+1]); y++) {
                                     costMatrix.set(x, y, 0xff);
                                 }
                         });
-                        room.find(FIND_HOSTILE_CREEPS, {filter: c => c.getActiveBodyparts(RANGED_ATTACK)}).forEach(function (c) {
+                        room.find_cached(FIND_HOSTILE_CREEPS, {filter: c => c.getActiveBodyparts(RANGED_ATTACK)}).forEach(function (c) {
                             for(let x = _.max([0,c.pos.x-3]); x <= _.min([49,c.pos.x+3]); x++)
                                 for(let y = _.max([0,c.pos.y-3]); y <= _.min([49,c.pos.y+3]); y++) {
                                     costMatrix.set(x, y, 0xff);

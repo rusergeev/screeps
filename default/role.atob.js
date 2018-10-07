@@ -1,4 +1,5 @@
 require('prototype.Creep');
+require('prototype.Room');
 module.exports = {
     /** @param {Creep} creep **/
     run: function(creep) {
@@ -46,7 +47,7 @@ module.exports = {
                     });
             }
             if ( !resource  && !container ) {
-                let containers = creep.room.find( FIND_STRUCTURES, {
+                let containers = creep.room.find_cached( FIND_STRUCTURES, {
                     filter: t => storages.indexOf(t.structureType) !== -1
                         && t.pos.isSafe()
                         && t.pos.findInRange( FIND_MY_STRUCTURES, 4, {filter: s => s.structureType === STRUCTURE_CONTROLLER}).length === 0
@@ -63,7 +64,7 @@ module.exports = {
             }
 
             if ( !resource  && !container ) {
-                let resources = creep.room.find( FIND_DROPPED_RESOURCES, {
+                let resources = creep.room.find_cached( FIND_DROPPED_RESOURCES, {
                     filter: t => t.pos.isSafe()
                 } );
 
@@ -139,15 +140,15 @@ module.exports = {
                             s.structureType === STRUCTURE_STORAGE)
                             && s.store[RESOURCE_ENERGY] < 1000
                 }).sort(
-                    (a, b) => (a.store[RESOURCE_ENERGY] - a.storeCapacity)*a.pos.getRangeTo(creep) - (b.store[RESOURCE_ENERGY] - b.storeCapacity)*b.pos.getRangeTo(creep))[0];
+                    (a, b) => (b.store[RESOURCE_ENERGY] - b.storeCapacity)*a.pos.getRangeTo(creep) - (a.store[RESOURCE_ENERGY] - a.storeCapacity)*b.pos.getRangeTo(creep))[0];
             }
             if (!target) {
-                let targets = creep.room.find(FIND_MY_STRUCTURES, {
+                let targets = creep.room.find_cached(FIND_MY_STRUCTURES, {
                     filter: t => consumers.indexOf( t.structureType) !==  -1
                     && t.pos.isSafe()
                     && t.energy < t.energyCapacity
                 });
-                targets.sort((a,b) => (a.energy-a.energyCapacity)*a.pos.getRangeTo(creep) - (b.energy-b.energyCapacity)*b.pos.getRangeTo(creep) );
+                targets.sort((a,b) => (b.energy-b.energyCapacity)*a.pos.getRangeTo(creep) - (a.energy-a.energyCapacity)*b.pos.getRangeTo(creep)  );
                 target = targets[0];
             }
             if (!target && creep.room.controller) {
@@ -156,7 +157,7 @@ module.exports = {
                         s => [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_LINK].indexOf(s.structureType) !== -1
                             && s.store[RESOURCE_ENERGY] < s.storeCapacity / 10
                 }).sort(
-                    (a, b) => (a.store[RESOURCE_ENERGY]-a.storeCapacity)*a.pos.getRangeTo(creep) - (b.store[RESOURCE_ENERGY]-b.storeCapacity)*b.pos.getRangeTo(creep))[0];
+                    (a, b) => (b.store[RESOURCE_ENERGY]-b.storeCapacity)*a.pos.getRangeTo(creep) - (a.store[RESOURCE_ENERGY]-a.storeCapacity)*b.pos.getRangeTo(creep) )[0];
             }
             if (!target) {
                 target = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
@@ -167,7 +168,7 @@ module.exports = {
             }
 
             if (!target) {
-                let containers = creep.room.find( FIND_MY_STRUCTURES, {
+                let containers = creep.room.find_cached( FIND_MY_STRUCTURES, {
                     filter: t => storages.indexOf(t.structureType) !== -1
                         && t.pos.isSafe()
                 } );
@@ -176,7 +177,7 @@ module.exports = {
             }
 
             if (!target) {
-                let creeps = creep.room.find( FIND_MY_CREEPS, {
+                let creeps = creep.room.find_cached( FIND_MY_CREEPS, {
                     filter: t => ['upgrader', 'builder'].indexOf(t.memory.role) !== -1
                         && t.pos.isSafe()
                 } );
